@@ -1,0 +1,12 @@
+eduki/gen/
+eduki/bin/
+eduki/local.properties
+eduki/build.xml
+eduki/.settings/
+eduki/.loadpath
+eduki/.project
+eduki/.classpath
+.metadata
+*.class
+*.tmp
+*~
