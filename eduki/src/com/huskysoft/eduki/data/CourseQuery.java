@@ -2,8 +2,11 @@ package com.huskysoft.eduki.data;
 
 import static com.huskysoft.eduki.data.UrlConstants.COURSES;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.huskysoft.eduki.TaskComplete;
 
 public class CourseQuery {
@@ -13,7 +16,9 @@ public class CourseQuery {
     }
     
     public static List<Course> parseCourseList(String data) {
-        // TODO: Implement parsing of GSON into a list of courses
-        return null;
+        Gson gson = new Gson();
+        Type collectionType = new TypeToken<List<Course>>(){}.getType();
+        List<Course> courses = gson.fromJson(data, collectionType);
+        return courses;
     }
 }

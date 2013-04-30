@@ -1,10 +1,18 @@
 package com.huskysoft.eduki.data;
 
 public class Course {
-    // TODO: Add course details
+    private int id;
+    private String title;
     
     public String toString() {
-        // TODO: Implement toString
-        return null;
+        return getTitle();
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public String getTitle() {
+        return title;
     }
 }

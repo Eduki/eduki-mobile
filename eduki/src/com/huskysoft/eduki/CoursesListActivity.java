@@ -1,8 +1,12 @@
 package com.huskysoft.eduki;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -14,11 +18,12 @@ import com.huskysoft.eduki.data.CourseQuery;
 
 public class CoursesListActivity extends Activity implements TaskComplete {
     
+    private List<Course> courseList;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Once uncommented, this will add all the courses to the current view
-        //CourseQuery.getAllCourses(this);
+        CourseQuery.getAllCourses(this);
         setContentView(R.layout.loading_screen);
     }
     
@@ -33,12 +38,24 @@ public class CoursesListActivity extends Activity implements TaskComplete {
 
     @Override
     public void taskComplete(String data) {
-        List<Course> list = CourseQuery.parseCourseList(data);
-        ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(this, 
-                android.R.layout.simple_list_item_1, list);
         setContentView(R.layout.activity_courseslist);
+        List<Course> courseList = CourseQuery.parseCourseList(data);
+        ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(this, 
+                android.R.layout.simple_list_item_1, courseList);
         ListView listView = (ListView) findViewById(R.id.courseListView);
         listView.setAdapter(adapter);
-        // TODO: Use list data to propogate the courses list, takedown progress circles
+        listView.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CoursesListActivity.this.courseSelected(position);
+            }
+        });
+    }
+    
+    private void courseSelected(int position) {
+        Course chosen = courseList.get(position);
+        Intent i = new Intent(this, LessonsListActivity.class);
+        i.putExtra("title", chosen.getTitle());
+        i.putExtra("id", chosen.getId());
+        startActivity(i);
     }
 }
