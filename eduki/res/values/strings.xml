@@ -6,5 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="coursesList">Courses List</string>
     <string name="coursesTitle">Courses</string>
+    <string name="lessonsList">Lessons List</string>
+    <string name="lessonsTitle">Lessons</string>
+    <string name="lessonViewTitle">Lesson View</string>
 
 </resources>

@@ -22,7 +22,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:theme="@style/AppTheme" android:name="com.huskysoft.eduki.CoursesListActivity" android:label="@string/coursesTitle" android:icon="@drawable/ic_launcher" android:screenOrientation="portrait"></activity>
+        <activity 
+            android:theme="@style/AppTheme" 
+            android:name="com.huskysoft.eduki.CoursesListActivity" 
+            android:label="@string/coursesTitle" 
+            android:icon="@drawable/ic_launcher" 
+            android:screenOrientation="portrait">
+        </activity>
+        <activity 
+            android:theme="@style/AppTheme" 
+            android:name="com.huskysoft.eduki.LessonsListActivity" 
+            android:label="@string/lessonsTitle" 
+            android:icon="@drawable/ic_launcher" 
+            android:screenOrientation="portrait">
+        </activity>
+        <activity 
+            android:theme="@style/AppTheme" 
+            android:name="com.huskysoft.eduki.LessonsViewActivity" 
+            android:label="@string/lessonViewTitle" 
+            android:icon="@drawable/ic_launcher" 
+            android:screenOrientation="portrait">
+        </activity>
     </application>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
