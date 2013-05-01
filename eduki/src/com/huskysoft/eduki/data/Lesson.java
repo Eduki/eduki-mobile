@@ -1,22 +1,23 @@
 package com.huskysoft.eduki.data;
 
 public class Lesson {
-    // TODO: Add lesson details
-	//		 Add either constructor or setter method, not sure what
-	//		 implementation will work best yet.
-	Course course;
-	String content;
-	
-	protected Course getCourse() {
-		return course;
-	}
-	
-	protected String getContent() {
-		return content;
-	}
+    private int id;
+    private String title;
+    private String content;
     
     public String toString() {
-        // TODO: Implement toString
-        return null;
+        return getTitle();
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public String getTitle() {
+        return title;
+    }
+    
+    public String getContent() {
+    	return content;
     }
 }
