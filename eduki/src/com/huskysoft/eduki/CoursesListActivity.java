@@ -35,11 +35,10 @@ public class CoursesListActivity extends Activity implements TaskComplete {
         return true;
     }
 
-
     @Override
     public void taskComplete(String data) {
         setContentView(R.layout.activity_courseslist);
-        List<Course> courseList = CourseQuery.parseCourseList(data);
+        courseList = CourseQuery.parseCourseList(data);
         ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(this, 
                 android.R.layout.simple_list_item_1, courseList);
         ListView listView = (ListView) findViewById(R.id.courseListView);
@@ -54,8 +53,8 @@ public class CoursesListActivity extends Activity implements TaskComplete {
     private void courseSelected(int position) {
         Course chosen = courseList.get(position);
         Intent i = new Intent(this, LessonsListActivity.class);
-        i.putExtra("title", chosen.getTitle());
-        i.putExtra("id", chosen.getId());
+        i.putExtra("course_title", chosen.getTitle());
+        i.putExtra("course_id", chosen.getId());
         startActivity(i);
     }
 }
