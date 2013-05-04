@@ -16,7 +16,7 @@ public class LessonQuery {
     }
     
     public static void getSpecificLesson(TaskComplete callback, String course_id, String lesson_id) {
-    	String specificLessonUrl = COURSES + "/" + course_id + "/" + lesson_id;
+    	String specificLessonUrl = COURSES + "/" + course_id + "/lessons/" + lesson_id;
     	new ConnectionTask(callback).execute(specificLessonUrl);
     }
     
