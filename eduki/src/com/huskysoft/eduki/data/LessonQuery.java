@@ -11,7 +11,7 @@ import com.huskysoft.eduki.TaskComplete;
 
 public class LessonQuery {
     public static void getAllLessons(TaskComplete callback, String course_id) {
-    	String lessonsInCourseUrl = COURSES + "/" + course_id;
+    	String lessonsInCourseUrl = COURSES + "/" + course_id + "/lessons";
         new ConnectionTask(callback).execute(lessonsInCourseUrl);
     }
     
