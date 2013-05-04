@@ -16,25 +16,31 @@ import com.example.eduki.R;
 import com.huskysoft.eduki.data.Course;
 import com.huskysoft.eduki.data.CourseQuery;
 
+/**
+ * @author Cody Thomas
+ * 
+ * Class CoursesListActivity shows a list of all courses, allowing them to be clicked.
+ */
+
 public class CoursesListActivity extends Activity implements TaskComplete {
-    
+    /** The list of courses to be displayed, not initialized until data has been loaded */
     private List<Course> courseList;
-    
+ 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CourseQuery.getAllCourses(this);
         setContentView(R.layout.loading_screen);
     }
-    
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
+    
+    
     @Override
     public void taskComplete(String data) {
         setContentView(R.layout.activity_courseslist);

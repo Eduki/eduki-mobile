@@ -9,69 +9,50 @@ import java.net.URL;
 
 import com.huskysoft.eduki.TaskComplete;
 
+/**
+ * 
+ * @author Cody Thomas
+ * Class ConnectionTask will make basic GET requests to a provided url, 
+ * passing the data to a callback represented by a TaskComplete object.
+ *
+ */
 public class ConnectionTask extends AsyncTask<String, Void, String> {
 
+    /**
+     * The callback to pass the result to when the request is complete
+     */
     private TaskComplete callback;
     
-    //TODO: Delete when API is up
-    private boolean DEBUG = false;
-    private static int calls = -1; 
-    
+    /**
+     * Initializes a connectionTask object
+     * @param callback The object to pass the result to.
+     */
     public ConnectionTask(TaskComplete callback) {
         this.callback = callback;
     }
-    
+
     @Override
     protected String doInBackground(String... urls) {
-    	if (DEBUG) {
-	    	String retval = "";
-	    	calls++;
-	    	switch (calls) {
-	    		case 0:
-	    			retval = 
-	    				   "[" +
-	    				   "{\"id\":1,\"title\":\"Bear Recipes 101\"}," +
-	    				   "{\"id\":2,\"title\":\"Spicy Bear Recipes\"}," +
-	    				   "{\"id\":3,\"title\":\"Soups Involving Bears\"}," +
-	    				   "{\"id\":4,\"title\":\"Anatomy of Bears with regard to the culinary arts\"}]";
-	    			break;
-	    		case 1:
-	    			retval = 
-	    			       "[" +
-	    			 	   "{\"id\":1,\"title\":\"Bear Recipe 1\"}," +
-	    			 	   "{\"id\":2,\"title\":\"Bear Recipe 2\"}," +
-	    			 	   "{\"id\":3,\"title\":\"Bear Recipe 3\"}," +
-	    			 	   "{\"id\":4,\"title\":\"Bear Recipe 4\"}]";
-	    			break;
-	    		case 2:
-	    			retval = "This is an example recipe!";
-	    			break;
-				default:
-					break;
-	    	}
-			return retval;
-    	} else {
-			try {
-	            URL url;
-	            url = new URL(urls[0]);
-	            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	            conn.setRequestMethod("GET");
-	            conn.connect();
-	            BufferedReader rd  = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-	            StringBuilder sb = new StringBuilder();
-	            String line = rd.readLine();
-	            while(line != null) {
-	                sb.append(line + '\n');
-	                line = rd.readLine();
-	            }
-	            return sb.toString();
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            return null;
-	        }
-    	}
+		try {
+            URL url;
+            url = new URL(urls[0]);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+            BufferedReader rd  = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder sb = new StringBuilder();
+            String line = rd.readLine();
+            while(line != null) {
+                sb.append(line + '\n');
+                line = rd.readLine();
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-    
+
     @Override
     protected void onPostExecute(String response) {
         callback.taskComplete(response);
