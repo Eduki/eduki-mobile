@@ -11,6 +11,14 @@ public class Lesson {
     private String title;
     private String body;
     
+    /**
+     * Constructs a new Lesson based on an ID, title, course id, and body 
+     * 
+     * @param id lesson id
+     * @param title lesson title
+     * @param course_id course id
+     * @param body content of the specific lesson
+     */
     public Lesson(int id, String title, int course_id, String body) {
     	this.id = id;
     	this.title = title;

@@ -9,6 +9,12 @@ public class Course {
     private int id;
     private String title;
 
+    /**
+     * Constructs a new course based on a course id and a course title
+     * 
+     * @param id course id
+     * @param title	course title
+     */
     public Course(int id, String title) {
     	this.id = id;
     	this.title = title;
