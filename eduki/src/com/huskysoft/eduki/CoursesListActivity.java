@@ -1,3 +1,4 @@
+
 package com.huskysoft.eduki;
 
 import android.app.Activity;
@@ -17,15 +18,17 @@ import com.huskysoft.eduki.data.Course;
 import com.huskysoft.eduki.data.CourseQuery;
 
 /**
- * @author Cody Thomas
- * 
- * Class CoursesListActivity shows a list of all courses, allowing them to be clicked.
+ * @author Cody Thomas Class CoursesListActivity shows a list of all courses,
+ *         allowing them to be clicked.
  */
 
 public class CoursesListActivity extends Activity implements TaskComplete {
-    /** The list of courses to be displayed, not initialized until data has been loaded */
+    /**
+     * The list of courses to be displayed, not initialized until data has been
+     * loaded
+     */
     private List<Course> courseList;
- 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +42,11 @@ public class CoursesListActivity extends Activity implements TaskComplete {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    
-    
+
     @Override
     public void taskComplete(String data) {
         courseList = CourseQuery.parseCourseList(data);
-        ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(this, 
+        ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(this,
                 android.R.layout.simple_list_item_1, courseList);
         setContentView(R.layout.activity_courseslist);
         ListView listView = (ListView) findViewById(R.id.courseListView);
@@ -55,7 +57,12 @@ public class CoursesListActivity extends Activity implements TaskComplete {
             }
         });
     }
-    
+
+    /**
+     * Will use the position parameter and find that course in the list of courses,
+     * calling the lessons list activity.
+     * @param position the position in the list of the button pressed
+     */
     private void courseSelected(int position) {
         Course chosen = courseList.get(position);
         Intent i = new Intent(this, LessonsListActivity.class);
