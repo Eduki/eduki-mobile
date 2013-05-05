@@ -6,25 +6,28 @@ import android.view.Menu;
 import android.widget.TextView;
 
 import com.example.eduki.R;
+import com.huskysoft.eduki.data.Lesson;
 import com.huskysoft.eduki.data.LessonQuery;
+
+/**
+ * @author Rafael Vertido Class LessonsViewActivity shows a specific lesson's content
+ */
 
 public class LessonsViewActivity extends Activity implements TaskComplete {
 	
-	private String course_id;
-	private String course_title;
-	private String lesson_id;
-	private String lesson_title;
-	private String lesson_content;
+	/** Specific lesson this view is tied to */
+	private Lesson lesson;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            course_title = extras.getString("course_title");
-            course_id = extras.getString("course_id");
-            lesson_title = extras.getString("lesson_title");
-            lesson_id = extras.getString("lesson_id");
+            String lesson_title = extras.getString("lesson_title");
+            String lesson_body = extras.getString("lesson_body");
+            int lesson_id = extras.getInt("lesson_id");          
+            int course_id = extras.getInt("course_id");
+            lesson = new Lesson(lesson_id, lesson_title, course_id, lesson_body);
             LessonQuery.getSpecificLesson(this, course_id, lesson_id);
         }
         setContentView(R.layout.loading_screen);
@@ -42,8 +45,8 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
     @Override
     public void taskComplete(String data) {
         setContentView(R.layout.activity_lessonview);
-        lesson_content = LessonQuery.parseLessonContent(data);
+        this.setTitle(lesson.getTitle());
         TextView contentView = (TextView) findViewById(R.id.lessonViewLayoutText);
-        contentView.setText(lesson_content);
+        contentView.setText(lesson.getBody());
     }
 }

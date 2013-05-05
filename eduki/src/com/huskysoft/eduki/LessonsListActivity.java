@@ -13,22 +13,34 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.eduki.R;
+import com.huskysoft.eduki.data.Course;
 import com.huskysoft.eduki.data.Lesson;
 import com.huskysoft.eduki.data.LessonQuery;
 
+/**
+ * @author Rafael Vertido Class LessonsListActivity shows a list of all lessons,
+ *         allowing them to be clicked.
+ */
+
 public class LessonsListActivity extends Activity implements TaskComplete {
-	
+    /**
+     * lessonList - The list of courses to be displayed, 
+     * not initialized until data has been loaded
+     * 
+     * course - The specific course that the lesson is tied to, this is
+     * initialized after reading in the shared data from the CoursesListActivity
+     */
 	private List<Lesson> lessonList;
-	private String course_id;
-	private String course_title;
+	private Course course;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            course_title = extras.getString("course_title");
-            course_id = extras.getString("course_id");
+            String course_title = extras.getString("course_title");
+            int course_id = extras.getInt("course_id");
+            course = new Course(course_id, course_title);
             LessonQuery.getAllLessons(this, course_id);
         }
         setContentView(R.layout.loading_screen);
@@ -44,6 +56,7 @@ public class LessonsListActivity extends Activity implements TaskComplete {
     @Override
     public void taskComplete(String data) {
         setContentView(R.layout.activity_lessonslist);
+        this.setTitle(course.getTitle());
         lessonList = LessonQuery.parseLessonsList(data);
         ArrayAdapter<Lesson> adapter = new ArrayAdapter<Lesson>(this, 
                 android.R.layout.simple_list_item_1, lessonList);
@@ -56,11 +69,18 @@ public class LessonsListActivity extends Activity implements TaskComplete {
         });
     }
     
+    /**
+     * Will use the position parameter and find that course in the list of lessons,
+     * calling the lesson view activity.
+     * @param position the position in the list of the button pressed
+     */
     private void lessonSelected(int position) {
         Lesson chosen = lessonList.get(position);
         Intent i = new Intent(this, LessonsViewActivity.class);
         i.putExtra("lesson_title", chosen.getTitle());
         i.putExtra("lesson_id", chosen.getId());
+        i.putExtra("lesson_body", chosen.getBody());
+        i.putExtra("course_id", course.getId());
         startActivity(i);
     }
 }
