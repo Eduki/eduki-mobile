@@ -1,3 +1,4 @@
+
 package com.huskysoft.eduki.data;
 
 import android.os.AsyncTask;
@@ -10,11 +11,9 @@ import java.net.URL;
 import com.huskysoft.eduki.TaskComplete;
 
 /**
- * 
- * @author Cody Thomas
- * Class ConnectionTask will make basic GET requests to a provided url, 
- * passing the data to a callback represented by a TaskComplete object.
- *
+ * @author Cody Thomas Class ConnectionTask will make basic GET requests to a
+ *         provided url, passing the data to a callback represented by a
+ *         TaskComplete object.
  */
 public class ConnectionTask extends AsyncTask<String, Void, String> {
 
@@ -22,9 +21,10 @@ public class ConnectionTask extends AsyncTask<String, Void, String> {
      * The callback to pass the result to when the request is complete
      */
     private TaskComplete callback;
-    
+
     /**
      * Initializes a connectionTask object
+     * 
      * @param callback The object to pass the result to.
      */
     public ConnectionTask(TaskComplete callback) {
@@ -33,16 +33,16 @@ public class ConnectionTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... urls) {
-		try {
+        try {
             URL url;
             url = new URL(urls[0]);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
-            BufferedReader rd  = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder sb = new StringBuilder();
             String line = rd.readLine();
-            while(line != null) {
+            while (line != null) {
                 sb.append(line + '\n');
                 line = rd.readLine();
             }
