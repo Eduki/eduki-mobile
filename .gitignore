@@ -6,6 +6,7 @@ eduki/.settings/
 eduki/.loadpath
 eduki/.project
 eduki/.classpath
+eduki/doc/
 .metadata
 *.class
 *.tmp
