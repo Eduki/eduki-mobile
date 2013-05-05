@@ -43,10 +43,10 @@ public class CoursesListActivity extends Activity implements TaskComplete {
     
     @Override
     public void taskComplete(String data) {
-        setContentView(R.layout.activity_courseslist);
         courseList = CourseQuery.parseCourseList(data);
         ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(this, 
                 android.R.layout.simple_list_item_1, courseList);
+        setContentView(R.layout.activity_courseslist);
         ListView listView = (ListView) findViewById(R.id.courseListView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new OnItemClickListener() {
