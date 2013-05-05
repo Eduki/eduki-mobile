@@ -16,8 +16,8 @@ public class Course {
      * @param title	course title
      */
     public Course(int id, String title) {
-    	this.id = id;
-    	this.title = title;
+        this.id = id;
+        this.title = title;
     }
     
     /** @return The string representation of the course */
