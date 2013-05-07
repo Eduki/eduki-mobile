@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.eduki.R;
@@ -55,18 +56,24 @@ public class LessonsListActivity extends Activity implements TaskComplete {
 
     @Override
     public void taskComplete(String data) {
+        lessonList = LessonQuery.parseLessonsList(data);
         setContentView(R.layout.activity_lessonslist);
         this.setTitle(course.getTitle());
-        lessonList = LessonQuery.parseLessonsList(data);
-        ArrayAdapter<Lesson> adapter = new ArrayAdapter<Lesson>(this, 
-                android.R.layout.simple_list_item_1, lessonList);
-        ListView listView = (ListView) findViewById(R.id.lessonsListView);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LessonsListActivity.this.lessonSelected(position);
-            }
-        });
+        if (lessonList.size() == 0) {
+            TextView contentView = (TextView) findViewById(R.id.noLessonListText);
+            contentView.setText("No lessons found for this course.");
+            contentView.setVisibility(0); // Reveal the message
+        } else {
+            ArrayAdapter<Lesson> adapter = new ArrayAdapter<Lesson>(this, 
+                    android.R.layout.simple_list_item_1, lessonList);
+            ListView listView = (ListView) findViewById(R.id.lessonsListView);
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    LessonsListActivity.this.lessonSelected(position);
+                }
+            });
+        }
     }
     
     /**
