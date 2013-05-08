@@ -56,14 +56,18 @@ public class LessonsListActivity extends Activity implements TaskComplete {
 
     @Override
     public void taskComplete(String data) {
+        // Get the list of lessons, and set the title
         lessonList = LessonQuery.parseLessonsList(data);
-        setContentView(R.layout.activity_lessonslist);
         this.setTitle(course.getTitle());
+        
+        // Check if there are lessons, if there are then display them in a list,
+        // otherwise, display a message saying that no lessons were found.
         if (lessonList.size() == 0) {
+            setContentView(R.layout.activity_no_lessonlist);
             TextView contentView = (TextView) findViewById(R.id.noLessonListText);
             contentView.setText("No lessons found for this course.");
-            contentView.setVisibility(0); // Reveal the message
         } else {
+            setContentView(R.layout.activity_lessonslist);
             ArrayAdapter<Lesson> adapter = new ArrayAdapter<Lesson>(this, 
                     android.R.layout.simple_list_item_1, lessonList);
             ListView listView = (ListView) findViewById(R.id.lessonsListView);

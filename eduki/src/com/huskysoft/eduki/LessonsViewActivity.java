@@ -48,6 +48,9 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
         setContentView(R.layout.activity_lessonview);
         this.setTitle(lesson.getTitle());
         TextView contentView = (TextView) findViewById(R.id.lessonViewLayoutText);
+        
+        // Check if there was useful content, if there was display it,
+        // otherwise, display a message that there is no body found.
         if (lessonBody.equals("")) {
             contentView.setText("No body found for this lesson");
         } else {
