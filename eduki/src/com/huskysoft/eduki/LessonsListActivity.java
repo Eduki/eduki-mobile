@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.eduki.R;
@@ -55,18 +56,28 @@ public class LessonsListActivity extends Activity implements TaskComplete {
 
     @Override
     public void taskComplete(String data) {
-        setContentView(R.layout.activity_lessonslist);
-        this.setTitle(course.getTitle());
+        // Get the list of lessons, and set the title
         lessonList = LessonQuery.parseLessonsList(data);
-        ArrayAdapter<Lesson> adapter = new ArrayAdapter<Lesson>(this, 
-                android.R.layout.simple_list_item_1, lessonList);
-        ListView listView = (ListView) findViewById(R.id.lessonsListView);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LessonsListActivity.this.lessonSelected(position);
-            }
-        });
+        this.setTitle(course.getTitle());
+        
+        // Check if there are lessons, if there are then display them in a list,
+        // otherwise, display a message saying that no lessons were found.
+        if (lessonList.size() == 0) {
+            setContentView(R.layout.activity_no_lessonlist);
+            TextView contentView = (TextView) findViewById(R.id.noLessonListText);
+            contentView.setText("No lessons found for this course.");
+        } else {
+            setContentView(R.layout.activity_lessonslist);
+            ArrayAdapter<Lesson> adapter = new ArrayAdapter<Lesson>(this, 
+                    android.R.layout.simple_list_item_1, lessonList);
+            ListView listView = (ListView) findViewById(R.id.lessonsListView);
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    LessonsListActivity.this.lessonSelected(position);
+                }
+            });
+        }
     }
     
     /**
