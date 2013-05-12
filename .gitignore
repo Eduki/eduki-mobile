@@ -1,7 +1,6 @@
 eduki/gen/
 eduki/bin/
 eduki/local.properties
-eduki/build.xml
 eduki/.settings/
 eduki/.loadpath
 eduki/.project
