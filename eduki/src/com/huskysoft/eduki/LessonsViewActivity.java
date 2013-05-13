@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
 
-import com.example.eduki.R;
+import com.huskysoft.eduki.R;
 import com.huskysoft.eduki.data.Lesson;
 import com.huskysoft.eduki.data.LessonQuery;
 

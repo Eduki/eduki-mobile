@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 
-import com.example.eduki.R;
+import com.huskysoft.eduki.R;
 
 /**
  * @author Cody Thomas MainActivity is the first activity to be loaded when the
