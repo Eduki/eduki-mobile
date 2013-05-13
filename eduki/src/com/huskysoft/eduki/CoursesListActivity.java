@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import java.util.List;
 
-import com.example.eduki.R;
+import com.huskysoft.eduki.R;
 import com.huskysoft.eduki.data.Course;
 import com.huskysoft.eduki.data.CourseQuery;
 
