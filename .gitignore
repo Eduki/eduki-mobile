@@ -1,4 +1,5 @@
 *gen/
+*bin/
 *local.properties
 *.settings/
 *.loadpath

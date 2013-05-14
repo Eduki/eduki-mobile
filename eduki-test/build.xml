@@ -103,5 +103,15 @@
         </fail>
         <echo>Unit tests passed!</echo>
     </target>
+    <target name=”fetch-test-report”>
+		<echo>Downloading XML test report…</echo>
+		<mkdir dir=”junitreports”/>
+		<exec executable=”${adb}” failonerror=”true”>
+		<arg line=”${adb.device.arg}”/>
+		<arg value=”pull” />
+		<arg value=”/data/data/${tested.manifest.package}/files/junit-report.xml” />
+		<arg value=”junitreports/junit-report.xml” />
+		</exec>
+	</target>
     
 </project>
