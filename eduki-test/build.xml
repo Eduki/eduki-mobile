@@ -103,7 +103,7 @@
         </fail>
         <echo>Unit tests passed!</echo>
     </target>
-    <target name="fetchreports" depends="unittests">
+    <target name="fetchreports">
 		<echo>Downloading XML test report…</echo>
 		<mkdir dir="junitreports"/>
 		<exec executable="${adb}" failonerror="true">
