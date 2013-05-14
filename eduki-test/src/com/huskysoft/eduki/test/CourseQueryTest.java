@@ -11,7 +11,9 @@ import com.huskysoft.eduki.data.CourseQuery;
 
 public class CourseQueryTest extends AndroidTestCase {
 
-    @Test
+    private static final int TIMEOUT = 5000;
+    
+    @Test(timeout=TIMEOUT)
     public void testParsingList() {
         String sampleGson = "[\n" + 
                        "{\"id\":1,\"title\":\"Bear Recipes 101\"},\n" + 

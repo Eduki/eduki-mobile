@@ -10,7 +10,7 @@ import com.huskysoft.eduki.data.Course;
 
 public class CourseTest extends AndroidTestCase {
 
-    private static final int TIMEOUT = 5000;
+    private static final int TIMEOUT = 3000;
     private Course course;
     private int id;
     private String title;

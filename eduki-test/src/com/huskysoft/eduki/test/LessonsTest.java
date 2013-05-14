@@ -9,7 +9,7 @@ import android.test.AndroidTestCase;
 
 public class LessonsTest extends AndroidTestCase {
 
-    private static final int TIMEOUT = 5000;
+    private static final int TIMEOUT = 3000;
     
     private Lesson lesson;
     private int id;
