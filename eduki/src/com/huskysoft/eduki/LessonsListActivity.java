@@ -25,7 +25,7 @@ import com.huskysoft.eduki.data.LessonQuery;
 
 public class LessonsListActivity extends Activity implements TaskComplete {
     /**
-     * lessonList - The list of courses to be displayed, 
+     * lessonList - The list of lessons to be displayed, 
      * not initialized until data has been loaded
      * 
      * course - The specific course that the lesson is tied to, this is
@@ -63,8 +63,8 @@ public class LessonsListActivity extends Activity implements TaskComplete {
         // Check if there are lessons, if there are then display them in a list,
         // otherwise, display a message saying that no lessons were found.
         if (lessonList.size() == 0) {
-            setContentView(R.layout.activity_no_lessonlist);
-            TextView contentView = (TextView) findViewById(R.id.noLessonListText);
+            setContentView(R.layout.activity_no_list_found);
+            TextView contentView = (TextView) findViewById(R.id.noListText);
             contentView.setText("No lessons found for this course.");
         } else {
             setContentView(R.layout.activity_lessonslist);

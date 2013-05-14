@@ -16,4 +16,12 @@ public final class UrlConstants {
     public static String getSingleLessonURL(int course_id, int lesson_id) {
         return getAllLessonsURL(course_id) + "/" + lesson_id;
     }
+    
+    public static String getAllQuizzesURL(int course_id) {
+        return COURSES + "/" + course_id + "/quizzes";
+    }
+    
+    public static String getSingleQuizURL(int course_id, int quiz_id) {
+        return getAllQuizzesURL(course_id) + "/" + quiz_id;
+    }
 }
