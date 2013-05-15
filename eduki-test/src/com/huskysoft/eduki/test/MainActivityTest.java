@@ -12,6 +12,7 @@ import com.jayway.android.robotium.solo.Solo;
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     private Solo solo;
+    private static final int TIMEOUT = 10000;
     
     public MainActivityTest() {
         super(MainActivity.class);
@@ -25,7 +26,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     /**
      * This is a black box test, making sure the new activity starts after clicking a button
      */
-    @Test
+    @Test(timeout=TIMEOUT)
     public void testAllCoursesClick() {
         solo.assertCurrentActivity("Wrong activity", MainActivity.class);
         

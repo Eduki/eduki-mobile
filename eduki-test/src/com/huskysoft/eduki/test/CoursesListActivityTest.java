@@ -15,6 +15,7 @@ import com.jayway.android.robotium.solo.Solo;
 public class CoursesListActivityTest extends ActivityInstrumentationTestCase2<CoursesListActivity>{
 
     private Solo solo;
+    private static final int TIMEOUT = 10000;
     
     public CoursesListActivityTest() {
         super(CoursesListActivity.class);
@@ -28,7 +29,7 @@ public class CoursesListActivityTest extends ActivityInstrumentationTestCase2<Co
     /**
      * Assert the list of test courses appear properly
      */
-    @Test
+    @Test(timeout=TIMEOUT)
     public void testCoursesAppear() {
         solo.assertCurrentActivity("Wrong activity", CoursesListActivity.class);
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.courseListView));
@@ -41,7 +42,7 @@ public class CoursesListActivityTest extends ActivityInstrumentationTestCase2<Co
     /**
      * Assert the list of test courses appear properly
      */
-    @Test
+    @Test(timeout=TIMEOUT)
     public void testNewActivityStarted() {
         solo.assertCurrentActivity("Wrong activity", CoursesListActivity.class);
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.courseListView));
