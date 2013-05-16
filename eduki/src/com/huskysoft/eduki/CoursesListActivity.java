@@ -43,6 +43,14 @@ public class CoursesListActivity extends Activity implements TaskComplete {
         return true;
     }
 
+    /**
+     * 
+     * @return The current list of courses in use
+     */
+    public List<Course> getCourseList() {
+        return courseList;
+    }
+    
     @Override
     public void taskComplete(String data) {
         courseList = CourseQuery.parseCourseList(data);

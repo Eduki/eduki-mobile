@@ -16,7 +16,7 @@ public class CourseTest extends AndroidTestCase {
     private String title;
     
     @Before
-    protected void setUp() throws Exception {
+    public void setUp() throws Exception {
         super.setUp();
         title = "OH GOD I HOPE THESE tests PASS";
         id = 100;
