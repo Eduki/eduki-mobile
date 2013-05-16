@@ -12,7 +12,7 @@ import com.huskysoft.eduki.LessonsListActivity;
 import com.huskysoft.eduki.data.Course;
 import com.jayway.android.robotium.solo.Solo;
 
-public class CoursesListActivityTest extends ActivityInstrumentationTestCase2<CoursesListActivity>{
+public class CoursesListActivityTest extends ActivityInstrumentationTestCase2<CoursesListActivity> {
 
     private Solo solo;
     private static final int TIMEOUT = 10000;
