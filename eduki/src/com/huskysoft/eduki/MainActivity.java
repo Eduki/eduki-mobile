@@ -21,6 +21,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // TODO: If authenticated, get rid of the login bar. 
+        //       In this case, switch it to a logout bar and change the onclick listener
     }
 
     @Override
@@ -40,5 +42,16 @@ public class MainActivity extends Activity {
     public void coursesListPressed(View view) {
         Intent intent = new Intent(this, CoursesListActivity.class);
         startActivity(intent);
+    }
+    
+    /**
+     * An onClickListener established in the xml of this activity, called when
+     * the "login" button is pressed. Note: Method header must be public
+     * for the xml to recognize this method.
+     * 
+     * @param view The view clicked. In this case, a button
+     */
+    public void loginPressed(View view) {
+        
     }
 }
