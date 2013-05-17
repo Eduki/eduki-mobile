@@ -1,7 +1,5 @@
 package com.huskysoft.eduki.test;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -41,7 +39,7 @@ public class LessonViewTest extends ActivityInstrumentationTestCase2<LessonsView
      * Assert the a single lesson is displayed correctly
      */
     @Test(timeout=TIMEOUT)
-    public void testCoursesAppear() {
+    public void testLessonAppears() {
         solo.assertCurrentActivity("Wrong activity", LessonsViewActivity.class);
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.lessonViewLayoutText));
         Lesson lesson = ((LessonsViewActivity) solo.getCurrentActivity()).getLesson();
