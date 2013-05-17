@@ -44,7 +44,7 @@ public class LessonViewTest extends ActivityInstrumentationTestCase2<LessonsView
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.lessonViewLayoutText));
         Lesson lesson = ((LessonsViewActivity) solo.getCurrentActivity()).getLesson();
         assertNotSame(null, lesson);
-        assertNotSame("", lesson.getBody());
+        assertFalse(lesson.getBody().equals(""));
         assertEquals("test_lesson_title", lesson.getTitle());
     }
 }
