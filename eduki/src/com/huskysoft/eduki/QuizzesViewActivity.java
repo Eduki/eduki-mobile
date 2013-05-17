@@ -2,7 +2,6 @@ package com.huskysoft.eduki;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.huskysoft.eduki.data.Question;
 import com.huskysoft.eduki.data.Quiz;
@@ -10,7 +9,6 @@ import com.huskysoft.eduki.data.QuizQuery;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -76,9 +74,7 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
             
             parseQuizContent(questionList);
             setContentView(R.layout.activity_quizzesview);
-            Log.w("Eduki", "Eduki: updating quiz content");
             updateQuiz();
-            Log.w("Eduki", "Eduki: updated quiz content");
         }
     }
     

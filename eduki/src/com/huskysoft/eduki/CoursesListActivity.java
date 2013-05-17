@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -82,7 +81,6 @@ public class CoursesListActivity extends Activity implements TaskComplete {
                     i.putExtra("course_title", chosen.getTitle());
                     i.putExtra("course_id", chosen.getId());
                     startActivity(i);
-                    Log.w("myApp", "EDUKI: Showing quizzes");
                 }
             })
             .setNegativeButton(R.string.showLessons, new DialogInterface.OnClickListener() {
