@@ -1,6 +1,8 @@
 package com.huskysoft.eduki;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.huskysoft.eduki.data.Question;
 import com.huskysoft.eduki.data.Quiz;
@@ -8,10 +10,12 @@ import com.huskysoft.eduki.data.QuizQuery;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -22,10 +26,10 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
      * quiz - Specific quiz this view is tied to 
      * course_id - ID of the course that this quiz is tied to
      */
-    private List<Question> questionList;
+    private List<String> questions;
+    private List<List<String>> choices;
+    private List<String> answers;
     private Quiz quiz;
-    private RadioGroup answers;
-    private Button submitButton;
     private int course_id;
     private static int questionsAnswered = 0; 
     
@@ -55,9 +59,8 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
     @Override
     public void taskComplete(String data) {
         //TODO: Implement taking quiz
-        
         // Get the list of questions, and set the title
-        questionList = QuizQuery.parseQuestionsList(data);
+        List<Question> questionList = QuizQuery.parseQuestionsList(data);
         this.setTitle(quiz.getTitle());
         
         // Check if there are questions for this quiz, if so then begin the quiz.
@@ -67,35 +70,66 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
             TextView contentView = (TextView) findViewById(R.id.noListText);
             contentView.setText("No questions found for this quiz.");
         } else {
+            questions = new ArrayList<String>();
+            answers = new ArrayList<String>();
+            choices = new ArrayList<List<String>>();
+            
+            parseQuizContent(questionList);
             setContentView(R.layout.activity_quizzesview);
-            this.setTitle(quiz.getTitle());
+            Log.w("Eduki", "Eduki: updating quiz content");
             updateQuiz();
+            Log.w("Eduki", "Eduki: updated quiz content");
+        }
+    }
+    
+    public void parseQuizContent(List<Question> questionList) {
+        for (Question q: questionList) {
+            String[] questionContent = q.getQuestion().split("\\n");
+            questions.add(questionContent[0]);
+            answers.add(q.getAnswer());
+            
+            List<String> answerChoices = new ArrayList<String>();
+            for (int i = 1; i < questionContent.length; i++) {
+                answerChoices.add(questionContent[i]);
+            }
+            choices.add(answerChoices);
         }
     }
     
     private void updateQuiz() {
-        if (questionsAnswered == questionList.size()) { // Finished the quiz
+        if (questionsAnswered == questions.size()) { // Finished the quiz
             // TODO: Display results
+            setContentView(R.layout.activity_no_list_found);
+            TextView contentView = (TextView) findViewById(R.id.noListText);
+            contentView.setText("Quiz Finished!");
         } else { // Show the question
             TextView contentView = (TextView) findViewById(R.id.questionText);
-            contentView.setText("Question goes here"); //TODO: UPDATE
-            
+            contentView.setText(questions.get(questionsAnswered)); 
             generateAnswers();
+            questionsAnswered++;
         }
     }
     
     private void generateAnswers() {
-        answers = (RadioGroup) findViewById(R.id.answerGroup);
-        submitButton = (Button) findViewById(R.id.submitButton);
-        
+        RadioGroup answersRadioGroup = (RadioGroup) findViewById(R.id.answerGroup);
+        answersRadioGroup.removeAllViews(); // Refresh the display
+        List<String> currentChoices = choices.get(questionsAnswered);
+        RadioButton[] rb = new RadioButton[currentChoices.size()];
+        for (int i = 0; i < currentChoices.size(); i++) {
+            rb[i] = new RadioButton(this);
+            rb[i].setText(currentChoices.get(i));
+            rb[i].setId(i);
+            answersRadioGroup.addView(rb[i]);
+        }
+
+        Button submitButton = (Button) findViewById(R.id.submitButton);        
         submitButton.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                
+                //TODO: Add score tracking
+                updateQuiz();
             }
-            
         });
     }
 }

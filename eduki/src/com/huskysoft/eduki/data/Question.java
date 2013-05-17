@@ -1,11 +1,11 @@
 package com.huskysoft.eduki.data;
 
 public class Question {
-    private String choices;
+    private String question;
     private String answer;
     
-    public String getChoices() {
-        return choices;
+    public String getQuestion() {
+        return question;
     }
     
     public String getAnswer() {

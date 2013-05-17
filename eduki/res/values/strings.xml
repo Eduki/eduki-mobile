@@ -13,5 +13,6 @@
     <string name="showQuizzes">Quizzes</string>
     <string name="courseSelectDialog">What would you like to display?</string>
     <string name="submit">Submit</string>
+    <string name="quizViewTitle">Quiz</string>
 
 </resources>
