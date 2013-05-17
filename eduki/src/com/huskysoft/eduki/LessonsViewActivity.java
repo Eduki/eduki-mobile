@@ -33,6 +33,13 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
         setContentView(R.layout.loading_screen);
     }
     
+    /**
+     * 
+     * @return A copy of the lesson attached to this lessonView
+     */
+    public Lesson getLesson() {
+        return new Lesson(lesson.getId(), lesson.getTitle(), lesson.getCourseId(), lesson.getBody());
+    }
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
