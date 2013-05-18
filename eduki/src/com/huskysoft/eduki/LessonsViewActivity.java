@@ -28,7 +28,7 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
             int lesson_id = extras.getInt("lesson_id");          
             int course_id = extras.getInt("course_id");
             lesson = new Lesson(lesson_id, lesson_title, course_id, lesson_body);
-            LessonQuery.getSpecificLesson(this, course_id, lesson_id);
+            LessonQuery.getSpecificLesson(this, lesson_id);
         }
         setContentView(R.layout.loading_screen);
     }
