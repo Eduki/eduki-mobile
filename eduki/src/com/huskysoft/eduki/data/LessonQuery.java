@@ -29,7 +29,7 @@ public class LessonQuery {
      * @param callback The callback for when the request is complete
      */
     public static void getSpecificLesson(TaskComplete callback, int course_id, int lesson_id) {
-        String specificLessonUrl = UrlConstants.getSingleLessonURL(course_id, lesson_id);
+        String specificLessonUrl = UrlConstants.getSingleLessonURL(lesson_id);
         new ConnectionTask(callback).execute(specificLessonUrl);
     }
 
@@ -42,8 +42,7 @@ public class LessonQuery {
      */
     public static List<Lesson> parseLessonsList(String data) {
         Gson gson = new Gson();
-        Type collectionType = new TypeToken<List<Lesson>>() {
-        }.getType();
+        Type collectionType = new TypeToken<List<Lesson>>() {}.getType();
         List<Lesson> lessons = gson.fromJson(data, collectionType);
         return lessons;
     }

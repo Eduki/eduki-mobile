@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +18,10 @@ import com.huskysoft.eduki.data.Course;
 import com.huskysoft.eduki.data.Quiz;
 import com.huskysoft.eduki.data.QuizQuery;
 
+/**
+ * @author Rafael Vertido Class QuizzesListActivity shows a list of quizzes
+ *         associated with a course, allowing them to be clicked.
+ */
 public class QuizzesListActivity extends Activity implements TaskComplete {
     /**
      * quizList - The list of quizzes to be displayed, 
@@ -30,12 +35,16 @@ public class QuizzesListActivity extends Activity implements TaskComplete {
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.w("Eduki", "Eduki: Starting QuizzesListActivity");
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
+            Log.w("Eduki", "Eduki: Getting intent info");
             String course_title = extras.getString("course_title");
             int course_id = extras.getInt("course_id");
             course = new Course(course_id, course_title);
+            Log.w("Eduki", "Eduki: Finished getting intent info");
+            Log.w("Eduki", "Eduki: Getting Quizzes list from URL");
             QuizQuery.getAllQuizzes(this, course_id);
         }
         setContentView(R.layout.loading_screen);
@@ -50,8 +59,10 @@ public class QuizzesListActivity extends Activity implements TaskComplete {
 
     @Override
     public void taskComplete(String data) {
+        Log.w("Eduki", "Eduki: Finished retreiving quiz list.... now parsing");
         // Get the list of lessons, and set the title
         quizList = QuizQuery.parseQuizzesList(data);
+        Log.w("Eduki", "Eduki: Finished parsing quiz list");
         this.setTitle(course.getTitle());
         
         // Check if there are lessons, if there are then display them in a list,
@@ -84,7 +95,7 @@ public class QuizzesListActivity extends Activity implements TaskComplete {
         Intent i = new Intent(this, QuizzesViewActivity.class);
         i.putExtra("quiz_title", chosen.getTitle());
         i.putExtra("quiz_id", chosen.getId());
-        i.putExtra("course_id", course.getId());
+        i.putExtra("course_id", chosen.getCourseId());
         startActivity(i);
     }
 }

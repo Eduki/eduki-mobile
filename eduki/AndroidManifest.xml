@@ -41,6 +41,20 @@
             android:icon="@drawable/ic_launcher" 
             android:screenOrientation="portrait">
         </activity>
+                <activity 
+            android:theme="@style/AppTheme" 
+            android:name="com.huskysoft.eduki.QuizzesListActivity" 
+            android:label="@string/quizzesTitle" 
+            android:icon="@drawable/ic_launcher" 
+            android:screenOrientation="portrait">
+        </activity>
+        <activity 
+            android:theme="@style/AppTheme" 
+            android:name="com.huskysoft.eduki.QuizzesViewActivity" 
+            android:label="@string/quizViewTitle" 
+            android:icon="@drawable/ic_launcher" 
+            android:screenOrientation="portrait">
+        </activity>
     </application>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />

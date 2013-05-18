@@ -75,7 +75,7 @@ public class CoursesListActivity extends Activity implements TaskComplete {
         alertDialogBuilder
             .setMessage(R.string.courseSelectDialog)
             .setCancelable(false)
-            .setPositiveButton(R.string.showQuizzes, new DialogInterface.OnClickListener() {
+            .setPositiveButton(R.string.quizzesTitle, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     Intent i = new Intent(context, QuizzesListActivity.class);
                     i.putExtra("course_title", chosen.getTitle());
@@ -83,7 +83,7 @@ public class CoursesListActivity extends Activity implements TaskComplete {
                     startActivity(i);
                 }
             })
-            .setNegativeButton(R.string.showLessons, new DialogInterface.OnClickListener() {
+            .setNegativeButton(R.string.lessonsTitle, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     Intent i = new Intent(context, LessonsListActivity.class);
                     i.putExtra("course_title", chosen.getTitle());
