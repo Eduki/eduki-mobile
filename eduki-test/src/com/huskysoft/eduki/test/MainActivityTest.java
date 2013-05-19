@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.huskysoft.eduki.CoursesListActivity;
+import com.huskysoft.eduki.LoginActivity;
 import com.huskysoft.eduki.MainActivity;
 import com.jayway.android.robotium.solo.Solo;
 
@@ -29,8 +30,14 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     @Test(timeout=TIMEOUT)
     public void testAllCoursesClick() {
         solo.assertCurrentActivity("Wrong activity", MainActivity.class);
-        
         solo.clickOnButton(solo.getString(com.huskysoft.eduki.R.string.coursesList));
         solo.assertCurrentActivity("Did not start the Course list Activity", CoursesListActivity.class);
+    }
+    
+    @Test(timeout=TIMEOUT)
+    public void testLoginButtonClick() {
+        solo.assertCurrentActivity("Wrong activity", MainActivity.class);
+        solo.clickOnButton(solo.getString(com.huskysoft.eduki.R.string.login));
+        solo.assertCurrentActivity("Did not start the Login Activity", LoginActivity.class);
     }
 }
