@@ -1,5 +1,6 @@
 package com.huskysoft.eduki;
 
+import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
@@ -83,6 +84,22 @@ public class QuizzesListActivity extends Activity implements TaskComplete {
                 }
             });
         }
+    }
+    
+    /**
+     * 
+     * @return The current list of quizzes in the course selected
+     */
+    public List<Quiz> getQuizList() {
+        return Collections.unmodifiableList(quizList);
+    }
+    
+    /**
+     * 
+     * @return Copy of associated course
+     */
+    public Course getCourse() {
+        return new Course(course.getId(), course.getTitle());
     }
     
     /**
