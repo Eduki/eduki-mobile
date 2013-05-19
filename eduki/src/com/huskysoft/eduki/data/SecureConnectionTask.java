@@ -1,4 +1,3 @@
-
 package com.huskysoft.eduki.data;
 
 import android.os.AsyncTask;
@@ -6,41 +5,52 @@ import android.os.AsyncTask;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import com.huskysoft.eduki.TaskComplete;
 
-/**
- * @author Cody Thomas Class ConnectionTask will make basic GET requests to a
- *         provided url, passing the data to a callback represented by a
- *         TaskComplete object.
- */
-public class ConnectionTask extends AsyncTask<String, Void, String> {
-
+public class SecureConnectionTask extends AsyncTask<String, Void, String> {
     /**
      * The callback to pass the result to when the request is complete
      */
     private TaskComplete callback;
+    private String user;
+    private String pass;
 
     /**
      * Initializes a connectionTask object
      * 
      * @param callback The object to pass the result to.
      */
-    public ConnectionTask(TaskComplete callback) {
+    public SecureConnectionTask(TaskComplete callback) {
         this.callback = callback;
+    }
+    
+    public void setAuth(String user, String pass) {
+        this.user = user;
+        this.pass = pass;
     }
 
     @Override
     protected String doInBackground(String... urls) {
-        HttpURLConnection conn = null;
+        HttpsURLConnection conn = null;
         try {
             URL url;
             url = new URL(urls[0]);
-            conn = (HttpURLConnection) url.openConnection();
+            conn = (HttpsURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
+            if(user != null && pass != null) {
+                Authenticator.setDefault (new Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication (user, pass.toCharArray());
+                    }
+                });
+            }
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder sb = new StringBuilder();
             String line = rd.readLine();
@@ -66,4 +76,5 @@ public class ConnectionTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String response) {
         callback.taskComplete(response);
     }
+
 }

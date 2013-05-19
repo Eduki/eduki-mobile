@@ -10,7 +10,7 @@
     <string name="lessonsTitle">Lessons</string>
     <string name="lessonViewTitle">Lesson View</string>
     <string name="login">Log In</string>
-    <string name="username">Username</string>
+    <string name="username">Email</string>
     <string name="password">Password</string>
 
 </resources>

@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/loginBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -18,11 +18,11 @@
     </EditText>
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/passwordBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_below="@+id/editText1"
+        android:layout_alignLeft="@+id/loginBox"
+        android:layout_below="@+id/loginBox"
         android:layout_marginTop="61dp"
         android:ems="10"
         android:inputType="textPassword" />
@@ -31,7 +31,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editText1"
+        android:layout_alignBottom="@+id/loginBox"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="51dp"
         android:text="@string/username"
@@ -41,7 +41,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
+        android:layout_below="@+id/loginBox"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
         android:text="@string/password"
@@ -52,9 +52,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/passwordBox"
         android:layout_marginTop="45dp"
         android:text="@string/login"
-        android:onClick="coursesListPressed" />
+        android:onClick="loginClicked" />
 
 </RelativeLayout>

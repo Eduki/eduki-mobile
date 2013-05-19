@@ -3,11 +3,12 @@ package com.huskysoft.eduki;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
-
-import com.huskysoft.eduki.R;
+import android.widget.Button;
 
 /**
  * @author Cody Thomas MainActivity is the first activity to be loaded when the
@@ -21,6 +22,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean authenticated = prefs.getBoolean("authenticated", false);
+        if(authenticated) {
+           disableLogin();
+        }
         // TODO: If authenticated, get rid of the login bar. 
         //       In this case, switch it to a logout bar and change the onclick listener
     }
@@ -30,6 +36,11 @@ public class MainActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+    
+    private void disableLogin() {
+        Button loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -52,6 +63,16 @@ public class MainActivity extends Activity {
      * @param view The view clicked. In this case, a button
      */
     public void loginPressed(View view) {
-        
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivityForResult(i, 1);
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                disableLogin();     
+            }
+        }
     }
 }
