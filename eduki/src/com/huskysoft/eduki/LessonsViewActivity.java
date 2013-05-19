@@ -28,11 +28,18 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
             int lesson_id = extras.getInt("lesson_id");          
             int course_id = extras.getInt("course_id");
             lesson = new Lesson(lesson_id, lesson_title, course_id, lesson_body);
-            LessonQuery.getSpecificLesson(this, course_id, lesson_id);
+            LessonQuery.getSpecificLesson(this, lesson_id);
         }
         setContentView(R.layout.loading_screen);
     }
     
+    /**
+     * 
+     * @return A copy of the lesson attached to this lessonView
+     */
+    public Lesson getLesson() {
+        return new Lesson(lesson.getId(), lesson.getTitle(), lesson.getCourseId(), lesson.getBody());
+    }
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

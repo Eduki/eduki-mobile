@@ -1,5 +1,6 @@
 package com.huskysoft.eduki;
 
+import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
@@ -78,6 +79,22 @@ public class LessonsListActivity extends Activity implements TaskComplete {
                 }
             });
         }
+    }
+    
+    /**
+     * 
+     * @return Copy of the list of lessons
+     */
+    public List<Lesson> getLessonList() {
+        return Collections.unmodifiableList(lessonList);
+    }
+    
+    /**
+     * 
+     * @return Copy of associated course
+     */
+    public Course getCourse() {
+        return new Course(course.getId(), course.getTitle());
     }
     
     /**

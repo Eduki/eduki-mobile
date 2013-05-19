@@ -41,7 +41,7 @@
             android:icon="@drawable/ic_launcher" 
             android:screenOrientation="portrait">
         </activity>
-                <activity 
+        <activity 
             android:theme="@style/AppTheme" 
             android:name="com.huskysoft.eduki.QuizzesListActivity" 
             android:label="@string/quizzesTitle" 
