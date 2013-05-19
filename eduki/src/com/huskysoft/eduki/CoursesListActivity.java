@@ -2,6 +2,9 @@
 package com.huskysoft.eduki;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,6 +32,8 @@ public class CoursesListActivity extends Activity implements TaskComplete {
      * loaded
      */
     private List<Course> courseList;
+    private static Course chosen;
+    private final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +78,29 @@ public class CoursesListActivity extends Activity implements TaskComplete {
      * @param position the position in the list of the button pressed
      */
     private void courseSelected(int position) {
-        Course chosen = courseList.get(position);
-        Intent i = new Intent(this, LessonsListActivity.class);
-        i.putExtra("course_title", chosen.getTitle());
-        i.putExtra("course_id", chosen.getId());
-        startActivity(i);
+        chosen = courseList.get(position);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        alertDialogBuilder.setTitle(chosen.getTitle());
+        alertDialogBuilder
+            .setMessage(R.string.courseSelectDialog)
+            .setCancelable(false)
+            .setPositiveButton(R.string.quizzesTitle, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Intent i = new Intent(context, QuizzesListActivity.class);
+                    i.putExtra("course_title", chosen.getTitle());
+                    i.putExtra("course_id", chosen.getId());
+                    startActivity(i);
+                }
+            })
+            .setNegativeButton(R.string.lessonsTitle, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Intent i = new Intent(context, LessonsListActivity.class);
+                    i.putExtra("course_title", chosen.getTitle());
+                    i.putExtra("course_id", chosen.getId());
+                    startActivity(i);
+                }
+            });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }

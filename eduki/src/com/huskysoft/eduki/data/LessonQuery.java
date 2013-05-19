@@ -42,8 +42,7 @@ public class LessonQuery {
      */
     public static List<Lesson> parseLessonsList(String data) {
         Gson gson = new Gson();
-        Type collectionType = new TypeToken<List<Lesson>>() {
-        }.getType();
+        Type collectionType = new TypeToken<List<Lesson>>() {}.getType();
         List<Lesson> lessons = gson.fromJson(data, collectionType);
         return lessons;
     }
