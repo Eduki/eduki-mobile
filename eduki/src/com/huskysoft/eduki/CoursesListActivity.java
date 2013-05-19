@@ -11,6 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.huskysoft.eduki.R;
@@ -43,6 +44,14 @@ public class CoursesListActivity extends Activity implements TaskComplete {
         return true;
     }
 
+    /**
+     * 
+     * @return The current list of courses in use
+     */
+    public List<Course> getCourseList() {
+        return Collections.unmodifiableList(courseList);
+    }
+    
     @Override
     public void taskComplete(String data) {
         courseList = CourseQuery.parseCourseList(data);

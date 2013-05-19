@@ -28,8 +28,8 @@ public class LessonQuery {
      * 
      * @param callback The callback for when the request is complete
      */
-    public static void getSpecificLesson(TaskComplete callback, int course_id, int lesson_id) {
-        String specificLessonUrl = UrlConstants.getSingleLessonURL(course_id, lesson_id);
+    public static void getSpecificLesson(TaskComplete callback, int lesson_id) {
+        String specificLessonUrl = UrlConstants.getSingleLessonURL(lesson_id);
         new ConnectionTask(callback).execute(specificLessonUrl);
     }
 

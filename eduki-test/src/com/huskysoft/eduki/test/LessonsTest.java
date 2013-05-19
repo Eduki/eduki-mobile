@@ -18,7 +18,7 @@ public class LessonsTest extends AndroidTestCase {
     private String body;
     
     @Before
-    protected void setUp() throws Exception {
+    public void setUp() throws Exception {
         super.setUp();
         id = 0;
         c_id = 1;
