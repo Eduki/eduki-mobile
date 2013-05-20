@@ -8,7 +8,6 @@ import org.junit.Test;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 
-import com.huskysoft.eduki.LessonsListActivity;
 import com.huskysoft.eduki.QuizzesListActivity;
 import com.huskysoft.eduki.QuizzesViewActivity;
 import com.huskysoft.eduki.data.Course;
