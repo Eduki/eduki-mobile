@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.huskysoft.eduki.CoursesListActivity;
 import com.huskysoft.eduki.LessonsListActivity;
+import com.huskysoft.eduki.QuizzesListActivity;
 import com.huskysoft.eduki.data.Course;
 import com.jayway.android.robotium.solo.Solo;
 
@@ -40,16 +41,37 @@ public class CoursesListActivityTest extends ActivityInstrumentationTestCase2<Co
     }
     
     /**
-     * Assert the list of test courses appear properly
+     * Assert the list of test courses appear properly, and transition to 
+     * the lesson list is also correct
      */
     @Test(timeout=TIMEOUT)
-    public void testNewActivityStarted() {
+    public void testLessonListActivityStarted() {
         solo.assertCurrentActivity("Wrong activity", CoursesListActivity.class);
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.courseListView));
         List<Course> courseList = ((CoursesListActivity) solo.getCurrentActivity()).getCourseList();
         assertNotSame(courseList.size(), 0);
         solo.clickOnText(courseList.get(0).toString());
+        solo.clickOnButton("Lessons");
         solo.assertCurrentActivity("Wrong activity", LessonsListActivity.class);
+        solo.goBack(); 
+        solo.assertCurrentActivity("Wrong activity", CoursesListActivity.class);
+    }
+    
+    /**
+     * Assert the list of test courses appear properly, and transition to 
+     * the quiz list is also correct
+     */
+    @Test(timeout=TIMEOUT)
+    public void testQuizListActivityStarted() {
+        solo.assertCurrentActivity("Wrong activity", CoursesListActivity.class);
+        solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.courseListView));
+        List<Course> courseList = ((CoursesListActivity) solo.getCurrentActivity()).getCourseList();
+        assertNotSame(courseList.size(), 0);
+        solo.clickOnText(courseList.get(0).toString());
+        solo.clickOnButton("Quizzes");
+        solo.assertCurrentActivity("Wrong activity", QuizzesListActivity.class);
+        solo.goBack(); 
+        solo.assertCurrentActivity("Wrong activity", CoursesListActivity.class);
     }
 }
 
