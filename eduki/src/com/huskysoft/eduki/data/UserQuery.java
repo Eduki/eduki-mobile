@@ -3,9 +3,7 @@ package com.huskysoft.eduki.data;
 import com.huskysoft.eduki.TaskComplete;
 
 /**
- * 
  * @author Cody Thomas Userquery streamlines queries to the api involving users.
- *
  */
 
 public class UserQuery {

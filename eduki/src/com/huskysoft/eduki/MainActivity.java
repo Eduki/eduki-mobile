@@ -18,6 +18,8 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
+    private static final int LOGIN_CONSTANT = 1;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,12 +66,12 @@ public class MainActivity extends Activity {
      */
     public void loginPressed(View view) {
         Intent i = new Intent(this, LoginActivity.class);
-        startActivityForResult(i, 1);
+        startActivityForResult(i, LOGIN_CONSTANT);
     }
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) {
+        if (requestCode == LOGIN_CONSTANT) {
             if(resultCode == RESULT_OK) {
                 disableLogin();     
             }
