@@ -83,7 +83,6 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
 
     @Override
     public void taskComplete(String data) {
-        // TODO: Implement taking quiz
         // Get the list of questions, and set the title
         quizContent = QuizQuery.parseQuestionsList(data);
         List<Problem> problemList = quizContent.getProblems();
