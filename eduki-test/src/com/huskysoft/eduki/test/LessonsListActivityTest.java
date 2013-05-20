@@ -14,15 +14,26 @@ import com.huskysoft.eduki.data.Course;
 import com.huskysoft.eduki.data.Lesson;
 import com.jayway.android.robotium.solo.Solo;
 
+/**
+ * 
+ * @author Rafael Vertido LessonsListActivityTest tests the LessonsList Activity
+ */
+
 public class LessonsListActivityTest extends ActivityInstrumentationTestCase2<LessonsListActivity> {
     
     private Solo solo;
     private static final int TIMEOUT = 10000;
     
+    /**
+     * Constructs the tests
+     */
     public LessonsListActivityTest() {
         super(LessonsListActivity.class);
     }
     
+    /**
+     * Initializes required variables
+     */
     @Before
     public void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());

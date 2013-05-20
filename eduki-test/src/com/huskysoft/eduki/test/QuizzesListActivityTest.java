@@ -14,15 +14,26 @@ import com.huskysoft.eduki.data.Course;
 import com.huskysoft.eduki.data.Quiz;
 import com.jayway.android.robotium.solo.Solo;
 
+/**
+ * 
+ * @author Rafael Vertido QuizzesListActivityTest tests the QuizzesList Activity
+ */
+
 public class QuizzesListActivityTest extends ActivityInstrumentationTestCase2<QuizzesListActivity> { 
     
     private Solo solo;
     private static final int TIMEOUT = 10000;
     
+    /**
+     * Constructs the tests
+     */
     public QuizzesListActivityTest() {
         super(QuizzesListActivity.class);
     }
     
+    /**
+     * Initializes required variables
+     */
     @Before
     public void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());
