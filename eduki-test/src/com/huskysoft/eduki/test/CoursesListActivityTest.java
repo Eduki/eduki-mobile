@@ -38,6 +38,11 @@ public class CoursesListActivityTest extends ActivityInstrumentationTestCase2<Co
         solo = new Solo(getInstrumentation(), getActivity());
     }
     
+    @Override
+    public void tearDown() throws Exception {
+         solo.finishOpenedActivities();
+   }
+    
     /**
      * Assert the list of test courses appear properly
      */
@@ -54,9 +59,10 @@ public class CoursesListActivityTest extends ActivityInstrumentationTestCase2<Co
     /**
      * Assert the list of test courses appear properly, and transition to 
      * the lesson list is also correct
+     * @throws Exception 
      */
     @Test(timeout=TIMEOUT)
-    public void testLessonListActivityStarted() {
+    public void testLessonListActivityStarted() throws Exception {
         solo.assertCurrentActivity("Wrong activity", CoursesListActivity.class);
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.courseListView));
         List<Course> courseList = ((CoursesListActivity) solo.getCurrentActivity()).getCourseList();
@@ -64,16 +70,16 @@ public class CoursesListActivityTest extends ActivityInstrumentationTestCase2<Co
         solo.clickOnText(courseList.get(0).toString());
         solo.clickOnButton("Lessons");
         solo.assertCurrentActivity("Wrong activity", LessonsListActivity.class);
-        solo.goBack(); 
-        solo.assertCurrentActivity("Wrong activity", CoursesListActivity.class);
+        tearDown();
     }
     
     /**
      * Assert the list of test courses appear properly, and transition to 
      * the quiz list is also correct
+     * @throws Exception 
      */
     @Test(timeout=TIMEOUT)
-    public void testQuizListActivityStarted() {
+    public void testQuizListActivityStarted() throws Exception {
         solo.assertCurrentActivity("Wrong activity", CoursesListActivity.class);
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.courseListView));
         List<Course> courseList = ((CoursesListActivity) solo.getCurrentActivity()).getCourseList();
@@ -81,8 +87,7 @@ public class CoursesListActivityTest extends ActivityInstrumentationTestCase2<Co
         solo.clickOnText(courseList.get(0).toString());
         solo.clickOnButton("Quizzes");
         solo.assertCurrentActivity("Wrong activity", QuizzesListActivity.class);
-        solo.goBack(); 
-        solo.assertCurrentActivity("Wrong activity", CoursesListActivity.class);
+        tearDown();
     }
 }
 
