@@ -1,3 +1,4 @@
+
 package com.huskysoft.eduki;
 
 import android.app.Activity;
@@ -8,18 +9,22 @@ import android.widget.TextView;
 
 import com.huskysoft.eduki.data.UserQuery;
 
+/**
+ * @author Cody Thomas LoginActivity allows a user to login to their account
+ */
+
 public class LoginActivity extends Activity implements TaskComplete {
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
-    
+
     /**
      * An onClickListener established in the xml of this activity, called when
-     * the "login" button is pressed. Note: Method header must be public
-     * for the xml to recognize this method.
+     * the "login" button is pressed. Note: Method header must be public for the
+     * xml to recognize this method.
      * 
      * @param view The view clicked. In this case, a button
      */
@@ -33,11 +38,12 @@ public class LoginActivity extends Activity implements TaskComplete {
 
     @Override
     public void taskComplete(String data) {
-        // TODO If data doesn't give me an error, store the authtoken in shared preferences
+        // TODO If data doesn't give me an error, store the authtoken in shared
+        // preferences
         boolean error = false;
-        if(!error) {
+        if (!error) {
             Intent returnIntent = new Intent();
-            setResult(RESULT_OK, returnIntent);        
+            setResult(RESULT_OK, returnIntent);
             finish();
         }
     }
