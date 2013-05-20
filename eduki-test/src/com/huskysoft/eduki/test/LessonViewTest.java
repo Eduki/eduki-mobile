@@ -10,15 +10,26 @@ import com.jayway.android.robotium.solo.Solo;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 
+/**
+ * 
+ * @author Cody Thomas LessonViewTest tests the LessonView Activity
+ *
+ */
 public class LessonViewTest extends ActivityInstrumentationTestCase2<LessonsViewActivity> {
 
     private Solo solo;
     private static final int TIMEOUT = 10000;
     
+    /**
+     * Constructs the tests
+     */
     public LessonViewTest() {
         super(LessonsViewActivity.class);
     }
     
+    /**
+     * Initializes required variables
+     */
     @Before
     public void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());

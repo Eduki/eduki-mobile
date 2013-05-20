@@ -8,6 +8,11 @@ import org.junit.Test;
 
 import com.huskysoft.eduki.data.Course;
 
+/**
+ * 
+ * @author Cody Thomas CourseTest are unit tests for courses
+ *
+ */
 public class CourseTest extends AndroidTestCase {
 
     private static final int TIMEOUT = 3000;
@@ -15,6 +20,9 @@ public class CourseTest extends AndroidTestCase {
     private int id;
     private String title;
     
+    /**
+     * Creates a course
+     */
     @Before
     public void setUp() throws Exception {
         super.setUp();
@@ -23,11 +31,17 @@ public class CourseTest extends AndroidTestCase {
         course = new Course(id, title);
     }
 
+    /**
+     * Test the getId method
+     */
     @Test(timeout=TIMEOUT)
     public void testGetId() {
         assertEquals(id, course.getId());
     }
     
+    /**
+     * Test the getTitle method
+     */
     @Test(timeout=TIMEOUT)
     public void testGetTitle() {
         assertEquals(title, course.getTitle());
