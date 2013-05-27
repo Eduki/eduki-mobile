@@ -51,7 +51,7 @@
         android:id="@+id/submitlogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignLeft="@+id/passText"
         android:layout_below="@+id/passwordBox"
         android:layout_marginTop="45dp"
         android:text="@string/login"

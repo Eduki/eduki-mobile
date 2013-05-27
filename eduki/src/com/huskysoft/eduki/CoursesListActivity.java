@@ -13,11 +13,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.List;
 
-import com.huskysoft.eduki.R;
 import com.huskysoft.eduki.data.Course;
 import com.huskysoft.eduki.data.CourseQuery;
 
@@ -61,8 +61,9 @@ public class CoursesListActivity extends Activity implements TaskComplete {
     public void taskComplete(String data) {
         courseList = CourseQuery.parseCourseList(data);
         ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(this,
-                android.R.layout.simple_list_item_1, courseList);
+                R.layout.list_item_layout, courseList);
         setContentView(R.layout.activity_courseslist);
+        ((TextView) findViewById(R.id.title)).setText("COURSES");
         ListView listView = (ListView) findViewById(R.id.courseListView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new OnItemClickListener() {

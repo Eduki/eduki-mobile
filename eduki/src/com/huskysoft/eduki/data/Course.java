@@ -22,7 +22,7 @@ public class Course {
     
     /** @return The string representation of the course */
     public String toString() {
-        return getTitle();
+        return getTitle().toUpperCase();
     }
 
     /** @return The id of the course */

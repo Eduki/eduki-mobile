@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#dbdbd9</color>
+    <color name="headers">#6d6e70</color>
+    <color name="action_bar">#3f3f3f</color>
+    <color name="blue_button">#87a8b1</color>
+    <color name="blue_button_selected">#35849a</color>
+    <color name="divider">#bbbdc0</color>
+</resources>
