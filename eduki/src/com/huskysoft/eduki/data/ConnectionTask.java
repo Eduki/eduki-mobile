@@ -22,14 +22,16 @@ public class ConnectionTask extends AsyncTask<String, Void, String> {
      * The callback to pass the result to when the request is complete
      */
     private TaskComplete callback;
+    private int id;
 
     /**
      * Initializes a connectionTask object
      * 
      * @param callback The object to pass the result to.
      */
-    public ConnectionTask(TaskComplete callback) {
+    public ConnectionTask(TaskComplete callback, int id) {
         this.callback = callback;
+        this.id = id;
     }
 
     @Override
@@ -64,6 +66,6 @@ public class ConnectionTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String response) {
-        callback.taskComplete(response);
+        callback.taskComplete(response, id);
     }
 }

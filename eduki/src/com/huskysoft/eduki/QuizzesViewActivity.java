@@ -72,7 +72,7 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
             int quiz_id = extras.getInt("quiz_id");
             course_id = extras.getInt("course_id");
             quiz = new Quiz(quiz_id, course_id, quiz_title);
-            QuizQuery.getAllQuestions(this, quiz_id);
+            QuizQuery.getAllQuestions(this, quiz_id, 0);
         }
         setContentView(R.layout.loading_screen);
     }
@@ -85,7 +85,7 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
     }
 
     @Override
-    public void taskComplete(String data) {
+    public void taskComplete(String data, int id) {
         // Get the list of questions, and set the title
         quizContent = QuizQuery.parseQuestionsList(data);
         List<Problem> problemList = quizContent.getProblems();

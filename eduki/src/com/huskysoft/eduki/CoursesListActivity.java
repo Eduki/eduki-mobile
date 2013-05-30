@@ -38,7 +38,7 @@ public class CoursesListActivity extends Activity implements TaskComplete {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CourseQuery.getAllCourses(this);
+        CourseQuery.getAllCourses(this, 0);
         setContentView(R.layout.loading_screen);
     }
 
@@ -58,7 +58,7 @@ public class CoursesListActivity extends Activity implements TaskComplete {
     }
     
     @Override
-    public void taskComplete(String data) {
+    public void taskComplete(String data, int id) {
         courseList = CourseQuery.parseCourseList(data);
         ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(this,
                 R.layout.list_item_layout, courseList);
@@ -80,28 +80,9 @@ public class CoursesListActivity extends Activity implements TaskComplete {
      */
     private void courseSelected(int position) {
         chosen = courseList.get(position);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        alertDialogBuilder.setTitle(chosen.getTitle());
-        alertDialogBuilder
-            .setMessage(R.string.courseSelectDialog)
-            .setCancelable(false)
-            .setPositiveButton(R.string.quizzesTitle, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    Intent i = new Intent(context, QuizzesListActivity.class);
-                    i.putExtra("course_title", chosen.getTitle());
-                    i.putExtra("course_id", chosen.getId());
-                    startActivity(i);
-                }
-            })
-            .setNegativeButton(R.string.lessonsTitle, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    Intent i = new Intent(context, LessonsListActivity.class);
-                    i.putExtra("course_title", chosen.getTitle());
-                    i.putExtra("course_id", chosen.getId());
-                    startActivity(i);
-                }
-            });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+        Intent i = new Intent(context, CourseActivity.class);
+        i.putExtra("course_title", chosen.getTitle());
+        i.putExtra("course_id", chosen.getId());
+        startActivity(i);
     }
 }

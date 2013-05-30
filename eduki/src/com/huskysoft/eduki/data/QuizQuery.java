@@ -18,9 +18,9 @@ public class QuizQuery {
      * @param callback The callback for when the request is complete
      * @param course_id id of the associated course
      */
-    public static void getAllQuizzes(TaskComplete callback, int course_id) {
+    public static void getAllQuizzes(TaskComplete callback, int course_id, int id) {
         String quizzesURL = UrlConstants.getAllQuizzesURL(course_id);
-        new ConnectionTask(callback).execute(quizzesURL);
+        new ConnectionTask(callback, id).execute(quizzesURL);
     }
     
     /**
@@ -29,9 +29,9 @@ public class QuizQuery {
      * @param callback The callback for when the request is complete
      * @param quiz_id id of the associated quiz
      */
-    public static void getAllQuestions(TaskComplete callback, int quiz_id) {
+    public static void getAllQuestions(TaskComplete callback, int quiz_id, int id) {
         String singleQuizURL = UrlConstants.getSingleQuizURL(quiz_id);
-        new ConnectionTask(callback).execute(singleQuizURL);
+        new ConnectionTask(callback, id).execute(singleQuizURL);
     }
     
     /**
