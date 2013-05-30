@@ -13,11 +13,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -86,7 +89,6 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
         // Get the list of questions, and set the title
         quizContent = QuizQuery.parseQuestionsList(data);
         List<Problem> problemList = quizContent.getProblems();
-        this.setTitle(quiz.getTitle());
 
         // Check if there are questions for this quiz, if so then begin the
         // quiz.
@@ -102,6 +104,7 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
 
             parseQuizContent(problemList);
             setContentView(R.layout.activity_quizzesview);
+            ((TextView) findViewById(R.id.title)).setText(quiz.getTitle());
             updateQuiz();
         }
     }
@@ -136,13 +139,12 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
      */
     private void updateQuiz() {
         if (questionsAnswered == questions.size()) { // Finished the quiz
-            setContentView(R.layout.activity_no_list_found);
-            TextView contentView = (TextView) findViewById(R.id.noListText);
-            double percentage = ((1.0 * questionsCorrect) / questionsAnswered) * 100; // Get % score
-            contentView.setText("Quiz Finished!\n" + "You scored "
-                                + questionsCorrect + "/" + questionsAnswered + ".\n"
-                                + "You have earned " + (int) percentage + "%.");
+            setContentView(R.layout.activity_quizresult);
+            ((TextView) findViewById(R.id.title)).setText(R.string.quizResults);
+            displayQuizResults();
+            addEventListeners();
         } else { // Show the question
+            ((TextView) findViewById(R.id.questionNumber)).setText((questionsAnswered + 1) + ".");
             TextView contentView = (TextView) findViewById(R.id.questionText);
             contentView.setText(questions.get(questionsAnswered));
             generateAnswers(questionsAnswered);
@@ -167,6 +169,7 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
             rb[i] = new RadioButton(this);
             rb[i].setText(currentChoices.get(i));
             rb[i].setId(i);
+            rb[i].setTextColor(Color.parseColor(getResources().getString(R.color.content)));
             answersRadioGroup.addView(rb[i]);
         }
 
@@ -210,6 +213,44 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
                     AlertDialog alertDialog = alertDialogBuilder.create();
                     alertDialog.show();
                 }
+            }
+        });
+    }
+    
+    private void displayQuizResults() {
+        TextView contentView = (TextView) findViewById(R.id.quizResultText);
+        double percentage = ((1.0 * questionsCorrect) / questionsAnswered) * 100; // Get % score
+        contentView.setText("Quiz Finished!\n" + "You got "
+                            + questionsCorrect + "/" + questionsAnswered + " questions correct.\n"
+                            + "Your score is " + (int) percentage + "%!");
+    }
+    
+    private void addEventListeners() {
+        ImageButton retakeButton = (ImageButton) findViewById(R.id.retakeButton);
+        ImageButton coursesButton = (ImageButton) findViewById(R.id.coursesButton);
+        
+        // On mouse click event listener for the re-take button
+        retakeButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //TODO: ADD POSTING OF RESULTS
+                // Post results, then restart the quiz
+                questionsAnswered = 0;
+                questionsCorrect = 0;
+                setContentView(R.layout.activity_quizzesview);
+                ((TextView) findViewById(R.id.title)).setText(quiz.getTitle());
+                updateQuiz();
+            }
+        });
+        
+        // On mouse click event listener for the courses logo
+        coursesButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, CoursesListActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -41,6 +41,6 @@ public class Quiz {
     
     /** @return title of the quiz */
     public String getTitle() {
-        return title;
+        return title.toUpperCase();
     }
 }

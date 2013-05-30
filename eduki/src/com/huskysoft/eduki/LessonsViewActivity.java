@@ -53,7 +53,7 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
     public void taskComplete(String data) {
         String lessonBody = lesson.getBody();
         setContentView(R.layout.activity_lessonview);
-        this.setTitle(lesson.getTitle());
+        ((TextView) findViewById(R.id.title)).setText(lesson.getTitle());
         TextView contentView = (TextView) findViewById(R.id.lessonViewLayoutText);
         
         // Check if there was useful content, if there was display it,

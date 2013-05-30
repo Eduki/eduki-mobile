@@ -44,7 +44,7 @@ public class Lesson {
 
     /** @return the title of the lesson */
     public String getTitle() {
-        return title;
+        return title.toUpperCase();
     }
 
     /** @return the content of the lesson */
