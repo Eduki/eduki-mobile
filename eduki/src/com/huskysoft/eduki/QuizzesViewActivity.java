@@ -139,7 +139,7 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
      */
     private void updateQuiz() {
         if (questionsAnswered == questions.size()) { // Finished the quiz
-            setContentView(R.layout.activity_quizresult);
+            setContentView(R.layout.activity_quizzesresult);
             ((TextView) findViewById(R.id.title)).setText(R.string.quizResults);
             displayQuizResults();
             addEventListeners();
@@ -250,6 +250,7 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CoursesListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
