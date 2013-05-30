@@ -33,11 +33,11 @@ public class LoginActivity extends Activity implements TaskComplete {
         String user = userBox.getText().toString();
         TextView passBox = (TextView) findViewById(R.id.passwordBox);
         String pass = passBox.getText().toString();
-        UserQuery.attemptLogin(user, pass, this);
+        UserQuery.attemptLogin(user, pass, this, 0);
     }
 
     @Override
-    public void taskComplete(String data) {
+    public void taskComplete(String data, int id) {
         // TODO If data doesn't give me an error, store the authtoken in shared
         // preferences
         boolean error = false;

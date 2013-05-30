@@ -18,9 +18,9 @@ public class LessonQuery {
      * 
      * @param callback The callback for when the request is complete
      */
-    public static void getAllLessons(TaskComplete callback, int course_id) {
+    public static void getAllLessons(TaskComplete callback, int course_id, int id) {
         String getLessonsURL = UrlConstants.getAllLessonsURL(course_id);
-        new ConnectionTask(callback).execute(getLessonsURL);
+        new ConnectionTask(callback, id).execute(getLessonsURL);
     }
 
     /**
@@ -28,9 +28,9 @@ public class LessonQuery {
      * 
      * @param callback The callback for when the request is complete
      */
-    public static void getSpecificLesson(TaskComplete callback, int lesson_id) {
+    public static void getSpecificLesson(TaskComplete callback, int lesson_id, int id) {
         String specificLessonUrl = UrlConstants.getSingleLessonURL(lesson_id);
-        new ConnectionTask(callback).execute(specificLessonUrl);
+        new ConnectionTask(callback, id).execute(specificLessonUrl);
     }
 
     /**

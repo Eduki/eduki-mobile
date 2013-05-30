@@ -43,7 +43,7 @@ public class LessonsListActivity extends Activity implements TaskComplete {
             String course_title = extras.getString("course_title");
             int course_id = extras.getInt("course_id");
             course = new Course(course_id, course_title);
-            LessonQuery.getAllLessons(this, course_id);
+            LessonQuery.getAllLessons(this, course_id, 0);
         }
         setContentView(R.layout.loading_screen);
     } 
@@ -56,7 +56,7 @@ public class LessonsListActivity extends Activity implements TaskComplete {
     }
 
     @Override
-    public void taskComplete(String data) {
+    public void taskComplete(String data, int id) {
         // Get the list of lessons, and set the title
         lessonList = LessonQuery.parseLessonsList(data);
         this.setTitle(course.getTitle());

@@ -14,11 +14,11 @@ public class UserQuery {
      * @param pass The password
      * @param callback The callback to be called on completion
      */
-    public static void attemptLogin(String user, String pass, TaskComplete callback) {
-        SecureConnectionTask sct = new SecureConnectionTask(callback);
+    public static void attemptLogin(String user, String pass, TaskComplete callback, int id) {
+        SecureConnectionTask sct = new SecureConnectionTask(callback, id);
         sct.setAuth(user, pass);
         //sct.execute(UrlConstants.URL_AUTH);
         // For now, assume task is fine
-        callback.taskComplete("");
+        callback.taskComplete("", id);
     }
 }

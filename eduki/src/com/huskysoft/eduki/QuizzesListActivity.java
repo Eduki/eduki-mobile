@@ -46,7 +46,7 @@ public class QuizzesListActivity extends Activity implements TaskComplete {
             course = new Course(course_id, course_title);
             Log.w("Eduki", "Eduki: Finished getting intent info");
             Log.w("Eduki", "Eduki: Getting Quizzes list from URL");
-            QuizQuery.getAllQuizzes(this, course_id);
+            QuizQuery.getAllQuizzes(this, course_id, 0);
         }
         setContentView(R.layout.loading_screen);
     } 
@@ -59,7 +59,7 @@ public class QuizzesListActivity extends Activity implements TaskComplete {
     }
 
     @Override
-    public void taskComplete(String data) {
+    public void taskComplete(String data, int id) {
         Log.w("Eduki", "Eduki: Finished retreiving quiz list.... now parsing");
         // Get the list of lessons, and set the title
         quizList = QuizQuery.parseQuizzesList(data);

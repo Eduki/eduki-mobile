@@ -28,7 +28,7 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
             int lesson_id = extras.getInt("lesson_id");          
             int course_id = extras.getInt("course_id");
             lesson = new Lesson(lesson_id, lesson_title, course_id, lesson_body);
-            LessonQuery.getSpecificLesson(this, lesson_id);
+            LessonQuery.getSpecificLesson(this, lesson_id, 0);
         }
         setContentView(R.layout.loading_screen);
     }
@@ -50,7 +50,7 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
 
 
     @Override
-    public void taskComplete(String data) {
+    public void taskComplete(String data, int id) {
         String lessonBody = lesson.getBody();
         setContentView(R.layout.activity_lessonview);
         this.setTitle(lesson.getTitle());

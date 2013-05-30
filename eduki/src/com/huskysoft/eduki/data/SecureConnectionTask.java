@@ -20,14 +20,16 @@ public class SecureConnectionTask extends AsyncTask<String, Void, String> {
     private TaskComplete callback;
     private String user;
     private String pass;
+    private int id;
 
     /**
      * Initializes a connectionTask object
      * 
      * @param callback The object to pass the result to.
      */
-    public SecureConnectionTask(TaskComplete callback) {
+    public SecureConnectionTask(TaskComplete callback, int id) {
         this.callback = callback;
+        this.id = id;
     }
     
     public void setAuth(String user, String pass) {
@@ -74,7 +76,7 @@ public class SecureConnectionTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String response) {
-        callback.taskComplete(response);
+        callback.taskComplete(response, id);
     }
 
 }

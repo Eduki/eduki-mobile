@@ -13,5 +13,5 @@ public interface TaskComplete {
      * 
      * @param data A string provided through the callback, a result
      */
-    public void taskComplete(String data);
+    public void taskComplete(String data, int id);
 }
