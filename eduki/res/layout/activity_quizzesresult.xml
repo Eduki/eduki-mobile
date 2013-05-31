@@ -48,4 +48,29 @@
 
     </LinearLayout>
 
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        layout="@layout/sub_title_text" />
+    
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:scrollbars="none" >
+
+        <include
+            android:id="@+id/quiz_rowview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="16dp"
+            layout="@layout/custom_row_view" />
+
+    </HorizontalScrollView>
+   
 </LinearLayout>

@@ -1,5 +1,11 @@
 package com.huskysoft.eduki;
 
+import java.util.List;
+
+import com.huskysoft.eduki.data.Quiz;
+import com.huskysoft.eduki.data.QuizQuery;
+import com.huskysoft.eduki.data.ViewPopulator;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,15 +14,18 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class QuizzesResultsActivity  extends Activity {
+public class QuizzesResultsActivity  extends Activity implements TaskComplete {
 
     private int questionsAnswered;
     private int questionsCorrect;
-    private String quiz_title;
     private int quiz_id;
     private int course_id;
+    private String quiz_title;
+    private LinearLayout mainLayout;
+    private List<Quiz> quizList;
     
     /** Save 'this' for access to nested classes */
     private final Context context = this;
@@ -31,10 +40,10 @@ public class QuizzesResultsActivity  extends Activity {
             quiz_title = extras.getString("quiz_title");
             quiz_id = extras.getInt("quiz_id");
             course_id = extras.getInt("course_id");
-        }
-        setContentView(R.layout.activity_quizzesresult);         
-        ((TextView) findViewById(R.id.title)).setText(R.string.quizResults);
-        displayQuizResults();
+            QuizQuery.getAllQuizzes(this, course_id, quiz_id);
+        }       
+        mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_quizzesresult, null);
+        setContentView(R.layout.loading_screen);
     }
     
     @Override
@@ -42,6 +51,27 @@ public class QuizzesResultsActivity  extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+    
+    @Override
+    public void taskComplete(String data, int id) {
+        // TODO Auto-generated method stub
+        //setContentView(R.layout.activity_quizzesresult);         
+        
+        quizList = QuizQuery.parseQuizzesList(data);
+        LinearLayout layout = (LinearLayout) mainLayout.findViewById(R.id.quiz_rowview);
+        View.OnClickListener v = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                quizSelected(v.getId());
+            }
+        };
+        ViewPopulator.populateCarousel(quizList, layout, R.layout.quiz_carousel_item, v, this);
+        
+        setContentView(mainLayout);
+        ((TextView) findViewById(R.id.title)).setText(R.string.quizResults);
+        ((TextView) findViewById(R.id.subtitle)).setText(R.string.quizzesTitle);
+        displayQuizResults();
     }
     
     private void displayQuizResults() {       
@@ -89,5 +119,19 @@ public class QuizzesResultsActivity  extends Activity {
         Intent intent = new Intent(context, CoursesListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+    
+    /**
+     * Will use the position parameter and find that course in the list of quizzes,
+     * calling the quiz view activity.
+     * @param position the position in the list of the button pressed
+     */
+    private void quizSelected(int position) {
+        Quiz chosen = quizList.get(position);
+        Intent i = new Intent(this, QuizzesViewActivity.class);
+        i.putExtra("quiz_title", chosen.getTitle());
+        i.putExtra("quiz_id", chosen.getId());
+        i.putExtra("course_id", chosen.getCourseId());
+        startActivity(i);
     }
 }
