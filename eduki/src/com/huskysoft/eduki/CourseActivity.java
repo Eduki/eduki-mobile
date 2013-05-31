@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,17 +38,36 @@ public class CourseActivity extends Activity implements TaskComplete {
         if (extras != null) {
             String course_title = extras.getString("course_title");
             int course_id = extras.getInt("course_id");
+            Log.w("Eduki", "Eduki: Querying lessons");
             course = new Course(course_id, course_title);
             LessonQuery.getAllLessons(this, course_id, LESSON_ID);
+            Log.w("Eduki", "Eduki: Querying quiz");
             QuizQuery.getAllQuizzes(this, course_id, QUIZZES_ID);
         }
         mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_course, null);
+        
+        // Set Course title
+        TextView coursesTitle = (TextView) mainLayout.findViewById(R.id.title);
+        coursesTitle.setText(course.getTitle());
+        
+        // Set Lessons carousel title
+        LinearLayout lessonsLayout = (LinearLayout) mainLayout.findViewById(R.id.lessonsCarouselTitle);
+        TextView lessonTitle = (TextView) lessonsLayout.findViewById(R.id.subtitle);
+        lessonTitle.setText(R.string.lessonsTitle);
+        
+        // Set quizzes carousel title
+        LinearLayout quizzesLayout = (LinearLayout) mainLayout.findViewById(R.id.quizzesCarouselTitle);
+        TextView quizzesTitle = (TextView) quizzesLayout.findViewById(R.id.subtitle);
+        quizzesTitle.setText(R.string.quizzesTitle);
+        
         setContentView(R.layout.loading_screen);
     }
 
     @Override
     public void taskComplete(String data, int id) {
+        Log.w("Eduki", "Eduki: Task Complete!");
         if (id == LESSON_ID) {
+            Log.w("Eduki", "Eduki: Parsing lesson data");
             lessonList = LessonQuery.parseLessonsList(data);
             if (lessonList.size() == 0) {
                 // TODO: Handle 0 lesson case
@@ -62,6 +82,7 @@ public class CourseActivity extends Activity implements TaskComplete {
                 ViewPopulator.populateCarousel(lessonList, layout, R.layout.lesson_carousel_item, v, this);
             }
         } else if(id == QUIZZES_ID) {
+            Log.w("Eduki", "Eduki: Parsing quizzes data");
             quizList = QuizQuery.parseQuizzesList(data);
             LinearLayout layout = (LinearLayout) mainLayout.findViewById(R.id.quiz_rowview);
             View.OnClickListener v = new View.OnClickListener() {
@@ -75,6 +96,7 @@ public class CourseActivity extends Activity implements TaskComplete {
         synchronized(taskCompleteCount) {
             taskCompleteCount++;
             if(taskCompleteCount == 2) {
+                Log.w("Eduki", "Eduki: Setting main layout");
                 setContentView(mainLayout);
             }
         }
