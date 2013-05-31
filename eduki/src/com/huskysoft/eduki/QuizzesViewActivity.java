@@ -150,6 +150,7 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
      */
     private void updateQuiz() {
         LinearLayout questionsLayout = (LinearLayout) this.findViewById(R.id.quizScrollViewLayout);
+        questionsLayout.setPadding(0, 0, 0, 15);
         
         for (String question: questions) {
             // Create necessary layout components to display a question

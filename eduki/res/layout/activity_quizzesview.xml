@@ -15,7 +15,7 @@
         android:id="@+id/quizScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="95" >
+        android:layout_weight="85" >
 
         <LinearLayout
             android:id="@+id/quizScrollViewLayout"
@@ -28,16 +28,26 @@
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="128dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="160dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/submit_button_selector"
-        android:gravity="center"
-        android:text="@string/submit"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom|right"
+        android:layout_weight="15"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="128dp"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="28dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/submit_button_selector"
+            android:gravity="center"
+            android:text="@string/submit"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
 
 </LinearLayout>
