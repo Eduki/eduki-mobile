@@ -14,7 +14,7 @@
     <string name="courseSelectDialog">What would you like to display?</string>
     <string name="submit">SUBMIT</string>
     <string name="quizzesTitle">Quizzes</string>
-    <string name="noAnswerChosen">Please select an answer</string>
+    <string name="noAnswerChosen">Please fill out all questions!</string>
     <string name="okay">Okay</string>
     <string name="quizResults">Quiz Results</string>
     <string name="retakeQuiz">Retake Quiz</string>

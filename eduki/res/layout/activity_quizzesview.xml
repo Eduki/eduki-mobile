@@ -3,83 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="100" >
 
     <include
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         layout="@layout/title_text" />
 
-    <TableLayout
+    <ScrollView
+        android:id="@+id/quizScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:dividerPadding="2dp" >
+        android:layout_height="0dp"
+        android:layout_weight="95" >
 
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/quizScrollViewLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom" >
+            android:layout_margin="10dp"
+            android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/questionNumber"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginLeft="18dp"
-                android:layout_weight="2"
-                android:gravity="bottom"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/content"
-                android:textIsSelectable="false" />
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/questionText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="12dp"
-                android:layout_weight="35"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/content"
-                android:textIsSelectable="false" />
+    </ScrollView>
 
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <RadioGroup
-                android:id="@+id/answerGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="34dp" >
-            </RadioGroup>
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/submitButton"
-                android:layout_width="128dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="160dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/submit_button_selector"
-                android:gravity="center"
-                android:text="@string/submit"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-        </TableRow>
-    </TableLayout>
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="128dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/submit_button_selector"
+        android:gravity="center"
+        android:text="@string/submit"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 </LinearLayout>
