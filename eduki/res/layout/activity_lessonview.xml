@@ -8,13 +8,55 @@
 		  
 	<include layout="@layout/title_text"/>
 
-	<TextView
-	    android:id="@+id/lessonViewLayoutText"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_marginLeft="20dp"
-	    android:layout_marginTop="10dp"
-	    android:textColor="@color/content"
-	    android:textIsSelectable="true" />
+	<ScrollView
+        android:id="@+id/quizScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="60" >
+		<TextView
+		    android:id="@+id/lessonViewLayoutText"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+		    android:layout_marginTop="10dp"
+		    android:textColor="@color/content"
+		    android:textIsSelectable="true"
+		    android:textAppearance="?android:attr/textAppearanceSmall" />
+	</ScrollView>
+	
     
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="40"
+	    android:gravity="bottom"
+	    android:orientation="vertical" >
+        
+        <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                layout="@layout/sub_title_text" />
+
+	    <HorizontalScrollView
+	        android:layout_width="match_parent"
+	  		android:layout_height="wrap_content"
+	        android:scrollbars="none"
+	        android:layout_gravity="bottom" >
+	             
+	        
+            <include
+                android:id="@+id/lesson_rowview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                layout="@layout/custom_row_view" />
+	            
+	
+	    </HorizontalScrollView>
+    </LinearLayout>-->
+	
 </LinearLayout>

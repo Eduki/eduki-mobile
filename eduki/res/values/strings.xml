@@ -7,16 +7,16 @@
     <string name="coursesList">Courses</string>
     <string name="coursesTitle">Courses</string>
     <string name="lessonsList">Lessons List</string>
-    <string name="lessonsTitle">Lessons</string>
+    <string name="lessonsTitle">LESSONS</string>
     <string name="login">Log In</string>
     <string name="username">Email</string>
     <string name="password">Password</string>
     <string name="courseSelectDialog">What would you like to display?</string>
     <string name="submit">SUBMIT</string>
-    <string name="quizzesTitle">Quizzes</string>
+    <string name="quizzesTitle">QUIZZES</string>
     <string name="noAnswerChosen">Please fill out all questions!</string>
     <string name="okay">Okay</string>
-    <string name="quizResults">Quiz Results</string>
+    <string name="quizResults">QUIZ RESULTS</string>
     <string name="retakeQuiz">Retake Quiz</string>
 
 </resources>

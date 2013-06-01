@@ -25,14 +25,13 @@
 	<HorizontalScrollView
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:layout_marginRight="16dp"
+	    android:layout_marginRight="@dimen/activity_horizontal_margin"
 	    android:scrollbars="none" >
 
 	    <include layout="@layout/custom_row_view"
 	            android:id="@+id/lesson_rowview"
                 android:layout_marginBottom="8dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
 	    		android:layout_width="wrap_content" 
 	    		android:layout_height="wrap_content" />
 	</HorizontalScrollView>   	
@@ -48,14 +47,13 @@
 	<HorizontalScrollView
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:layout_marginRight="16dp"
+	    android:layout_marginRight="@dimen/activity_horizontal_margin"
 	    android:scrollbars="none" >
 
 	    <include layout="@layout/custom_row_view"
 	            android:id="@+id/quiz_rowview"
                 android:layout_marginBottom="8dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
 	    		android:layout_width="wrap_content" 
 	    		android:layout_height="wrap_content" />
 	</HorizontalScrollView>   		

@@ -1,11 +1,5 @@
 package com.huskysoft.eduki;
 
-import java.util.List;
-
-import com.huskysoft.eduki.data.Quiz;
-import com.huskysoft.eduki.data.QuizQuery;
-import com.huskysoft.eduki.data.ViewPopulator;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +10,13 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.Iterator;
+import java.util.List;
+
+import com.huskysoft.eduki.data.Quiz;
+import com.huskysoft.eduki.data.QuizQuery;
+import com.huskysoft.eduki.data.ViewPopulator;
 
 public class QuizzesResultsActivity  extends Activity implements TaskComplete {
 
@@ -66,7 +67,17 @@ public class QuizzesResultsActivity  extends Activity implements TaskComplete {
                 quizSelected(v.getId());
             }
         };
-        ViewPopulator.populateCarousel(quizList, layout, R.layout.quiz_carousel_item, v, this);
+        Iterator<Quiz> it = quizList.iterator();
+        Quiz chosen = null;
+        while(it.hasNext()) {
+            Quiz next = it.next();
+            if(next.getId() == quiz_id) {
+                chosen = next;
+                it.remove();
+                break;
+            }
+        }
+        ViewPopulator.populateCarouselWithSelected(quizList, layout, R.layout.quiz_carousel_item, v, this, chosen);
         
         setContentView(mainLayout);
         ((TextView) findViewById(R.id.title)).setText(R.string.quizResults);
