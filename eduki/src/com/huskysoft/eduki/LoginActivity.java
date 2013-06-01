@@ -53,4 +53,12 @@ public class LoginActivity extends Activity implements TaskComplete {
             ((TextView) findViewById(R.id.loginError)).setVisibility(View.VISIBLE);
         }
     }
+    
+    /**
+     * Starts the courseslist activity
+     */
+    public void restartToCoursesActivity(View v) {
+        Intent intent = new Intent(this, CoursesListActivity.class);
+        startActivity(intent);
+    }
 }

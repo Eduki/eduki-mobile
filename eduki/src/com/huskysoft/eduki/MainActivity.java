@@ -8,7 +8,16 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.huskysoft.eduki.data.Course;
+import com.huskysoft.eduki.data.CourseQuery;
+import com.huskysoft.eduki.data.Enrollment;
+import com.huskysoft.eduki.data.UserQuery;
+import com.huskysoft.eduki.data.ViewPopulator;
 
 /**
  * @author Cody Thomas MainActivity is the first activity to be loaded when the
@@ -16,21 +25,35 @@ import android.widget.Button;
  *         can continue, such as a button for the list of courses
  */
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements TaskComplete {
 
-    private static final int LOGIN_CONSTANT = 1;
+    private static final int ENROLLMENTS = 0;
+    private static final int COURSES = 1;
+    private static final int ENROLLED_COURSE = 2;
+    
+    private Integer tasksCompleted;
+    private Integer enrollmentsFound;
+    private LinearLayout mainLayout;
+    
+    private List<Course> enrolledCourses;
+    private List<Course> myCourses;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean authenticated = prefs.getBoolean("authenticated", false);
-        if(authenticated) {
-           disableLogin();
+        if(!authenticated) {
+           startLogin();
+        } else {
+            setContentView(R.layout.loading_screen);
+            mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_main, null);
+            tasksCompleted = 0;
+            enrolledCourses = new ArrayList<Course>();
+            int userId = prefs.getInt("user_id", 0);
+            CourseQuery.getAllUserCourses(this, COURSES, userId);
+            UserQuery.getEnrollments(this, userId, ENROLLMENTS);
         }
-        // TODO: If authenticated, get rid of the login bar. 
-        //       In this case, switch it to a logout bar and change the onclick listener
     }
 
     @Override
@@ -39,42 +62,90 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    
-    private void disableLogin() {
-        Button loginButton = (Button) findViewById(R.id.loginButton);
-        loginButton.setVisibility(View.INVISIBLE);
-    }
 
-    /**
-     * An onClickListener established in the xml of this activity, called when
-     * the "courses list" button is pressed. Note: Method header must be public
-     * for the xml to recognize this method.
-     * 
-     * @param view The view clicked. In this case, a button
-     */
-    public void coursesListPressed(View view) {
-        Intent intent = new Intent(this, CoursesListActivity.class);
+    public void startLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
-    
-    /**
-     * An onClickListener established in the xml of this activity, called when
-     * the "login" button is pressed. Note: Method header must be public
-     * for the xml to recognize this method.
-     * 
-     * @param view The view clicked. In this case, a button
-     */
-    public void loginPressed(View view) {
-        Intent i = new Intent(this, LoginActivity.class);
-        startActivityForResult(i, LOGIN_CONSTANT);
+
+    @Override
+    public void taskComplete(String data, int id) {
+        boolean complete = false;
+        if(id == ENROLLMENTS) {
+            List<Enrollment> enrollments = UserQuery.parseEnrollments(data);
+            enrollmentsFound = enrollments.size();
+            for(Enrollment e: enrollments) {
+                int course_id = e.getCourseId();
+                CourseQuery.getCourse(this, ENROLLED_COURSE, course_id);
+            }
+        } else if(id == COURSES) {
+            
+            complete = true;
+            myCourses = CourseQuery.parseCourseList(data);
+            LinearLayout layout = (LinearLayout) mainLayout.findViewById(R.id.mycourses_rowview);
+            View.OnClickListener v = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myCourseSelected(v.getId());
+                }
+            };
+            ViewPopulator.populateCarousel(myCourses, layout, R.layout.red_carousel_item, v, this);
+            
+        } else if(id == ENROLLED_COURSE) {
+            
+            Course c = CourseQuery.parseCourse(data);
+            enrolledCourses.add(c);
+            synchronized(enrollmentsFound) {
+                enrollmentsFound--;
+                if(enrollmentsFound == 0) {
+                    complete = true;
+                    
+                    LinearLayout layout = (LinearLayout) mainLayout.findViewById(R.id.enrollment_rowview);
+                    View.OnClickListener v = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            enrollmentSelected(v.getId());
+                        }
+                    };
+                    ViewPopulator.populateCarousel(enrolledCourses, layout, R.layout.blue_carousel_item, v, this);
+                }
+            }
+            
+        }
+        if(complete) {
+            synchronized(tasksCompleted) {
+                tasksCompleted++;
+                if(tasksCompleted == 2) {
+                    setContentView(mainLayout);
+                }
+            }    
+        }
     }
     
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == LOGIN_CONSTANT) {
-            if(resultCode == RESULT_OK) {
-                disableLogin();     
-            }
-        }
+    /**
+     * Will use the position parameter and find that course in the list of courses,
+     * calling the lessons list activity.
+     * @param position the position in the list of the button pressed
+     */
+    private void enrollmentSelected(int position) {
+        Course chosen = enrolledCourses.get(position);
+        Intent i = new Intent(this, CourseActivity.class);
+        i.putExtra("course_title", chosen.getTitle());
+        i.putExtra("course_id", chosen.getId());
+        startActivity(i);
+    }
+    
+    /**
+     * Will use the position parameter and find that course in the list of courses,
+     * calling the lessons list activity.
+     * @param position the position in the list of the button pressed
+     */
+    private void myCourseSelected(int position) {
+        Course chosen = myCourses.get(position);
+        Intent i = new Intent(this, CourseActivity.class);
+        i.putExtra("course_title", chosen.getTitle());
+        i.putExtra("course_id", chosen.getId());
+        startActivity(i);
     }
 }

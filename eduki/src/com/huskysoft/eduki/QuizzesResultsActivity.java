@@ -77,7 +77,7 @@ public class QuizzesResultsActivity  extends Activity implements TaskComplete {
                 break;
             }
         }
-        ViewPopulator.populateCarouselWithSelected(quizList, layout, R.layout.quiz_carousel_item, v, this, chosen);
+        ViewPopulator.populateCarouselWithSelected(quizList, layout, R.layout.yellow_carousel_item, v, this, chosen);
         
         setContentView(mainLayout);
         ((TextView) findViewById(R.id.title)).setText(R.string.quizResults);
@@ -126,7 +126,7 @@ public class QuizzesResultsActivity  extends Activity implements TaskComplete {
         });
     }
     
-    public void restartToCoursesActivity() {
+    private void restartToCoursesActivity() {
         Intent intent = new Intent(context, CoursesListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

@@ -32,7 +32,6 @@ public class CoursesListActivity extends Activity implements TaskComplete {
      * loaded
      */
     private List<Course> courseList;
-    private static Course chosen;
     private final Context context = this;
 
     @Override
@@ -79,7 +78,7 @@ public class CoursesListActivity extends Activity implements TaskComplete {
      * @param position the position in the list of the button pressed
      */
     private void courseSelected(int position) {
-        chosen = courseList.get(position);
+        Course chosen = courseList.get(position);
         Intent i = new Intent(context, CourseActivity.class);
         i.putExtra("course_title", chosen.getTitle());
         i.putExtra("course_id", chosen.getId());

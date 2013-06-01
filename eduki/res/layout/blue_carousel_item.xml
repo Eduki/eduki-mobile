@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/lessonCarousel"
     android:textColor="@color/white"
-    android:background="@drawable/lesson_carousel_selector"
+    android:background="@drawable/blue_carousel_selector"
     android:textAppearance="?android:attr/textAppearanceSmall"
     android:padding="8dp" 
     android:textStyle="bold"

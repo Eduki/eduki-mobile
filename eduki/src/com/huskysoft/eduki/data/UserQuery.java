@@ -1,5 +1,10 @@
 package com.huskysoft.eduki.data;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.huskysoft.eduki.TaskComplete;
 
 /**
@@ -20,5 +25,18 @@ public class UserQuery {
         //sct.execute(UrlConstants.URL_AUTH);
         // For now, assume task is fine
         callback.taskComplete("", id);
+    }
+    
+    public static void getEnrollments(TaskComplete callback, int user_id, int id) {
+        String url = UrlConstants.getEnrollmentsURL(user_id);
+        new ConnectionTask(callback, id).execute(url);
+    }
+    
+    public static List<Enrollment> parseEnrollments(String data) {
+        Gson gson = new Gson();
+        Type collectionType = new TypeToken<List<Enrollment>>() {
+        }.getType();
+        List<Enrollment> enrollments = gson.fromJson(data, collectionType);
+        return enrollments;
     }
 }

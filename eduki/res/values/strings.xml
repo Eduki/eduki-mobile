@@ -20,5 +20,7 @@
     <string name="retakeQuiz">Retake Quiz</string>
     <string name="loginText">Don\'t have an account?\nStart browsing now!</string>
     <string name="loginFailed">Login info incorrect. Try again.</string>
+    <string name="enrollment">ENROLLMENTS</string>
+    <string name="myCourses">MY COURSES</string>
 
 </resources>

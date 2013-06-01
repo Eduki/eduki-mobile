@@ -106,7 +106,7 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
                 break;
             }
         }
-        ViewPopulator.populateCarouselWithSelected(lessonList, layout, R.layout.lesson_carousel_item, v, this, chosen);
+        ViewPopulator.populateCarouselWithSelected(lessonList, layout, R.layout.red_carousel_item, v, this, chosen);
         
         ((TextView) mainLayout.findViewById(R.id.subtitle)).setText(R.string.lessonsTitle);
         Log.w("Eduki", "Eduki: Setting main layout");

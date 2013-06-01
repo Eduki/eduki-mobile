@@ -1,40 +1,56 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/showCourses"
+    <include
+        android:id="@+id/enrollmentsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:onClick="coursesListPressed"
-        android:text="@string/coursesList" />
+        layout="@layout/sub_title_text"
+        android:text="@string/enrollment" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/showCourses"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="63dp"
-        android:src="@drawable/huskysoftlogo" />
-
-    <Button
-        android:id="@+id/loginButton"
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/showCourses"
-        android:layout_below="@+id/showCourses"
-        android:layout_marginTop="16dp"
-        android:text="@string/login" 
-        android:onClick="loginPressed" />
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:scrollbars="none" >
 
-</RelativeLayout>
+        <include
+            android:id="@+id/enrollment_rowview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            layout="@layout/custom_row_view" />
+    </HorizontalScrollView>
+
+    <include
+        android:id="@+id/myCoursesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/sub_title_text"
+        android:text="@string/myCourses" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:scrollbars="none" >
+
+        <include
+            android:id="@+id/mycourses_rowview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            layout="@layout/custom_row_view" />
+    </HorizontalScrollView>
+
+</LinearLayout>
