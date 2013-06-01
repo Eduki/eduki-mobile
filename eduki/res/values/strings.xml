@@ -8,9 +8,9 @@
     <string name="coursesTitle">Courses</string>
     <string name="lessonsList">Lessons List</string>
     <string name="lessonsTitle">LESSONS</string>
-    <string name="login">Log In</string>
-    <string name="username">Email</string>
-    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="email">EMAIL</string>
+    <string name="password">PASSWORD</string>
     <string name="courseSelectDialog">What would you like to display?</string>
     <string name="submit">SUBMIT</string>
     <string name="quizzesTitle">QUIZZES</string>
@@ -18,5 +18,7 @@
     <string name="okay">Okay</string>
     <string name="quizResults">QUIZ RESULTS</string>
     <string name="retakeQuiz">Retake Quiz</string>
+    <string name="loginText">Don\'t have an account?\nStart browsing now!</string>
+    <string name="loginFailed">Login info incorrect. Try again.</string>
 
 </resources>
