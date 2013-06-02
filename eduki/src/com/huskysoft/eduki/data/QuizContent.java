@@ -14,6 +14,14 @@ public class QuizContent {
     private String title;
     private List<Problem> problems;
     
+    /** Creates a new QuizContent */
+    public QuizContent(int id, int course_id, String title, List<Problem> problems) {
+        this.id = id;
+        this.course_id = course_id;
+        this.title = title;
+        this.problems = problems;
+    }
+    
     /** @return the string representation of this quizContent */
     public String toString() {
         return getTitle();
@@ -48,6 +56,14 @@ public class QuizContent {
         private int quiz_id;
         private String question;
         private String answer;
+        
+        /** Creates a new Problem */
+        public Problem(int id, int quiz_id, String question, String answer) {
+            this.id = id;
+            this.quiz_id = quiz_id;
+            this.question = question;
+            this.answer = answer;
+        }
         
         /** @return String representation of the question */
         public String toString() {
