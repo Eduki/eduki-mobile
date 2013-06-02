@@ -7,9 +7,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.huskysoft.eduki.CourseActivity;
 import com.huskysoft.eduki.CoursesListActivity;
-import com.huskysoft.eduki.LessonsListActivity;
-import com.huskysoft.eduki.QuizzesListActivity;
 import com.huskysoft.eduki.data.Course;
 import com.jayway.android.robotium.solo.Solo;
 
@@ -68,25 +67,7 @@ public class CoursesListActivityTest extends ActivityInstrumentationTestCase2<Co
         List<Course> courseList = ((CoursesListActivity) solo.getCurrentActivity()).getCourseList();
         assertNotSame(courseList.size(), 0);
         solo.clickOnText(courseList.get(0).toString());
-        solo.clickOnButton("Lessons");
-        solo.assertCurrentActivity("Wrong activity", LessonsListActivity.class);
-        tearDown();
-    }
-    
-    /**
-     * Assert the list of test courses appear properly, and transition to 
-     * the quiz list is also correct
-     * @throws Exception 
-     */
-    @Test(timeout=TIMEOUT)
-    public void testQuizListActivityStarted() throws Exception {
-        solo.assertCurrentActivity("Wrong activity", CoursesListActivity.class);
-        solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.courseListView));
-        List<Course> courseList = ((CoursesListActivity) solo.getCurrentActivity()).getCourseList();
-        assertNotSame(courseList.size(), 0);
-        solo.clickOnText(courseList.get(0).toString());
-        solo.clickOnButton("Quizzes");
-        solo.assertCurrentActivity("Wrong activity", QuizzesListActivity.class);
+        solo.assertCurrentActivity("Wrong activity", CourseActivity.class);
         tearDown();
     }
 }
