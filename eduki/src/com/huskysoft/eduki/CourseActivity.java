@@ -70,18 +70,15 @@ public class CourseActivity extends Activity implements TaskComplete {
         Log.w("Eduki", "Eduki: Task Complete!");
         if (id == LESSON_ID) {
             lessonList = LessonQuery.parseLessonsList(data);
-            if (lessonList.size() == 0) {
-                // TODO: Handle 0 lesson case
-            } else {
-                LinearLayout layout = (LinearLayout) mainLayout.findViewById(R.id.lesson_rowview);
-                View.OnClickListener v = new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        lessonSelected(v.getId());
-                    }
-                };
-                ViewPopulator.populateCarousel(lessonList, layout, R.layout.red_carousel_item, v, this, "NO LESSONS FOR THIS COURSE");
-            }
+            LinearLayout layout = (LinearLayout) mainLayout.findViewById(R.id.lesson_rowview);
+            View.OnClickListener v = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lessonSelected(v.getId());
+                }
+            };
+            Log.w("Eduki LessonListSiz", "Eduki: Task Complete!");
+            ViewPopulator.populateCarousel(lessonList, layout, R.layout.red_carousel_item, v, this, "NO LESSONS FOR THIS COURSE");
         } else if(id == QUIZZES_ID) {
             Log.w("Eduki", "Eduki: Parsing quizzes data");
             quizList = QuizQuery.parseQuizzesList(data);
