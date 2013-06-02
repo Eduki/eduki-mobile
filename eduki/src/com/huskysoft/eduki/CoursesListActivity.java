@@ -2,22 +2,22 @@
 package com.huskysoft.eduki;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.List;
 
-import com.huskysoft.eduki.R;
 import com.huskysoft.eduki.data.Course;
 import com.huskysoft.eduki.data.CourseQuery;
 
@@ -32,20 +32,39 @@ public class CoursesListActivity extends Activity implements TaskComplete {
      * loaded
      */
     private List<Course> courseList;
-    private static Course chosen;
     private final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CourseQuery.getAllCourses(this);
+        CourseQuery.getAllCourses(this, 0);
         setContentView(R.layout.loading_screen);
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_courses:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this, CoursesListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            case R.id.action_dash:
+                Intent intentMain = new Intent(this, MainActivity.class);
+                intentMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intentMain);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.action_courses).setVisible(false);
         return true;
     }
 
@@ -58,11 +77,12 @@ public class CoursesListActivity extends Activity implements TaskComplete {
     }
     
     @Override
-    public void taskComplete(String data) {
+    public void taskComplete(String data, int id) {
         courseList = CourseQuery.parseCourseList(data);
         ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(this,
-                android.R.layout.simple_list_item_1, courseList);
+                R.layout.list_item_layout, courseList);
         setContentView(R.layout.activity_courseslist);
+        ((TextView) findViewById(R.id.title)).setText("COURSES");
         ListView listView = (ListView) findViewById(R.id.courseListView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new OnItemClickListener() {
@@ -78,29 +98,10 @@ public class CoursesListActivity extends Activity implements TaskComplete {
      * @param position the position in the list of the button pressed
      */
     private void courseSelected(int position) {
-        chosen = courseList.get(position);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        alertDialogBuilder.setTitle(chosen.getTitle());
-        alertDialogBuilder
-            .setMessage(R.string.courseSelectDialog)
-            .setCancelable(false)
-            .setPositiveButton(R.string.quizzesTitle, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    Intent i = new Intent(context, QuizzesListActivity.class);
-                    i.putExtra("course_title", chosen.getTitle());
-                    i.putExtra("course_id", chosen.getId());
-                    startActivity(i);
-                }
-            })
-            .setNegativeButton(R.string.lessonsTitle, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    Intent i = new Intent(context, LessonsListActivity.class);
-                    i.putExtra("course_title", chosen.getTitle());
-                    i.putExtra("course_id", chosen.getId());
-                    startActivity(i);
-                }
-            });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+        Course chosen = courseList.get(position);
+        Intent i = new Intent(context, CourseActivity.class);
+        i.putExtra("course_title", chosen.getTitle());
+        i.putExtra("course_id", chosen.getId());
+        startActivity(i);
     }
 }

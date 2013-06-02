@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#dbdbd9</color>
+    <color name="headers">#6d6e70</color>
+    <color name="action_bar">#3f3f3f</color>
+    <color name="blue_button">#87a8b1</color>
+    <color name="blue_button_selected">#35849a</color>
+    <color name="divider">#bbbdc0</color>
+    <color name="pink_button">#be9790</color>
+    <color name="pink_button_selected">#a74738</color>
+    <color name="white">#ffffff</color>
+    <color name="yellow_button">#bfb191</color>
+    <color name="yellow_button_selected">#a56f37</color>
+    <color name="light_blue_button">#7fd2ea</color>
+    <color name="light_blue_button_selected">#a3dced</color>
+    <color name="content">#3f3f3f</color>
+    <color name="stripe">#1b1b1b</color>
+</resources>

@@ -26,6 +26,9 @@ public class Quiz {
     
     /** @return the string representation of this quiz */
     public String toString() {
+        if(getTitle().length() > 35) {
+            return getTitle().substring(0, 36) + "...";
+        }
         return getTitle();
     }
     
@@ -41,6 +44,6 @@ public class Quiz {
     
     /** @return title of the quiz */
     public String getTitle() {
-        return title;
+        return title.toUpperCase();
     }
 }

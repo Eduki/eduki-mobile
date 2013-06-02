@@ -22,6 +22,9 @@ public class Course {
     
     /** @return The string representation of the course */
     public String toString() {
+        if(getTitle().length() > 35) {
+            return getTitle().substring(0, 36) + "...";
+        }
         return getTitle();
     }
 
@@ -32,6 +35,6 @@ public class Course {
 
     /** @return The title of the course */
     public String getTitle() {
-        return title;
+        return title.toUpperCase();
     }
 }

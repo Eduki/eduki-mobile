@@ -5,18 +5,23 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="coursesList">Courses</string>
-    <string name="coursesTitle">Courses</string>
+    <string name="coursesTitle">COURSES</string>
     <string name="lessonsList">Lessons List</string>
-    <string name="lessonsTitle">Lessons</string>
-    <string name="lessonViewTitle">Lesson View</string>
-    <string name="login">Log In</string>
-    <string name="username">Email</string>
-    <string name="password">Password</string>
+    <string name="lessonsTitle">LESSONS</string>
+    <string name="login">LOGIN</string>
+    <string name="email">EMAIL</string>
+    <string name="password">PASSWORD</string>
     <string name="courseSelectDialog">What would you like to display?</string>
-    <string name="submit">Submit</string>
-    <string name="quizViewTitle">Quiz</string>
-    <string name="quizzesTitle">Quizzes</string>
-    <string name="noAnswerChosen">Please select an answer</string>
+    <string name="submit">SUBMIT</string>
+    <string name="quizzesTitle">QUIZZES</string>
+    <string name="noAnswerChosen">Please fill out all questions!</string>
     <string name="okay">Okay</string>
+    <string name="quizResults">QUIZ RESULTS</string>
+    <string name="retakeQuiz">Retake Quiz</string>
+    <string name="loginText">Don\'t have an account?\nStart browsing now!</string>
+    <string name="loginFailed">Login info incorrect. Try again.</string>
+    <string name="enrollment">ENROLLMENTS</string>
+    <string name="myCourses">MY COURSES</string>
+    <string name="dash">DASH</string>
 
 </resources>

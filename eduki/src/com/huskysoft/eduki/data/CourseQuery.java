@@ -3,6 +3,9 @@ package com.huskysoft.eduki.data;
 
 import static com.huskysoft.eduki.data.UrlConstants.COURSES;
 
+import android.util.DisplayMetrics;
+import android.view.View;
+
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -13,15 +16,33 @@ import com.huskysoft.eduki.TaskComplete;
 /**
  * @author Cody Thomas CourseQuery will make queries to the api
  */
-public class CourseQuery {
-
+public class CourseQuery  {
+    
     /**
      * Will get a list of all courses, returned to the callback as a string
      * 
      * @param callback The callback for when the request is complete
      */
-    public static void getAllCourses(TaskComplete callback) {
-        new ConnectionTask(callback).execute(COURSES);
+    public static void getAllCourses(TaskComplete callback, int id) {
+        new ConnectionTask(callback, id).execute(COURSES);
+    }
+    
+    /**
+     * Will get a list of all courses, returned to the callback as a string
+     * 
+     * @param callback The callback for when the request is complete
+     */
+    public static void getAllUserCourses(TaskComplete callback, int id, int user_id) {
+        new ConnectionTask(callback, id).execute(UrlConstants.getUserCoursesURL(user_id));
+    }
+    
+    /**
+     * Will get a list of one courses, returned to the callback as a string
+     * 
+     * @param callback The callback for when the request is complete
+     */
+    public static void getCourse(TaskComplete callback, int id, int course_id) {
+        new ConnectionTask(callback, id).execute(UrlConstants.getSingleCourseURL(course_id));
     }
 
     /**
@@ -37,5 +58,10 @@ public class CourseQuery {
         }.getType();
         List<Course> courses = gson.fromJson(data, collectionType);
         return courses;
+    }
+    
+    public static Course parseCourse(String data) {
+        Gson gson = new Gson();
+        return gson.fromJson(data, Course.class);
     }
 }

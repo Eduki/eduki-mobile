@@ -29,6 +29,9 @@ public class Lesson {
 
     /** @return the string representation of this lesson */
     public String toString() {
+        if(getTitle().length() > 35) {
+            return getTitle().substring(0, 36) + "...";
+        }
         return getTitle();
     }
 
@@ -44,7 +47,7 @@ public class Lesson {
 
     /** @return the title of the lesson */
     public String getTitle() {
-        return title;
+        return title.toUpperCase();
     }
 
     /** @return the content of the lesson */
