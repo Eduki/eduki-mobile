@@ -1,12 +1,13 @@
 package com.huskysoft.eduki.test;
 
+import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.huskysoft.eduki.CoursesListActivity;
-import com.huskysoft.eduki.LoginActivity;
 import com.huskysoft.eduki.MainActivity;
 import com.jayway.android.robotium.solo.Solo;
 
@@ -32,7 +33,16 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      */
     @Before
     public void setUp() throws Exception {
+        PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putBoolean("authenticated", true).commit();
         solo = new Solo(getInstrumentation(), getActivity());
+    }
+    
+    /**
+     * Clear shared preferences
+     */
+    @After
+    public void tearDown() throws Exception {
+        PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().clear().commit();
     }
     
     /**
@@ -41,17 +51,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     @Test(timeout=TIMEOUT)
     public void testAllCoursesClick() {
         solo.assertCurrentActivity("Wrong activity", MainActivity.class);
-        solo.clickOnButton(solo.getString(com.huskysoft.eduki.R.string.coursesList));
+        solo.clickOnActionBarItem(com.huskysoft.eduki.R.id.action_courses);
         solo.assertCurrentActivity("Did not start the Course list Activity", CoursesListActivity.class);
-    }
-    
-    /**
-     * This is a black box test, making sure the new activity starts after clicking the login button
-     */
-    @Test(timeout=TIMEOUT)
-    public void testLoginButtonClick() {
-        solo.assertCurrentActivity("Wrong activity", MainActivity.class);
-        solo.clickOnButton(solo.getString(com.huskysoft.eduki.R.string.login));
-        solo.assertCurrentActivity("Did not start the Login Activity", LoginActivity.class);
     }
 }
