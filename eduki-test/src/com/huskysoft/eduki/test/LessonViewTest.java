@@ -38,9 +38,9 @@ public class LessonViewTest extends ActivityInstrumentationTestCase2<LessonsView
     @Override
     public LessonsViewActivity getActivity() {
         Intent i = new Intent();
-        i.putExtra("lesson_title", "test_lesson_title");
+        i.putExtra("lesson_title", "TEST_LESSON_TITLE");
         i.putExtra("lesson_id", 1);
-        i.putExtra("lesson_body", "test_lesson_body");
+        i.putExtra("lesson_body", "TEST_LESSON_BODY");
         i.putExtra("course_id", 1);
         setActivityIntent(i);
         return super.getActivity();
@@ -56,6 +56,6 @@ public class LessonViewTest extends ActivityInstrumentationTestCase2<LessonsView
         Lesson lesson = ((LessonsViewActivity) solo.getCurrentActivity()).getLesson();
         assertNotSame(null, lesson);
         assertFalse(lesson.getBody().equals(""));
-        assertEquals("test_lesson_title", lesson.getTitle());
+        assertEquals("TEST_LESSON_TITLE", lesson.getTitle());
     }
 }
