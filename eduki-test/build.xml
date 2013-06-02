@@ -103,4 +103,12 @@
         </fail>
         <echo>Unit tests passed!</echo>
     </target>
+    <taskdef resource="checkstyletask.properties" classpath="${basedir}/libs/checkstyle.jar" />
+    <target name="checkstyle">
+        <checkstyle config="my_project_styles.xml">
+            <fileset dir="src" includes="**/*.java" />
+            <formatter type="plain" />
+            <formatter type="xml" toFile="checkstyle-result.xml" />
+        </checkstyle>
+    </target>
 </project>
