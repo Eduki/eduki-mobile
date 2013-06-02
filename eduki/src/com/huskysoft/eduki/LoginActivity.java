@@ -58,8 +58,9 @@ public class LoginActivity extends Activity implements TaskComplete {
             prefs.putString("first_name", user.getFirstName());
             prefs.commit();
             Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            finish();
         } else {
             ((TextView) findViewById(R.id.loginError)).setVisibility(View.VISIBLE);
         }
