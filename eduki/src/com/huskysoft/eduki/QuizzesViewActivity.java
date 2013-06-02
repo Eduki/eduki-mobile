@@ -1,3 +1,4 @@
+
 package com.huskysoft.eduki;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -27,21 +29,18 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 /**
- * @author Rafael Vertido Class QuizzesViewActivity allows users to take 
- * multiple choice quizzes
+ * @author Rafael Vertido Class QuizzesViewActivity allows users to take
+ *         multiple choice quizzes
  */
 @SuppressLint("DefaultLocale")
 public class QuizzesViewActivity extends Activity implements TaskComplete {
 
     /**
-     * private global variables that are initialized after requests to database are
-     * completed 
-     * 
-     * questions - Questions that will be asked 
-     * choices - Choices associated with each question 
-     * answers - Answers associated with each question 
-     * quiz - Quiz chosen by user 
-     * quizContent - Structure that holds details of the quiz
+     * private global variables that are initialized after requests to database
+     * are completed questions - Questions that will be asked choices - Choices
+     * associated with each question answers - Answers associated with each
+     * question quiz - Quiz chosen by user quizContent - Structure that holds
+     * details of the quiz
      */
     private List<RadioGroup> answersRadioGroup;
     private List<String> questions;
@@ -51,9 +50,8 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
     private int course_id;
 
     /**
-     * Static variables to keep track of quiz state 
-     * questionsAnswered - Total number answered 
-     * questionsCorrect  - Number answered correctly
+     * Static variables to keep track of quiz state questionsAnswered - Total
+     * number answered questionsCorrect - Number answered correctly
      */
     private static int questionsAnswered = 0;
     private static int questionsCorrect = 0;
@@ -61,13 +59,15 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
 
     /** Constant required to match ASCII 'a' to index 0 */
     private static final int ASCII_NUM = 97;
-    
+
     /** Save 'this' for access to nested classes */
     private final Context context = this;
 
     /** Quiz answer choices, used for dynamic generation of quiz content */
-    private final String[] choices = {"A", "B", "C", "D"};
-    
+    private final String[] choices = {
+            "A", "B", "C", "D"
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,12 +108,12 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
             // Process the input data
             Log.w("Eduki", "Eduki: parsing quiz content");
             parseQuizContent(problemList);
-            
+
             // Set to the proper view and set the correct title
             Log.w("Eduki", "Eduki: Setting content view");
             setContentView(R.layout.activity_quizzesview);
             ((TextView) findViewById(R.id.title)).setText(quiz.getTitle());
-            
+
             // Display quiz content and attach submit listener
             Log.w("Eduki", "Eduki: Updating quiz");
             updateQuiz();
@@ -127,11 +127,11 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
         resetData();
         super.onBackPressed();
     }
-    
+
     /**
      * Parse the problemList as retrieved as a List of Problem objects.
-     * Populates the questions and answers lists required for displaying the quiz
-     * the quiz content to the user dynamically.
+     * Populates the questions and answers lists required for displaying the
+     * quiz the quiz content to the user dynamically.
      * 
      * @param problemList List of problems to parse
      */
@@ -151,43 +151,45 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
     private void updateQuiz() {
         LinearLayout questionsLayout = (LinearLayout) this.findViewById(R.id.quizScrollViewLayout);
         questionsLayout.setPadding(0, 0, 0, 15);
-        
-        for (String question: questions) {
+
+        for (String question : questions) {
             // Create necessary layout components to display a question
             LinearLayout questionLayout = new LinearLayout(this);
             TextView questionTextView = new TextView(this);
             TextView questionNumber = new TextView(this);
-            
+
             // Set text content
             questionTextView.setText(question);
             questionTextView.setPadding(10, 5, 0, 0);
             questionNumber.setText((questionsCreated + 1) + ".");
             questionNumber.setPadding(0, 5, 0, 0);
-            
+
             // Nest and style the views
             questionLayout.setOrientation(LinearLayout.HORIZONTAL);
-            questionLayout.addView(questionNumber); 
+            questionLayout.addView(questionNumber);
             questionLayout.addView(questionTextView);
             questionsLayout.addView(questionLayout);
-            
+
             generateAnswers(questionsLayout);
             questionsCreated++;
         }
     }
 
     /**
-     * Dynamically generate the proper choices for the given question that the user 
-     * is currently answering.
+     * Dynamically generate the proper choices for the given question that the
+     * user is currently answering.
      * 
      * @param questionNumber Question # that the user is at
      */
     private void generateAnswers(LinearLayout questionsLayout) {
-        // Create necessary layouts and set orientation of radio group to horizontal
-        LinearLayout answersLayout = new LinearLayout(this);        
+        // Create necessary layouts and set orientation of radio group to
+        // horizontal
+        LinearLayout answersLayout = new LinearLayout(this);
         RadioGroup currentAnswersGroup = new RadioGroup(this);
         currentAnswersGroup.setOrientation(RadioGroup.HORIZONTAL);
-        currentAnswersGroup.setPadding(18, 0, 0, 0); // Shift right to align with question
-        
+        currentAnswersGroup.setPadding(18, 0, 0, 0); // Shift right to align
+                                                     // with question
+
         // Get the choices and display them as radio button choices
         RadioButton[] rb = new RadioButton[choices.length];
         for (int i = 0; i < rb.length; i++) {
@@ -197,15 +199,15 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
             rb[i].setTextColor(Color.parseColor(getResources().getString(R.color.content)));
             currentAnswersGroup.addView(rb[i]);
         }
-        
+
         // Add to the collection of answer groups
         answersRadioGroup.add(currentAnswersGroup);
-        
+
         // Put together the radio buttons and add to the ScrollView
         answersLayout.addView(currentAnswersGroup);
         questionsLayout.addView(answersLayout);
     }
-    
+
     private void setupSubmitListener() {
         // Set a listener for the submit button
         Button submitButton = (Button) findViewById(R.id.submitButton);
@@ -213,15 +215,17 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
 
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < answersRadioGroup.size(); i ++) {
+                for (int i = 0; i < answersRadioGroup.size(); i++) {
                     // Get the user's selected answer
                     int answerButtonId = answersRadioGroup.get(i).getCheckedRadioButtonId();
                     View radioButton = answersRadioGroup.get(i).findViewById(answerButtonId);
                     int answerIndex = answersRadioGroup.get(i).indexOfChild(radioButton);
 
-                    // Check if any of the questions were not answered, if so prompt the user
-                    // And also exit out of the loop and refresh current grading state
-                    if (answerIndex < 0) { 
+                    // Check if any of the questions were not answered, if so
+                    // prompt the user
+                    // And also exit out of the loop and refresh current grading
+                    // state
+                    if (answerIndex < 0) {
                         showMessageForIncompleteQuiz();
                         resetData();
                         return;
@@ -234,30 +238,31 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
                     // Check if the user got it correct
                     if (answerIndex == correctAnswerIndex) {
                         questionsCorrect++;
-                    } 
+                    }
                     questionsAnswered++;
                 }
                 displayQuizResults(); // Finished grading, show score
             }
         });
     }
-    
+
     private void showMessageForIncompleteQuiz() {
-        // Show a message that the user is required to select an answer before submitting
+        // Show a message that the user is required to select an answer before
+        // submitting
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setTitle(quiz.getTitle());
         alertDialogBuilder
-            .setMessage(R.string.noAnswerChosen)
-            .setCancelable(false)
-            .setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    // Do nothing, remove message
-                }
-            });
+                .setMessage(R.string.noAnswerChosen)
+                .setCancelable(false)
+                .setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Do nothing, remove message
+                    }
+                });
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
-    
+
     private void displayQuizResults() {
         Intent i = new Intent(context, QuizzesResultsActivity.class);
         i.putExtra("questionsCorrect", questionsCorrect);
@@ -268,16 +273,35 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
         resetData();
         startActivity(i);
     }
-    
+
     private void resetData() {
         questionsAnswered = 0;
         questionsCorrect = 0;
         questionsCreated = 0;
     }
-    
+
     private void initializeLists() {
         questions = new ArrayList<String>();
         answers = new ArrayList<String>();
-        answersRadioGroup = new ArrayList<RadioGroup>();   
+        answersRadioGroup = new ArrayList<RadioGroup>();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_courses:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this, CoursesListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            case R.id.action_dash:
+                Intent intentMain = new Intent(this, MainActivity.class);
+                intentMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intentMain);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

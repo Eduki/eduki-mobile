@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -67,7 +69,6 @@ public class CourseActivity extends Activity implements TaskComplete {
     public void taskComplete(String data, int id) {
         Log.w("Eduki", "Eduki: Task Complete!");
         if (id == LESSON_ID) {
-            Log.w("Eduki", "Eduki: Parsing lesson data");
             lessonList = LessonQuery.parseLessonsList(data);
             if (lessonList.size() == 0) {
                 // TODO: Handle 0 lesson case
@@ -145,5 +146,31 @@ public class CourseActivity extends Activity implements TaskComplete {
      */
     public List<Lesson> getLessonList() {
         return Collections.unmodifiableList(lessonList);
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_courses:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this, CoursesListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            case R.id.action_dash:
+                Intent intentMain = new Intent(this, MainActivity.class);
+                intentMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intentMain);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

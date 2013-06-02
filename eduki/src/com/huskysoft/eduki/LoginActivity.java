@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -47,7 +49,8 @@ public class LoginActivity extends Activity implements TaskComplete {
         ((ProgressBar) findViewById(R.id.progressBar1)).setVisibility(View.INVISIBLE);
         boolean error = false;
         if (!error) {
-            PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean("authenticated", true).commit();
+            PreferenceManager.getDefaultSharedPreferences(this).edit()
+                    .putBoolean("authenticated", true).commit();
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -55,12 +58,39 @@ public class LoginActivity extends Activity implements TaskComplete {
             ((TextView) findViewById(R.id.loginError)).setVisibility(View.VISIBLE);
         }
     }
-    
+
     /**
      * Starts the courseslist activity
      */
     public void restartToCoursesActivity(View v) {
         Intent intent = new Intent(this, CoursesListActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.action_dash).setVisible(false);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_courses:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this, CoursesListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            case R.id.action_dash:
+                Intent intentMain = new Intent(this, MainActivity.class);
+                intentMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intentMain);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
