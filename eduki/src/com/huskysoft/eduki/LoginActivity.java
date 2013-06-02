@@ -3,14 +3,17 @@ package com.huskysoft.eduki;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.huskysoft.eduki.data.User;
 import com.huskysoft.eduki.data.UserQuery;
 
 /**
@@ -47,10 +50,13 @@ public class LoginActivity extends Activity implements TaskComplete {
         // TODO If data doesn't give me an error, store the authtoken in shared
         // preferences
         ((ProgressBar) findViewById(R.id.progressBar1)).setVisibility(View.INVISIBLE);
-        boolean error = false;
-        if (!error) {
-            PreferenceManager.getDefaultSharedPreferences(this).edit()
-                    .putBoolean("authenticated", true).commit();
+        User user = UserQuery.parseLoginAttempt(data);
+        if (user != null) {
+            SharedPreferences.Editor prefs = PreferenceManager.getDefaultSharedPreferences(this).edit();
+            prefs.putBoolean("authenticated", true);
+            prefs.putInt("user_id", user.getId());
+            prefs.putString("first_name", user.getFirstName());
+            prefs.commit();
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
