@@ -1,7 +1,6 @@
 package com.huskysoft.eduki.data;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -69,7 +68,6 @@ public class AuthConnectionTask extends AsyncTask<String, Void, String> {
                 return null;
             }
         } catch (Exception e) {
-            Log.e("HITTING HERE", e.toString());
             e.printStackTrace();
             return null;
         }
