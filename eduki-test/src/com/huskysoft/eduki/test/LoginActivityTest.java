@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.huskysoft.eduki.CoursesListActivity;
 import com.huskysoft.eduki.LoginActivity;
+import com.huskysoft.eduki.MainActivity;
 import com.jayway.android.robotium.solo.Solo;
 
 /**
@@ -38,8 +39,6 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
     /**
      * Test that the login activity exits the activity upon successful login
      */
-    // TODO: Fix this assert to match new login/dashboard system once implemented
-    /*
     @Test(timeout=TIMEOUT)
     public void testLoginRenavigates() {        
         EditText user = solo.getEditText(0);
@@ -49,8 +48,15 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         solo.clickOnButton(solo.getString(com.huskysoft.eduki.R.string.login));
         // Need to sleep to allow the activity to finish
         solo.sleep(2000);
-        assertTrue(solo.getCurrentActivity() == null || !solo.getCurrentActivity().getClass().equals(LoginActivity.class));
-    }*/
+        solo.assertCurrentActivity("Wrong activity", MainActivity.class);
+    }
+    
+    @Override
+    public void tearDown() throws Exception {
+        getActivity().logout();
+        solo.finishOpenedActivities();
+        super.tearDown();
+    }
     
     /**
      * Test that the browse courses image leads to the courses list activity 

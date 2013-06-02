@@ -99,4 +99,8 @@ public class LoginActivity extends Activity implements TaskComplete {
                 return super.onOptionsItemSelected(item);
         }
     }
+    
+    public void logout() {
+        PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
+    }
 }
