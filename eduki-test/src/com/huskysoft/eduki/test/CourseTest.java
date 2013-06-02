@@ -44,7 +44,7 @@ public class CourseTest extends AndroidTestCase {
      */
     @Test(timeout=TIMEOUT)
     public void testGetTitle() {
-        assertEquals(title, course.getTitle());
+        assertEquals(title.toUpperCase(), course.getTitle());
     }
 
 }
