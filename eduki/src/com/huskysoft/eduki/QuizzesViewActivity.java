@@ -2,6 +2,7 @@
 package com.huskysoft.eduki;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.huskysoft.eduki.data.Quiz;
@@ -128,6 +129,33 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
         super.onBackPressed();
     }
 
+    /**
+     * Gets the radio groups for the selected quiz. Used for testing purposes only
+     * 
+     * @return Copy of the collection of radio groups for answers for this quiz
+     */
+    public List<RadioGroup> getAnswerGroup() {
+        return Collections.unmodifiableList(answersRadioGroup);
+    }
+    
+    /**
+     * Gets the list of questions for the quiz
+     * 
+     * @return Copy of the quiz questions
+     */
+    public List<String> getQuestions() {
+        return Collections.unmodifiableList(questions);
+    }
+    
+    /**
+     * Gets the current quiz
+     * 
+     * @return quiz object with the quiz information
+     */
+    public Quiz getQuiz() {
+        return quiz;
+    }
+    
     /**
      * Parse the problemList as retrieved as a List of Problem objects.
      * Populates the questions and answers lists required for displaying the

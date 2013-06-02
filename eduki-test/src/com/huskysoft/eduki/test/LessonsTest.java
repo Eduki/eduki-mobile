@@ -40,7 +40,7 @@ public class LessonsTest extends AndroidTestCase {
      */
     @Test(timeout=TIMEOUT)
 	public void testToString() {
-		assertEquals(title, lesson.toString());
+		assertEquals(title.toUpperCase(), lesson.toString());
 	}
 	
     /**
@@ -64,7 +64,7 @@ public class LessonsTest extends AndroidTestCase {
 	 */
 	@Test(timeout=TIMEOUT)
 	public void testGetTitle() {
-	    assertEquals(title, lesson.getTitle());
+	    assertEquals(title.toUpperCase(), lesson.getTitle());
 	}
 	
 	/**

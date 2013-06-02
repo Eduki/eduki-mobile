@@ -43,7 +43,7 @@ public class CourseQueryTest extends AndroidTestCase {
      */
     public void assertCorrectResults(int id, String title, Course c) {
         assertEquals(id, c.getId());
-        assertEquals(title, c.getTitle());
+        assertEquals(title.toUpperCase(), c.getTitle());
     }
 
 }
