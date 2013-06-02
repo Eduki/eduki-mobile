@@ -19,7 +19,7 @@ import com.jayway.android.robotium.solo.Solo;
 public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
     private Solo solo;
-    private static final int TIMEOUT = 10000;
+    private static final int TIMEOUT = 20000;
     
     /**
      * Construct the tests
@@ -47,7 +47,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         solo.typeText(pass, "password");
         solo.clickOnButton(solo.getString(com.huskysoft.eduki.R.string.login));
         // Need to sleep to allow the activity to finish
-        solo.sleep(2000);
+        solo.sleep(8000);
         solo.assertCurrentActivity("Wrong activity", MainActivity.class);
     }
     
@@ -57,7 +57,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         solo.finishOpenedActivities();
         super.tearDown();
     }
-    
+
     /**
      * Test that the browse courses image leads to the courses list activity 
      */

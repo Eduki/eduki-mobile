@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.huskysoft.eduki.CoursesListActivity;
 import com.huskysoft.eduki.QuizzesResultsActivity;
 import com.huskysoft.eduki.QuizzesViewActivity;
 import com.huskysoft.eduki.data.Quiz;
@@ -35,6 +36,7 @@ public class QuizzesViewTest extends ActivityInstrumentationTestCase2<QuizzesVie
     @Before
     public void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());
+        super.setUp();
     }
     
     @Override
@@ -94,5 +96,18 @@ public class QuizzesViewTest extends ActivityInstrumentationTestCase2<QuizzesVie
             }
         }
         return buttonList;
+    }
+    
+    @Test(timeout=TIMEOUT)
+    public void testAllCoursesClick() {
+        solo.assertCurrentActivity("Wrong activity", QuizzesViewActivity.class);
+        solo.clickOnActionBarItem(com.huskysoft.eduki.R.id.action_courses);
+        solo.assertCurrentActivity("Did not start the Course list Activity", CoursesListActivity.class);
+    }
+    
+    @Override
+    public void tearDown() throws Exception {
+        solo.finishOpenedActivities();
+        super.tearDown();
     }
 }
