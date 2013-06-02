@@ -142,6 +142,5 @@ public class UiTestWalkthrough extends ActivityInstrumentationTestCase2<LoginAct
             }
         }
         return buttonList;
-    }
-    
+    }    
 }
