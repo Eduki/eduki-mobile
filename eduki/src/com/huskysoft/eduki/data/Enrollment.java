@@ -2,13 +2,13 @@ package com.huskysoft.eduki.data;
 
 public class Enrollment {
     private int id;
-    private int userId;
-    private int courseId;
+    private int user_id;
+    private int course_id;
     
     public Enrollment(int id, int userId, int courseId) {
         this.id = id;
-        this.userId = userId;
-        this.courseId = courseId;
+        this.user_id = userId;
+        this.course_id = courseId;
     }
     
     public int getId() {
@@ -16,10 +16,10 @@ public class Enrollment {
     }
     
     public int getUserId() {
-        return userId;
+        return user_id;
     }
     
     public int getCourseId() {
-        return courseId;
+        return course_id;
     }
 }

@@ -2,13 +2,14 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/quizCarousel"
+    android:id="@+id/emptyCarousel"
     android:textColor="@color/white"
-    android:background="@drawable/yellow_carousel_selector"
+    android:background="@color/headers"
     android:textSize="11dp"
     android:padding="8dp" 
-    android:textStyle="bold"
-    android:clickable="true" >
+
+    android:clickable="false"
+    android:textIsSelectable="false" >
     
 
 </TextView>

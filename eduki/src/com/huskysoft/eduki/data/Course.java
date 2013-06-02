@@ -22,8 +22,8 @@ public class Course {
     
     /** @return The string representation of the course */
     public String toString() {
-        if(getTitle().length() > 25) {
-            return getTitle().substring(0, 26) + "...";
+        if(getTitle().length() > 35) {
+            return getTitle().substring(0, 36) + "...";
         }
         return getTitle();
     }

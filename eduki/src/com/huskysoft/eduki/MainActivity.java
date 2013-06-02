@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +51,30 @@ public class MainActivity extends Activity implements TaskComplete {
             mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_main, null);
             tasksCompleted = 0;
             enrolledCourses = new ArrayList<Course>();
-            int userId = prefs.getInt("user_id", 0);
+            String name = prefs.getString("user_name", null);
+            int userId = prefs.getInt("user_id", 3);
+            String dashboardName;
+            if(name == null) {
+                dashboardName = "MY";
+            } else {
+                if(name.toLowerCase().charAt(name.length() - 1) == 's') {
+                    dashboardName = name.toUpperCase() + "'";
+                } else {
+                    dashboardName = name.toUpperCase() + "'S";
+                }
+            }
+            dashboardName = dashboardName + " DASHBOARD";
+            ((TextView) mainLayout.findViewById(R.id.title)).setText(dashboardName);
             CourseQuery.getAllUserCourses(this, COURSES, userId);
             UserQuery.getEnrollments(this, userId, ENROLLMENTS);
+            
+            // Set enrolled carousel title
+            TextView lessonTitle = (TextView) mainLayout.findViewById(R.id.enrollmentsTitle);
+            lessonTitle.setText(R.string.enrollment);
+            
+            // Set mycourses carousel title
+            TextView quizzesTitle = (TextView) mainLayout.findViewById(R.id.myCoursesTitle);
+            quizzesTitle.setText(R.string.myCourses);
         }
     }
 
@@ -75,6 +97,11 @@ public class MainActivity extends Activity implements TaskComplete {
         if(id == ENROLLMENTS) {
             List<Enrollment> enrollments = UserQuery.parseEnrollments(data);
             enrollmentsFound = enrollments.size();
+            if(enrollmentsFound == 0) {
+                complete = true;
+                LinearLayout layout = (LinearLayout) mainLayout.findViewById(R.id.enrollment_rowview);
+                ViewPopulator.populateCarouselEmpty(layout, this, "NO COURSES ENROLLED BY YOU");
+            }
             for(Enrollment e: enrollments) {
                 int course_id = e.getCourseId();
                 CourseQuery.getCourse(this, ENROLLED_COURSE, course_id);
@@ -90,10 +117,9 @@ public class MainActivity extends Activity implements TaskComplete {
                     myCourseSelected(v.getId());
                 }
             };
-            ViewPopulator.populateCarousel(myCourses, layout, R.layout.red_carousel_item, v, this);
+            ViewPopulator.populateCarousel(myCourses, layout, R.layout.red_carousel_item, v, this, "NO COURSES CREATED BY YOU");
             
         } else if(id == ENROLLED_COURSE) {
-            
             Course c = CourseQuery.parseCourse(data);
             enrolledCourses.add(c);
             synchronized(enrollmentsFound) {
@@ -108,7 +134,7 @@ public class MainActivity extends Activity implements TaskComplete {
                             enrollmentSelected(v.getId());
                         }
                     };
-                    ViewPopulator.populateCarousel(enrolledCourses, layout, R.layout.blue_carousel_item, v, this);
+                    ViewPopulator.populateCarousel(enrolledCourses, layout, R.layout.blue_carousel_item, v, this, "NO COURSES ENROLLED BY YOU");
                 }
             }
             
@@ -147,5 +173,14 @@ public class MainActivity extends Activity implements TaskComplete {
         i.putExtra("course_title", chosen.getTitle());
         i.putExtra("course_id", chosen.getId());
         startActivity(i);
+    }
+    
+    /**
+     * Logs the current user out
+     * @param v
+     */
+    public void logout(View v) {
+        PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
+        startLogin();
     }
 }

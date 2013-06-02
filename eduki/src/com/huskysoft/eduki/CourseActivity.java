@@ -79,7 +79,7 @@ public class CourseActivity extends Activity implements TaskComplete {
                         lessonSelected(v.getId());
                     }
                 };
-                ViewPopulator.populateCarousel(lessonList, layout, R.layout.red_carousel_item, v, this);
+                ViewPopulator.populateCarousel(lessonList, layout, R.layout.red_carousel_item, v, this, "NO LESSONS FOR THIS COURSE");
             }
         } else if(id == QUIZZES_ID) {
             Log.w("Eduki", "Eduki: Parsing quizzes data");
@@ -91,7 +91,7 @@ public class CourseActivity extends Activity implements TaskComplete {
                     quizSelected(v.getId());
                 }
             };
-            ViewPopulator.populateCarousel(quizList, layout, R.layout.yellow_carousel_item, v, this);
+            ViewPopulator.populateCarousel(quizList, layout, R.layout.yellow_carousel_item, v, this, "NO QUIZZES FOR THIS COURSE");
         }
         synchronized(taskCompleteCount) {
             taskCompleteCount++;

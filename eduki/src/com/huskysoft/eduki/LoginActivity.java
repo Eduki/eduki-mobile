@@ -4,6 +4,7 @@ package com.huskysoft.eduki;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -46,9 +47,10 @@ public class LoginActivity extends Activity implements TaskComplete {
         ((ProgressBar) findViewById(R.id.progressBar1)).setVisibility(View.INVISIBLE);
         boolean error = false;
         if (!error) {
-            Intent returnIntent = new Intent();
-            setResult(RESULT_OK, returnIntent);
-            finish();
+            PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean("authenticated", true).commit();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         } else {
             ((TextView) findViewById(R.id.loginError)).setVisibility(View.VISIBLE);
         }

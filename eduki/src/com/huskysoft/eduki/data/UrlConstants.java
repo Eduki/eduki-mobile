@@ -6,7 +6,7 @@ package com.huskysoft.eduki.data;
  *         of variables representing appropriate api urls
  */
 public final class UrlConstants {
-    public static final String BASE = "http://eduki-beta.herokuapp.com/api/";
+    public static final String BASE = "http://eduki.herokuapp.com/api/";
     public static final String COURSES = BASE + "courses";
     public static final String URL_AUTH = "";
     public static final String LESSONS = BASE + "lessons";

@@ -5,7 +5,7 @@
     android:id="@+id/lessonCarousel"
     android:textColor="@color/white"
     android:background="@drawable/red_carousel_selector"
-    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:textSize="11dp"
     android:padding="8dp" 
     android:textStyle="bold"
     android:clickable="true" >
