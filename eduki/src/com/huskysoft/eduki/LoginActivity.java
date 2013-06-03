@@ -13,7 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.huskysoft.eduki.data.AuthConnectionTask;
-import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.User;
 import com.huskysoft.eduki.data.UserQuery;
 
@@ -106,6 +105,9 @@ public class LoginActivity extends Activity implements TaskComplete {
         }
     }
     
+    /**
+     * Clears the user's data from this device
+     */
     public void logout() {
         PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
     }

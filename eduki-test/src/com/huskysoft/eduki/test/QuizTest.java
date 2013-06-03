@@ -35,7 +35,7 @@ public class QuizTest extends AndroidTestCase {
      */
     @Test(timeout=TIMEOUT)
     public void testGetId() {
-        assertEquals(id, quiz.getId());
+        assertEquals("Quiz id incorrect", id, quiz.getId());
     }
     
     /**
@@ -43,15 +43,7 @@ public class QuizTest extends AndroidTestCase {
      */
     @Test(timeout=TIMEOUT)
     public void testGetTitle() {
-        assertEquals(title.toUpperCase(), quiz.getTitle());
-    }
-    
-    /**
-     * Test toString method
-     */
-    @Test(timeout=TIMEOUT)
-    public void testToString() {
-        assertEquals(title.toUpperCase(), quiz.toString());
+        assertEquals("Quiz id incorrect", title.toUpperCase(), quiz.getTitle());
     }
     
     /**
@@ -59,6 +51,6 @@ public class QuizTest extends AndroidTestCase {
      */
     @Test(timeout=TIMEOUT)
     public void testGetCoruseId() {
-        assertEquals(course_id, quiz.getCourseId());
+        assertEquals("Quiz id incorrect", course_id, quiz.getCourseId());
     }
 }

@@ -1,15 +1,14 @@
 package com.huskysoft.eduki.test;
 
+import android.content.Intent;
+import android.test.ActivityInstrumentationTestCase2;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import com.huskysoft.eduki.LessonsViewActivity;
-import com.huskysoft.eduki.QuizzesResultsActivity;
 import com.huskysoft.eduki.data.Lesson;
 import com.jayway.android.robotium.solo.Solo;
-
-import android.content.Intent;
-import android.test.ActivityInstrumentationTestCase2;
 
 /**
  * 
@@ -55,8 +54,8 @@ public class LessonViewTest extends ActivityInstrumentationTestCase2<LessonsView
         solo.assertCurrentActivity("Wrong activity", LessonsViewActivity.class);
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.lessonScrollView));
         Lesson lesson = ((LessonsViewActivity) solo.getCurrentActivity()).getLesson();
-        assertNotSame(null, lesson);
-        assertFalse(lesson.getBody().equals(""));
-        assertEquals("TEST_LESSON_TITLE", lesson.getTitle());
+        assertNotSame("Lesson is null", null, lesson);
+        assertFalse("Lesson Body is empty", lesson.getBody().equals(""));
+        assertEquals("Lesson Title is incorrect", "TEST_LESSON_TITLE", lesson.getTitle());
     }
 }

@@ -42,8 +42,8 @@ public class CourseQueryTest extends AndroidTestCase {
      * Assert the id and title match the course
      */
     public void assertCorrectResults(int id, String title, Course c) {
-        assertEquals(id, c.getId());
-        assertEquals(title.toUpperCase(), c.getTitle());
+        assertEquals("Id is incoorrect", id, c.getId());
+        assertEquals("Title is incorrect", title.toUpperCase(), c.getTitle());
     }
 
 }

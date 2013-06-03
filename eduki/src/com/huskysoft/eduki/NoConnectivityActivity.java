@@ -1,3 +1,4 @@
+
 package com.huskysoft.eduki;
 
 import com.huskysoft.eduki.data.ConnectionTask;
@@ -11,11 +12,16 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+/**
+ * @author Rafael Vertido This activity is for when no internet is available.
+ *         Displays an error message.
+ */
+
 public class NoConnectivityActivity extends Activity {
 
     /** Save 'this' for access to nested classes */
     private final Context context = this;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,12 +29,12 @@ public class NoConnectivityActivity extends Activity {
         ((TextView) findViewById(R.id.title)).setText(R.string.noConnection);
         TextView contentView = (TextView) findViewById(R.id.noConnectivityText);
         contentView.setText("Could not submit request due to lack of internet connectivity. " +
-                            "Please check your connection and try again.");
+                "Please check your connection and try again.");
         addResultsEventListeners();
     }
-    
-    /** 
-     * Attaches event listeners to the navigation buttons 
+
+    /**
+     * Attaches event listeners to the navigation buttons
      */
     private void addResultsEventListeners() {
         ImageButton retakeButton = (ImageButton) findViewById(R.id.homeButton);
@@ -52,7 +58,7 @@ public class NoConnectivityActivity extends Activity {
             }
         });
     }
-    
+
     /**
      * Restarts to the main login screen
      */
