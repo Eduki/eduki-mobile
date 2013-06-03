@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -108,6 +107,7 @@ public class CoursesListActivity extends Activity implements TaskComplete {
         Intent i = new Intent(context, CourseActivity.class);
         i.putExtra("course_title", chosen.getTitle());
         i.putExtra("course_id", chosen.getId());
+        i.putExtra("course_description", chosen.getDescription());
         startActivity(i);
     }
 }

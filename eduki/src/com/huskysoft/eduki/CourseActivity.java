@@ -43,10 +43,9 @@ public class CourseActivity extends Activity implements TaskComplete {
             if (extras != null) {
                 String course_title = extras.getString("course_title");
                 int course_id = extras.getInt("course_id");
-                Log.w("Eduki", "Eduki: Querying lessons");
-                course = new Course(course_id, course_title);
+                String course_description = extras.getString("course_description");
+                course = new Course(course_id, course_title, course_description);
                 LessonQuery.getAllLessons(this, course_id, LESSON_ID);
-                Log.w("Eduki", "Eduki: Querying quiz");
                 QuizQuery.getAllQuizzes(this, course_id, QUIZZES_ID);
             }
             mainLayout = (ScrollView) getLayoutInflater().inflate(R.layout.activity_course, null);
@@ -54,6 +53,13 @@ public class CourseActivity extends Activity implements TaskComplete {
             // Set Course title
             TextView coursesTitle = (TextView) mainLayout.findViewById(R.id.title);
             coursesTitle.setText(course.getTitle());
+            
+            // Set Course description if there is a valid description
+            if (course.getDescription() != null && !course.getDescription().equals("")) {
+                TextView courseDescription = (TextView) mainLayout.findViewById(R.id.courseDescriptionText);
+                courseDescription.setVisibility(TextView.VISIBLE);
+                courseDescription.setText(course.getDescription());
+            }
             
             // Set Lessons carousel title
             LinearLayout lessonsLayout = (LinearLayout) mainLayout.findViewById(R.id.lessonsCarouselTitle);

@@ -19,6 +19,7 @@ public class CourseTest extends AndroidTestCase {
     private Course course;
     private int id;
     private String title;
+    private String description;
     
     /**
      * Creates a course
@@ -28,7 +29,8 @@ public class CourseTest extends AndroidTestCase {
         super.setUp();
         title = "OH GOD I HOPE THESE tests PASS";
         id = 100;
-        course = new Course(id, title);
+        description = "DESCRIPTION HERE";
+        course = new Course(id, title, description);
     }
 
     /**
@@ -47,4 +49,11 @@ public class CourseTest extends AndroidTestCase {
         assertEquals(title.toUpperCase(), course.getTitle());
     }
 
+    /**
+     * Test the getDescription method
+     */
+    @Test(timeout=TIMEOUT)
+    public void testGetDescription() {
+        assertEquals(description, course.getDescription());
+    }
 }

@@ -8,6 +8,7 @@ package com.huskysoft.eduki.data;
 public class Course {
     private int id;
     private String title;
+    private String description;
 
     /**
      * Constructs a new course based on a course id and a course title
@@ -15,9 +16,10 @@ public class Course {
      * @param id course id
      * @param title	course title
      */
-    public Course(int id, String title) {
+    public Course(int id, String title, String description) {
         this.id = id;
         this.title = title;
+        this.description = description;
     }
     
     /** @return The string representation of the course */
@@ -36,5 +38,9 @@ public class Course {
     /** @return The title of the course */
     public String getTitle() {
         return title.toUpperCase();
+    }
+    
+    public String getDescription() {
+        return description;
     }
 }
