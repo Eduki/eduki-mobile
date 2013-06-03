@@ -120,6 +120,7 @@ public class CourseActivity extends Activity implements TaskComplete {
         i.putExtra("lesson_id", chosen.getId());
         i.putExtra("lesson_body", chosen.getBody());
         i.putExtra("course_id", course.getId());
+        i.putExtra("lesson_body_markdown", chosen.getBodyMarkdown());
         startActivity(i);
     }
     
