@@ -47,7 +47,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         solo.typeText(pass, "password");
         solo.clickOnButton(solo.getString(com.huskysoft.eduki.R.string.login));
         // Need to sleep to allow the activity to finish
-        solo.sleep(8000);
+        solo.waitForActivity(MainActivity.class);
         solo.assertCurrentActivity("Wrong activity", MainActivity.class);
     }
     
