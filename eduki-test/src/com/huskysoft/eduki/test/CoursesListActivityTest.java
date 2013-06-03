@@ -1,3 +1,4 @@
+
 package com.huskysoft.eduki.test;
 
 import android.test.ActivityInstrumentationTestCase2;
@@ -13,22 +14,21 @@ import com.huskysoft.eduki.data.Course;
 import com.jayway.android.robotium.solo.Solo;
 
 /**
- * 
- * @author Cody Thomas CoursesListActivityTest tests the course list activity with robotium
- *
+ * @author Cody Thomas CoursesListActivityTest tests the course list activity
+ *         with robotium
  */
 public class CoursesListActivityTest extends ActivityInstrumentationTestCase2<CoursesListActivity> {
 
     private Solo solo;
     private static final int TIMEOUT = 12000;
-    
+
     /**
      * Construct the test
      */
     public CoursesListActivityTest() {
         super(CoursesListActivity.class);
     }
-    
+
     /**
      * Set up solo
      */
@@ -36,40 +36,43 @@ public class CoursesListActivityTest extends ActivityInstrumentationTestCase2<Co
     public void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());
     }
-    
+
+    /**
+     * finish all activities
+     */
     @Override
     public void tearDown() throws Exception {
-         solo.finishOpenedActivities();
-   }
-    
+        solo.finishOpenedActivities();
+    }
+
     /**
      * Assert the list of test courses appear properly
      */
-    @Test(timeout=TIMEOUT)
+    @Test(timeout = TIMEOUT)
     public void testCoursesAppear() {
         solo.assertCurrentActivity("Wrong activity", CoursesListActivity.class);
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.courseListView));
         solo.sleep(1000);
         List<Course> courseList = ((CoursesListActivity) solo.getCurrentActivity()).getCourseList();
-        assertNotSame(courseList.size(), 0);
-        assertTrue(solo.searchText(courseList.get(0).toString()));
-        assertTrue(solo.searchText(courseList.get(courseList.size() / 2).toString()));
+        assertNotSame("Courselist is empty", courseList.size(), 0);
+        assertTrue("Text not present on page", solo.searchText(courseList.get(0).toString()));
+        assertTrue("Text not present on page",solo.searchText(courseList.get(courseList.size() / 2).toString()));
     }
-    
+
     /**
-     * Assert the list of test courses appear properly, and transition to 
-     * the lesson list is also correct
-     * @throws Exception 
+     * Assert the list of test courses appear properly, and transition to the
+     * lesson list is also correct
+     * 
+     * @throws Exception
      */
-    @Test(timeout=TIMEOUT)
+    @Test(timeout = TIMEOUT)
     public void testLessonListActivityStarted() throws Exception {
         solo.assertCurrentActivity("Wrong activity", CoursesListActivity.class);
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.courseListView));
         List<Course> courseList = ((CoursesListActivity) solo.getCurrentActivity()).getCourseList();
-        assertNotSame(courseList.size(), 0);
+        assertNotSame("CourseList is too small", courseList.size(), 0);
         solo.clickOnText(courseList.get(0).toString());
         solo.assertCurrentActivity("Wrong activity", CourseActivity.class);
         tearDown();
     }
 }
-

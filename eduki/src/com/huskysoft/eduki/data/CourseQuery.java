@@ -16,8 +16,8 @@ import com.huskysoft.eduki.TaskComplete;
 /**
  * @author Cody Thomas CourseQuery will make queries to the api
  */
-public class CourseQuery  {
-    
+public class CourseQuery {
+
     /**
      * Will get a list of all courses, returned to the callback as a string
      * 
@@ -26,7 +26,7 @@ public class CourseQuery  {
     public static void getAllCourses(TaskComplete callback, int id) {
         new ConnectionTask(callback, id).execute(COURSES);
     }
-    
+
     /**
      * Will get a list of all courses, returned to the callback as a string
      * 
@@ -35,7 +35,7 @@ public class CourseQuery  {
     public static void getAllUserCourses(TaskComplete callback, int id, int user_id) {
         new ConnectionTask(callback, id).execute(UrlConstants.getUserCoursesURL(user_id));
     }
-    
+
     /**
      * Will get a list of one courses, returned to the callback as a string
      * 
@@ -59,7 +59,13 @@ public class CourseQuery  {
         List<Course> courses = gson.fromJson(data, collectionType);
         return courses;
     }
-    
+
+    /**
+     * Parses data and returns the result
+     * 
+     * @param data The json string to be parsed
+     * @return The course represented in data
+     */
     public static Course parseCourse(String data) {
         Gson gson = new Gson();
         return gson.fromJson(data, Course.class);

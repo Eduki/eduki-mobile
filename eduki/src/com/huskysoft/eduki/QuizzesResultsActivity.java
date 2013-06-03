@@ -53,7 +53,8 @@ public class QuizzesResultsActivity extends Activity implements TaskComplete {
                 course_id = extras.getInt("course_id");
                 QuizQuery.getAllQuizzes(this, course_id, quiz_id);
             }
-            mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_quizzesresult,
+            mainLayout = (LinearLayout) getLayoutInflater().inflate(
+                    R.layout.activity_quizzesresult,
                     null);
             setContentView(R.layout.loading_screen);
         } else {
@@ -117,8 +118,8 @@ public class QuizzesResultsActivity extends Activity implements TaskComplete {
         addResultsEventListeners();
     }
 
-    /** 
-     * Attaches event listeners to the navigation buttons 
+    /**
+     * Attaches event listeners to the navigation buttons
      */
     private void addResultsEventListeners() {
         ImageButton retakeButton = (ImageButton) findViewById(R.id.retakeButton);
@@ -143,7 +144,7 @@ public class QuizzesResultsActivity extends Activity implements TaskComplete {
         });
     }
 
-    /** 
+    /**
      * Restarts the quiz activity to the beginning
      */
     private void retakeQuiz() {
@@ -155,7 +156,7 @@ public class QuizzesResultsActivity extends Activity implements TaskComplete {
         intent.putExtra("course_id", course_id);
         startActivity(intent);
     }
-    
+
     /**
      * Restarts to the course list activity
      */

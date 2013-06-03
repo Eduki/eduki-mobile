@@ -1,3 +1,4 @@
+
 package com.huskysoft.eduki.test;
 
 import android.test.ActivityInstrumentationTestCase2;
@@ -24,10 +25,15 @@ import com.huskysoft.eduki.data.Lesson;
 import com.huskysoft.eduki.data.Quiz;
 import com.jayway.android.robotium.solo.Solo;
 
+/**
+ * @author Cody Thomas This class runs through a few activities in different
+ *         walkthrough tests as documented on the wiki page
+ */
+
 public class UiTestWalkthrough extends ActivityInstrumentationTestCase2<LoginActivity> {
 
     private Solo solo;
-    
+
     /**
      * Construct the tests
      */
@@ -41,7 +47,7 @@ public class UiTestWalkthrough extends ActivityInstrumentationTestCase2<LoginAct
         solo.finishOpenedActivities();
         super.tearDown();
     }
-    
+
     /**
      * Initializes required variables
      */
@@ -49,10 +55,14 @@ public class UiTestWalkthrough extends ActivityInstrumentationTestCase2<LoginAct
     public void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());
     }
-    
+
+    /**
+     * The first walkthrough. Documented on the wiki. Starts on the login, ends
+     * up navigating to a lesson after logging in.
+     */
     @Test
     public void testWalkthroughLoginToDashboardToCoursesToCourseToLesson() {
-        //Login first
+        // Login first
         EditText user = solo.getEditText(0);
         EditText pass = solo.getEditText(1);
         solo.typeText(user, "test@eduki.com");
@@ -61,61 +71,69 @@ public class UiTestWalkthrough extends ActivityInstrumentationTestCase2<LoginAct
         // Need to sleep to allow the activity to finish
         solo.sleep(8000);
         solo.assertCurrentActivity("Wrong activity", MainActivity.class);
-        
-        //Click on the all courses button
+
+        // Click on the all courses button
         solo.clickOnActionBarItem(com.huskysoft.eduki.R.id.action_courses);
         solo.sleep(1000);
-        solo.assertCurrentActivity("Did not start the Course list Activity", CoursesListActivity.class);
-        
-        //Wait for the courses list to appear
+        solo.assertCurrentActivity("Did not start the Course list Activity",
+                CoursesListActivity.class);
+
+        // Wait for the courses list to appear
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.courseListView));
         solo.sleep(1000);
         List<Course> courseList = ((CoursesListActivity) solo.getCurrentActivity()).getCourseList();
         assertNotSame(courseList.size(), 0);
-        solo.clickOnText(courseList.get(0).toString());
+        solo.clickOnText("INTRODUCTION");
         solo.assertCurrentActivity("Wrong activity", CourseActivity.class);
-        
-        //Wait for the course page to appear
+
+        // Wait for the course page to appear
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.course_activity));
         solo.sleep(1000);
-        
-        //Click a lesson, wait for it to appear
+
+        // Click a lesson, wait for it to appear
         List<Lesson> lessonList = ((CourseActivity) solo.getCurrentActivity()).getLessonList();
         assertNotSame(lessonList.size(), 0);
         solo.clickOnText(lessonList.get(0).toString());
-        
+
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.lessonViewLayoutText));
         solo.sleep(1000);
-        String content = ((TextView) solo.getCurrentActivity().findViewById(com.huskysoft.eduki.R.id.lessonViewLayoutText)).getText().toString();
+        String content = ((TextView) solo.getCurrentActivity().findViewById(
+                com.huskysoft.eduki.R.id.lessonViewLayoutText)).getText().toString();
         assertFalse(content.equals(""));
     }
-    
+
+    /**
+     * The second test, documented on the wiki. Starts on login. Does not login,
+     * instead navigates to a course list and ends up at a quiz.
+     */
     @Test
     public void testWalkthroughLoginToCoursesListToCourseToQuiz() {
         // Need to sleep to allow the activity to finish
         solo.clickOnActionBarItem(com.huskysoft.eduki.R.id.action_courses);
         solo.sleep(1000);
-        solo.assertCurrentActivity("Did not start the Course list Activity", CoursesListActivity.class);
-        
-        //Wait for the courses list to appear
+        solo.assertCurrentActivity("Did not start the Course list Activity",
+                CoursesListActivity.class);
+
+        // Wait for the courses list to appear
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.courseListView));
         solo.sleep(1000);
         List<Course> courseList = ((CoursesListActivity) solo.getCurrentActivity()).getCourseList();
         assertNotSame(courseList.size(), 0);
-        solo.clickOnText(courseList.get(0).toString());
+        solo.clickOnText("INTRODUCTION");
         solo.assertCurrentActivity("Wrong activity", CourseActivity.class);
-        
-        //Wait for the course page to appear
+
+        // Wait for the course page to appear
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.course_activity));
         solo.sleep(1000);
-        
-        //Click a lesson, wait for it to appear
+
+        // Click a quiz, wait for it to appear
         List<Quiz> quizList = ((CourseActivity) solo.getCurrentActivity()).getQuizList();
         assertNotSame(quizList.size(), 0);
         solo.clickOnText(quizList.get(0).toString());
-        
+
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.quizScrollView));
-        List<RadioGroup> answersGroupList = ((QuizzesViewActivity) solo.getCurrentActivity()).getAnswerGroup();
+        List<RadioGroup> answersGroupList = ((QuizzesViewActivity) solo.getCurrentActivity())
+                .getAnswerGroup();
         for (int i = 0; i < answersGroupList.size(); i++) {
             RadioGroup current_rg = answersGroupList.get(i);
             List<RadioButton> list_rb = getRadioButtons(current_rg);
@@ -126,8 +144,8 @@ public class UiTestWalkthrough extends ActivityInstrumentationTestCase2<LoginAct
         solo.waitForActivity(QuizzesResultsActivity.class);
         solo.assertCurrentActivity("Wrong activity", QuizzesResultsActivity.class);
     }
-    
-    /** 
+
+    /**
      * Get the radio buttons in a radio group
      * 
      * @param rg Radio group the get the radio buttons from
@@ -143,5 +161,5 @@ public class UiTestWalkthrough extends ActivityInstrumentationTestCase2<LoginAct
             }
         }
         return buttonList;
-    }    
+    }
 }

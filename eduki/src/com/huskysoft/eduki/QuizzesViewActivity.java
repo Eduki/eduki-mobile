@@ -1,17 +1,6 @@
 
 package com.huskysoft.eduki;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import com.huskysoft.eduki.data.AuthConnectionTask;
-import com.huskysoft.eduki.data.ConnectionTask;
-import com.huskysoft.eduki.data.Quiz;
-import com.huskysoft.eduki.data.QuizContent;
-import com.huskysoft.eduki.data.QuizContent.Problem;
-import com.huskysoft.eduki.data.QuizQuery;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,6 +19,16 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import com.huskysoft.eduki.data.ConnectionTask;
+import com.huskysoft.eduki.data.Quiz;
+import com.huskysoft.eduki.data.QuizContent;
+import com.huskysoft.eduki.data.QuizContent.Problem;
+import com.huskysoft.eduki.data.QuizQuery;
 
 /**
  * @author Rafael Vertido Class QuizzesViewActivity allows users to take
@@ -138,14 +137,15 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
     }
 
     /**
-     * Gets the radio groups for the selected quiz. Used for testing purposes only
+     * Gets the radio groups for the selected quiz. Used for testing purposes
+     * only
      * 
      * @return Copy of the collection of radio groups for answers for this quiz
      */
     public List<RadioGroup> getAnswerGroup() {
         return Collections.unmodifiableList(answersRadioGroup);
     }
-    
+
     /**
      * Gets the list of questions for the quiz
      * 
@@ -154,7 +154,7 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
     public List<String> getQuestions() {
         return Collections.unmodifiableList(questions);
     }
-    
+
     /**
      * Gets the current quiz
      * 
@@ -163,7 +163,7 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
     public Quiz getQuiz() {
         return quiz;
     }
-    
+
     /**
      * Parse the problemList as retrieved as a List of Problem objects.
      * Populates the questions and answers lists required for displaying the
@@ -244,6 +244,9 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
         questionsLayout.addView(answersLayout);
     }
 
+    /**
+     * Sets up the submit listener for the quiz activity
+     */
     private void setupSubmitListener() {
         // Set a listener for the submit button
         Button submitButton = (Button) findViewById(R.id.submitButton);
@@ -282,6 +285,9 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
         });
     }
 
+    /**
+     * Shows a message if the quiz has not been completed.
+     */
     private void showMessageForIncompleteQuiz() {
         // Show a message that the user is required to select an answer before
         // submitting
@@ -299,6 +305,9 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
         alertDialog.show();
     }
 
+    /**
+     * Displays the quiz results in the results activity
+     */
     private void displayQuizResults() {
         Intent i = new Intent(context, QuizzesResultsActivity.class);
         i.putExtra("questionsCorrect", questionsCorrect);
@@ -310,12 +319,18 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
         startActivity(i);
     }
 
+    /**
+     * Clears the data
+     */
     private void resetData() {
         questionsAnswered = 0;
         questionsCorrect = 0;
         questionsCreated = 0;
     }
 
+    /**
+     * Factory method to reset list fields
+     */
     private void initializeLists() {
         questions = new ArrayList<String>();
         answers = new ArrayList<String>();

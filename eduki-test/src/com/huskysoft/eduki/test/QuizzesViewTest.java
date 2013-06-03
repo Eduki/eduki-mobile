@@ -58,7 +58,7 @@ public class QuizzesViewTest extends ActivityInstrumentationTestCase2<QuizzesVie
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.quizScrollView));
         Quiz quiz = ((QuizzesViewActivity) solo.getCurrentActivity()).getQuiz();
         List<String> questions = ((QuizzesViewActivity) solo.getCurrentActivity()).getQuestions();
-        assertNotSame(null, questions);
+        assertNotSame("questions list is null", null, questions);
         assertEquals("QUIZ_TITLE_EXAMPLE", quiz.getTitle());        
     }
     
@@ -98,6 +98,9 @@ public class QuizzesViewTest extends ActivityInstrumentationTestCase2<QuizzesVie
         return buttonList;
     }
     
+    /**
+     * Test that the action bar click renavigates to the CoursesListActivity
+     */
     @Test(timeout=TIMEOUT)
     public void testAllCoursesClick() {
         solo.assertCurrentActivity("Wrong activity", QuizzesViewActivity.class);

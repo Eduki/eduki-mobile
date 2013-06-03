@@ -36,7 +36,7 @@ public class CourseTest extends AndroidTestCase {
      */
     @Test(timeout=TIMEOUT)
     public void testGetId() {
-        assertEquals(id, course.getId());
+        assertEquals("ID was incorrect", id, course.getId());
     }
     
     /**
@@ -44,7 +44,7 @@ public class CourseTest extends AndroidTestCase {
      */
     @Test(timeout=TIMEOUT)
     public void testGetTitle() {
-        assertEquals(title.toUpperCase(), course.getTitle());
+        assertEquals("Title was incorrect", title.toUpperCase(), course.getTitle());
     }
 
 }
