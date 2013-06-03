@@ -1,62 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-	android:orientation="vertical"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content">
-		  
-	<include layout="@layout/title_text"/>
+    android:id="@+id/lessonScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
 
-	<ScrollView
-        android:id="@+id/lessonScrollView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="60" >
-		<TextView
-		    android:id="@+id/lessonViewLayoutText"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-		    android:layout_marginTop="10dp"
-		    android:textColor="@color/content"
-		    android:textIsSelectable="true"
-		    android:textAppearance="?android:attr/textAppearanceSmall" />
-	</ScrollView>
-	
-    
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="0dp"
-	    android:layout_weight="40"
-	    android:gravity="bottom"
-	    android:orientation="vertical" >
-        
-        <include
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <include layout="@layout/title_text" />
+
+        <TextView
+            android:id="@+id/lessonViewLayoutText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="10dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/content"
+            android:textIsSelectable="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:orientation="vertical" >
+
+            <include
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 layout="@layout/sub_title_text" />
 
-	    <HorizontalScrollView
-	        android:layout_width="match_parent"
-	  		android:layout_height="wrap_content"
-	        android:scrollbars="none"
-	        android:layout_gravity="bottom" >
-	             
-	        
-            <include
-                android:id="@+id/lesson_rowview"
-                android:layout_width="wrap_content"
+            <HorizontalScrollView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                layout="@layout/custom_row_view" />
-	            
-	
-	    </HorizontalScrollView>
+                android:scrollbars="none" >
+
+                <include
+                    android:id="@+id/lesson_rowview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    layout="@layout/custom_row_view" />
+            </HorizontalScrollView>
+        </LinearLayout>
     </LinearLayout>
-	
-</LinearLayout>
+
+</ScrollView>

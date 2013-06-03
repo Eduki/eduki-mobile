@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.Iterator;
@@ -17,7 +18,6 @@ import java.util.List;
 import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.Lesson;
 import com.huskysoft.eduki.data.LessonQuery;
-import com.huskysoft.eduki.data.Quiz;
 import com.huskysoft.eduki.data.ViewPopulator;
 
 /**
@@ -30,7 +30,7 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
     /** Specific lesson this view is tied to */
     private Lesson lesson;
     private List<Lesson> lessonList;
-    private LinearLayout mainLayout;
+    private ScrollView mainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
                 int course_id = extras.getInt("course_id");
                 lesson = new Lesson(lesson_id, lesson_title, course_id, lesson_body);
                 Log.e("Lesson Body: " + lesson.getBody(), "Lesson Body: " + lesson.getBody());
-                mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_lessonview,
+                mainLayout = (ScrollView) getLayoutInflater().inflate(R.layout.activity_lessonview,
                         null);
                 String lessonBody = lesson.getBody();
                 ((TextView) mainLayout.findViewById(R.id.title)).setText(lesson.getTitle());
