@@ -123,6 +123,7 @@ public class UiTestWalkthrough extends ActivityInstrumentationTestCase2<LoginAct
             solo.clickOnView(list_rb.get(0)); // Answer "A" for everything
         }
         solo.clickOnButton("SUBMIT");
+        solo.waitForActivity(QuizzesResultsActivity.class);
         solo.assertCurrentActivity("Wrong activity", QuizzesResultsActivity.class);
     }
     

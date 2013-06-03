@@ -33,7 +33,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      */
     @Before
     public void setUp() throws Exception {
-        PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putBoolean("authenticated", true).commit();
+        PreferenceManager.getDefaultSharedPreferences(getInstrumentation().getTargetContext()).edit().putBoolean("authenticated", true).commit();
         solo = new Solo(getInstrumentation(), getActivity());
     }
     
@@ -52,6 +52,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void testAllCoursesClick() {
         solo.assertCurrentActivity("Wrong activity", MainActivity.class);
         solo.clickOnActionBarItem(com.huskysoft.eduki.R.id.action_courses);
+        solo.waitForActivity(CoursesListActivity.class);
         solo.assertCurrentActivity("Did not start the Course list Activity", CoursesListActivity.class);
     }
 }

@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.huskysoft.eduki.LessonsViewActivity;
+import com.huskysoft.eduki.QuizzesResultsActivity;
 import com.huskysoft.eduki.data.Lesson;
 import com.jayway.android.robotium.solo.Solo;
 
@@ -52,7 +53,7 @@ public class LessonViewTest extends ActivityInstrumentationTestCase2<LessonsView
     @Test(timeout=TIMEOUT)
     public void testLessonAppears() {
         solo.assertCurrentActivity("Wrong activity", LessonsViewActivity.class);
-        solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.lessonViewLayoutText));
+        solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.lessonScrollView));
         Lesson lesson = ((LessonsViewActivity) solo.getCurrentActivity()).getLesson();
         assertNotSame(null, lesson);
         assertFalse(lesson.getBody().equals(""));

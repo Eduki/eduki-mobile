@@ -9,7 +9,7 @@
 	<include layout="@layout/title_text"/>
 
 	<ScrollView
-        android:id="@+id/quizScrollView"
+        android:id="@+id/lessonScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="60" >
@@ -57,6 +57,6 @@
 	            
 	
 	    </HorizontalScrollView>
-    </LinearLayout>-->
+    </LinearLayout>
 	
 </LinearLayout>
