@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.Collections;
@@ -16,7 +17,6 @@ import java.util.List;
 
 import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.Course;
-import com.huskysoft.eduki.data.CourseQuery;
 import com.huskysoft.eduki.data.Lesson;
 import com.huskysoft.eduki.data.LessonQuery;
 import com.huskysoft.eduki.data.Quiz;
@@ -31,7 +31,7 @@ public class CourseActivity extends Activity implements TaskComplete {
     private Course course;
     private List<Lesson> lessonList;
     private List<Quiz> quizList;
-    private LinearLayout mainLayout;
+    private ScrollView mainLayout;
     private Integer taskCompleteCount;
 
     @Override
@@ -49,7 +49,7 @@ public class CourseActivity extends Activity implements TaskComplete {
                 Log.w("Eduki", "Eduki: Querying quiz");
                 QuizQuery.getAllQuizzes(this, course_id, QUIZZES_ID);
             }
-            mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_course, null);
+            mainLayout = (ScrollView) getLayoutInflater().inflate(R.layout.activity_course, null);
             
             // Set Course title
             TextView coursesTitle = (TextView) mainLayout.findViewById(R.id.title);
