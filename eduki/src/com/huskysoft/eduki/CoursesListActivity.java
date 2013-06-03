@@ -42,10 +42,7 @@ public class CoursesListActivity extends Activity implements TaskComplete {
             CourseQuery.getAllCourses(this, 0);
             setContentView(R.layout.loading_screen);
         } else {
-            Intent intent = new Intent(this, NoConnectivityActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+            ConnectionTask.startNoConnectivityActivity(this);
         }
     }
 

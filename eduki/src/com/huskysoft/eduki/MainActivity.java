@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.huskysoft.eduki.data.AuthConnectionTask;
 import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.Course;
 import com.huskysoft.eduki.data.CourseQuery;
@@ -50,7 +51,7 @@ public class MainActivity extends Activity implements TaskComplete {
         if (!authenticated) {
             startLogin();
         } else {
-            if (ConnectionTask.isOnline(this)) {
+            if (AuthConnectionTask.isOnline(this)) {
                 setContentView(R.layout.loading_screen);
                 mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_main, null);
                 tasksCompleted = 0;
@@ -80,10 +81,7 @@ public class MainActivity extends Activity implements TaskComplete {
                 TextView quizzesTitle = (TextView) mainLayout.findViewById(R.id.myCoursesTitle);
                 quizzesTitle.setText(R.string.myCourses);
             } else {
-                Intent intent = new Intent(this, NoConnectivityActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
+                AuthConnectionTask.startNoConnectivityActivity(this);
             }
         }
     }

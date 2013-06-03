@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.huskysoft.eduki.data.AuthConnectionTask;
+import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.User;
 import com.huskysoft.eduki.data.UserQuery;
 
@@ -45,9 +46,7 @@ public class LoginActivity extends Activity implements TaskComplete {
             ((TextView) findViewById(R.id.loginError)).setVisibility(View.INVISIBLE);
             UserQuery.attemptLogin(user, pass, this, 0);
         } else {
-            Intent intent = new Intent(this, NoConnectivityActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+            ConnectionTask.startNoConnectivityActivity(this);
         }
     }
 

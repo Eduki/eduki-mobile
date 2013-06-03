@@ -2,6 +2,7 @@
 package com.huskysoft.eduki.data;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -12,6 +13,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import com.huskysoft.eduki.NoConnectivityActivity;
 import com.huskysoft.eduki.TaskComplete;
 
 /**
@@ -83,4 +85,10 @@ public class ConnectionTask extends AsyncTask<String, Void, String> {
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }   
+    
+    public static void startNoConnectivityActivity(Context activity) {
+        Intent intent = new Intent(activity, NoConnectivityActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(intent);
+    }
 }

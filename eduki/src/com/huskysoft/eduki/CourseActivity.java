@@ -67,10 +67,7 @@ public class CourseActivity extends Activity implements TaskComplete {
             
             setContentView(R.layout.loading_screen);
         } else {
-            Intent intent = new Intent(this, NoConnectivityActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
+            ConnectionTask.startNoConnectivityActivity(this);
         }
     }
 

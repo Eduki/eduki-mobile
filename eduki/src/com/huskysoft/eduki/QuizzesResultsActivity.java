@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.Iterator;
 import java.util.List;
 
+import com.huskysoft.eduki.data.AuthConnectionTask;
 import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.Quiz;
 import com.huskysoft.eduki.data.QuizQuery;
@@ -56,10 +57,7 @@ public class QuizzesResultsActivity extends Activity implements TaskComplete {
                     null);
             setContentView(R.layout.loading_screen);
         } else {
-            Intent intent = new Intent(this, NoConnectivityActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+            ConnectionTask.startNoConnectivityActivity(this);
         }
     }
 
