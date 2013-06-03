@@ -29,7 +29,7 @@ public class CourseTest extends AndroidTestCase {
         super.setUp();
         title = "OH GOD I HOPE THESE tests PASS";
         id = 100;
-        description = "DESCRIPTION HERE";
+        description = "EXAMPLE DESCRIPTION!!";
         course = new Course(id, title, description);
     }
 
@@ -48,12 +48,13 @@ public class CourseTest extends AndroidTestCase {
     public void testGetTitle() {
         assertEquals("Title was incorrect", title.toUpperCase(), course.getTitle());
     }
-
+    
     /**
      * Test the getDescription method
      */
     @Test(timeout=TIMEOUT)
     public void testGetDescription() {
-        assertEquals(description, course.getDescription());
+        assertEquals("Description was incorrect", description, course.getDescription());
     }
+
 }
