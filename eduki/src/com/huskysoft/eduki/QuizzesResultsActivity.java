@@ -70,8 +70,7 @@ public class QuizzesResultsActivity extends Activity implements TaskComplete {
 
     @Override
     public void taskComplete(String data, int id) {
-        // TODO Auto-generated method stub
-        // setContentView(R.layout.activity_quizzesresult);
+        ConnectionTask.checkErrors(this, data);
 
         quizList = QuizQuery.parseQuizzesList(data);
         LinearLayout layout = (LinearLayout) mainLayout.findViewById(R.id.quiz_rowview);

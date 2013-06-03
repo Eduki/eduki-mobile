@@ -103,6 +103,7 @@ public class MainActivity extends Activity implements TaskComplete {
 
     @Override
     public void taskComplete(String data, int id) {
+        ConnectionTask.checkErrors(this, data);
         boolean complete = false;
         if (id == ENROLLMENTS) {
             List<Enrollment> enrollments = UserQuery.parseEnrollments(data);
