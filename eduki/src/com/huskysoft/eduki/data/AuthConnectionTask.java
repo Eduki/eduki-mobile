@@ -1,5 +1,6 @@
 package com.huskysoft.eduki.data;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -97,7 +98,8 @@ public class AuthConnectionTask extends AsyncTask<String, Void, String> {
     
     public static void startNoConnectivityActivity(Context activity) {
         Intent intent = new Intent(activity, NoConnectivityActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         activity.startActivity(intent);
+        ((Activity) activity).finish();
     }
 }
