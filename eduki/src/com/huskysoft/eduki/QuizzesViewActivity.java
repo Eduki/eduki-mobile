@@ -100,6 +100,7 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
     @Override
     public void taskComplete(String data, int id) {
         // Get the list of questions, and set the title
+        ConnectionTask.checkErrors(this, data);
         quizContent = QuizQuery.parseQuestionsList(data);
         List<Problem> problemList = quizContent.getProblems();
 

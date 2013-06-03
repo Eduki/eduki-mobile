@@ -73,6 +73,7 @@ public class CourseActivity extends Activity implements TaskComplete {
 
     @Override
     public void taskComplete(String data, int id) {
+        ConnectionTask.checkErrors(this, data);
         Log.w("Eduki", "Eduki: Task Complete!");
         if (id == LESSON_ID) {
             lessonList = LessonQuery.parseLessonsList(data);

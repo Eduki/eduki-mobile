@@ -56,7 +56,11 @@ public class ConnectionTask extends AsyncTask<String, Void, String> {
                 sb.append(line + '\n');
                 line = rd.readLine();
             }
-            return sb.toString();
+            if(conn.getResponseCode() == 200) {
+                return sb.toString();
+            }
+            return "Error" + conn.getResponseCode();
+            
         } catch (IOException e) {
             try {
                 int respCode = conn.getResponseCode();
@@ -92,5 +96,11 @@ public class ConnectionTask extends AsyncTask<String, Void, String> {
         intent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         activity.startActivity(intent);
         ((Activity) activity).finish();
+    }
+    
+    public static void checkErrors(Activity act, String data) {
+        if(data.startsWith("Error")) {
+            startNoConnectivityActivity(act);
+        }
     }
 }

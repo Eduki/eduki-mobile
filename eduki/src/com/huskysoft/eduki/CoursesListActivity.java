@@ -83,6 +83,7 @@ public class CoursesListActivity extends Activity implements TaskComplete {
     
     @Override
     public void taskComplete(String data, int id) {
+        ConnectionTask.checkErrors(this, data);
         courseList = CourseQuery.parseCourseList(data);
         ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(this,
                 R.layout.list_item_layout, courseList);

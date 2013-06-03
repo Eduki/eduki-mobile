@@ -97,6 +97,7 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
 
     @Override
     public void taskComplete(String data, int id) {
+        ConnectionTask.checkErrors(this, data);
         lessonList = LessonQuery.parseLessonsList(data);
         LinearLayout layout = (LinearLayout) mainLayout.findViewById(R.id.lesson_rowview);
         View.OnClickListener v = new View.OnClickListener() {
