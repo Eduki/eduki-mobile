@@ -23,5 +23,7 @@
     <string name="enrollment">ENROLLMENTS</string>
     <string name="myCourses">MY COURSES</string>
     <string name="dash">DASH</string>
+    <string name="home">Home</string>
+    <string name="noConnection">No Internet Connectivity</string>
 
 </resources>

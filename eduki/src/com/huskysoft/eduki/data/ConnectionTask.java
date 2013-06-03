@@ -1,6 +1,9 @@
 
 package com.huskysoft.eduki.data;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 
 import java.io.BufferedReader;
@@ -68,4 +71,16 @@ public class ConnectionTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String response) {
         callback.taskComplete(response, id);
     }
+    
+    /**
+     * Check internet connectivity 
+     * 
+     * @param activity activity that is currently running
+     * @return true if there is internet connectivity, false otherwise
+     */
+    public static boolean isOnline(Context activity) {
+        ConnectivityManager cm = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }   
 }

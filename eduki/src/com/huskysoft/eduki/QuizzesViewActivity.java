@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.Quiz;
 import com.huskysoft.eduki.data.QuizContent;
 import com.huskysoft.eduki.data.QuizContent.Problem;
@@ -33,6 +34,7 @@ import android.widget.TextView;
  * @author Rafael Vertido Class QuizzesViewActivity allows users to take
  *         multiple choice quizzes
  */
+
 @SuppressLint("DefaultLocale")
 public class QuizzesViewActivity extends Activity implements TaskComplete {
 
@@ -72,15 +74,22 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String quiz_title = extras.getString("quiz_title");
-            int quiz_id = extras.getInt("quiz_id");
-            course_id = extras.getInt("course_id");
-            quiz = new Quiz(quiz_id, course_id, quiz_title);
-            QuizQuery.getAllQuestions(this, quiz_id, 0);
+        if (ConnectionTask.isOnline(this)) {
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                String quiz_title = extras.getString("quiz_title");
+                int quiz_id = extras.getInt("quiz_id");
+                course_id = extras.getInt("course_id");
+                quiz = new Quiz(quiz_id, course_id, quiz_title);
+                QuizQuery.getAllQuestions(this, quiz_id, 0);
+            }
+            setContentView(R.layout.loading_screen);
+        } else {
+            Intent intent = new Intent(this, NoConnectivityActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         }
-        setContentView(R.layout.loading_screen);
     }
 
     @Override

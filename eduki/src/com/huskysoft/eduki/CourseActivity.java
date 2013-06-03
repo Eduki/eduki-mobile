@@ -14,7 +14,9 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
+import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.Course;
+import com.huskysoft.eduki.data.CourseQuery;
 import com.huskysoft.eduki.data.Lesson;
 import com.huskysoft.eduki.data.LessonQuery;
 import com.huskysoft.eduki.data.Quiz;
@@ -35,34 +37,41 @@ public class CourseActivity extends Activity implements TaskComplete {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        taskCompleteCount = 0;
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String course_title = extras.getString("course_title");
-            int course_id = extras.getInt("course_id");
-            Log.w("Eduki", "Eduki: Querying lessons");
-            course = new Course(course_id, course_title);
-            LessonQuery.getAllLessons(this, course_id, LESSON_ID);
-            Log.w("Eduki", "Eduki: Querying quiz");
-            QuizQuery.getAllQuizzes(this, course_id, QUIZZES_ID);
+        if (ConnectionTask.isOnline(this)) {
+            taskCompleteCount = 0;
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                String course_title = extras.getString("course_title");
+                int course_id = extras.getInt("course_id");
+                Log.w("Eduki", "Eduki: Querying lessons");
+                course = new Course(course_id, course_title);
+                LessonQuery.getAllLessons(this, course_id, LESSON_ID);
+                Log.w("Eduki", "Eduki: Querying quiz");
+                QuizQuery.getAllQuizzes(this, course_id, QUIZZES_ID);
+            }
+            mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_course, null);
+            
+            // Set Course title
+            TextView coursesTitle = (TextView) mainLayout.findViewById(R.id.title);
+            coursesTitle.setText(course.getTitle());
+            
+            // Set Lessons carousel title
+            LinearLayout lessonsLayout = (LinearLayout) mainLayout.findViewById(R.id.lessonsCarouselTitle);
+            TextView lessonTitle = (TextView) lessonsLayout.findViewById(R.id.subtitle);
+            lessonTitle.setText(R.string.lessonsTitle);
+            
+            // Set quizzes carousel title
+            LinearLayout quizzesLayout = (LinearLayout) mainLayout.findViewById(R.id.quizzesCarouselTitle);
+            TextView quizzesTitle = (TextView) quizzesLayout.findViewById(R.id.subtitle);
+            quizzesTitle.setText(R.string.quizzesTitle);
+            
+            setContentView(R.layout.loading_screen);
+        } else {
+            Intent intent = new Intent(this, NoConnectivityActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
         }
-        mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_course, null);
-        
-        // Set Course title
-        TextView coursesTitle = (TextView) mainLayout.findViewById(R.id.title);
-        coursesTitle.setText(course.getTitle());
-        
-        // Set Lessons carousel title
-        LinearLayout lessonsLayout = (LinearLayout) mainLayout.findViewById(R.id.lessonsCarouselTitle);
-        TextView lessonTitle = (TextView) lessonsLayout.findViewById(R.id.subtitle);
-        lessonTitle.setText(R.string.lessonsTitle);
-        
-        // Set quizzes carousel title
-        LinearLayout quizzesLayout = (LinearLayout) mainLayout.findViewById(R.id.quizzesCarouselTitle);
-        TextView quizzesTitle = (TextView) quizzesLayout.findViewById(R.id.subtitle);
-        quizzesTitle.setText(R.string.quizzesTitle);
-        
-        setContentView(R.layout.loading_screen);
     }
 
     @Override
