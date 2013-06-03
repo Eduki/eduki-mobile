@@ -16,6 +16,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.huskysoft.eduki.data.AuthConnectionTask;
+import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.Course;
 import com.huskysoft.eduki.data.CourseQuery;
 import com.huskysoft.eduki.data.Enrollment;
@@ -49,34 +51,38 @@ public class MainActivity extends Activity implements TaskComplete {
         if (!authenticated) {
             startLogin();
         } else {
-            setContentView(R.layout.loading_screen);
-            mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_main, null);
-            tasksCompleted = 0;
-            enrolledCourses = new ArrayList<Course>();
-            String name = prefs.getString("user_name", null);
-            int userId = prefs.getInt("user_id", 2);
-            String dashboardName;
-            if (name == null) {
-                dashboardName = "MY";
-            } else {
-                if (name.toLowerCase().charAt(name.length() - 1) == 's') {
-                    dashboardName = name.toUpperCase() + "'";
+            if (AuthConnectionTask.isOnline(this)) {
+                setContentView(R.layout.loading_screen);
+                mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_main, null);
+                tasksCompleted = 0;
+                enrolledCourses = new ArrayList<Course>();
+                String name = prefs.getString("user_name", null);
+                int userId = prefs.getInt("user_id", 2);
+                String dashboardName;
+                if (name == null) {
+                    dashboardName = "MY";
                 } else {
-                    dashboardName = name.toUpperCase() + "'S";
+                    if (name.toLowerCase().charAt(name.length() - 1) == 's') {
+                        dashboardName = name.toUpperCase() + "'";
+                    } else {
+                        dashboardName = name.toUpperCase() + "'S";
+                    }
                 }
+                dashboardName = dashboardName + " DASHBOARD";
+                ((TextView) mainLayout.findViewById(R.id.title)).setText(dashboardName);
+                CourseQuery.getAllUserCourses(this, COURSES, userId);
+                UserQuery.getEnrollments(this, userId, ENROLLMENTS);
+    
+                // Set enrolled carousel title
+                TextView lessonTitle = (TextView) mainLayout.findViewById(R.id.enrollmentsTitle);
+                lessonTitle.setText(R.string.enrollment);
+    
+                // Set mycourses carousel title
+                TextView quizzesTitle = (TextView) mainLayout.findViewById(R.id.myCoursesTitle);
+                quizzesTitle.setText(R.string.myCourses);
+            } else {
+                AuthConnectionTask.startNoConnectivityActivity(this);
             }
-            dashboardName = dashboardName + " DASHBOARD";
-            ((TextView) mainLayout.findViewById(R.id.title)).setText(dashboardName);
-            CourseQuery.getAllUserCourses(this, COURSES, userId);
-            UserQuery.getEnrollments(this, userId, ENROLLMENTS);
-
-            // Set enrolled carousel title
-            TextView lessonTitle = (TextView) mainLayout.findViewById(R.id.enrollmentsTitle);
-            lessonTitle.setText(R.string.enrollment);
-
-            // Set mycourses carousel title
-            TextView quizzesTitle = (TextView) mainLayout.findViewById(R.id.myCoursesTitle);
-            quizzesTitle.setText(R.string.myCourses);
         }
     }
 

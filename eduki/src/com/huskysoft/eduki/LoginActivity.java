@@ -6,13 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.huskysoft.eduki.data.AuthConnectionTask;
+import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.User;
 import com.huskysoft.eduki.data.UserQuery;
 
@@ -36,13 +37,17 @@ public class LoginActivity extends Activity implements TaskComplete {
      * @param view The view clicked. In this case, a button
      */
     public void loginClicked(View v) {
-        TextView userBox = (TextView) findViewById(R.id.loginBox);
-        String user = userBox.getText().toString();
-        TextView passBox = (TextView) findViewById(R.id.passwordBox);
-        String pass = passBox.getText().toString();
-        ((ProgressBar) findViewById(R.id.progressBar1)).setVisibility(View.VISIBLE);
-        ((TextView) findViewById(R.id.loginError)).setVisibility(View.INVISIBLE);
-        UserQuery.attemptLogin(user, pass, this, 0);
+        if (AuthConnectionTask.isOnline(this)) {
+            TextView userBox = (TextView) findViewById(R.id.loginBox);
+            String user = userBox.getText().toString();
+            TextView passBox = (TextView) findViewById(R.id.passwordBox);
+            String pass = passBox.getText().toString();
+            ((ProgressBar) findViewById(R.id.progressBar1)).setVisibility(View.VISIBLE);
+            ((TextView) findViewById(R.id.loginError)).setVisibility(View.INVISIBLE);
+            UserQuery.attemptLogin(user, pass, this, 0);
+        } else {
+            AuthConnectionTask.startNoConnectivityActivity(this);
+        }
     }
 
     @Override

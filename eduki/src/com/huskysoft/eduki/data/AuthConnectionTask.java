@@ -1,5 +1,10 @@
 package com.huskysoft.eduki.data;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 
 import java.io.BufferedReader;
@@ -10,6 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 
+import com.huskysoft.eduki.NoConnectivityActivity;
 import com.huskysoft.eduki.TaskComplete;
 
 public class AuthConnectionTask extends AsyncTask<String, Void, String> {
@@ -78,4 +84,20 @@ public class AuthConnectionTask extends AsyncTask<String, Void, String> {
         callback.taskComplete(response, id);
     }
 
+    /**
+     * Check internet connectivity 
+     * 
+     * @param activity activity that is currently running
+     * @return true if there is internet connectivity, false otherwise
+     */
+    public static boolean isOnline(Context activity) {
+        ConnectivityManager cm = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    } 
+    
+    public static void startNoConnectivityActivity(Context activity) {
+        Intent intent = new Intent(activity, NoConnectivityActivity.class);
+        activity.startActivity(intent);
+    }
 }

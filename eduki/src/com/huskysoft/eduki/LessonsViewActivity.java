@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.Iterator;
 import java.util.List;
 
+import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.Lesson;
 import com.huskysoft.eduki.data.LessonQuery;
 import com.huskysoft.eduki.data.Quiz;
@@ -34,30 +35,34 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String lesson_title = extras.getString("lesson_title");
-            String lesson_body = extras.getString("lesson_body");
-            int lesson_id = extras.getInt("lesson_id");
-            int course_id = extras.getInt("course_id");
-            lesson = new Lesson(lesson_id, lesson_title, course_id, lesson_body);
-            Log.e("Lesson Body: " + lesson.getBody(), "Lesson Body: " + lesson.getBody());
-            mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_lessonview,
-                    null);
-            String lessonBody = lesson.getBody();
-            ((TextView) mainLayout.findViewById(R.id.title)).setText(lesson.getTitle());
-            TextView contentView = (TextView) mainLayout.findViewById(R.id.lessonViewLayoutText);
-
-            // Check if there was useful content, if there was display it,
-            // otherwise, display a message that there is no body found.
-            if (lessonBody.equals("")) {
-                contentView.setText("No body found for this lesson");
-            } else {
-                contentView.setText(lessonBody);
+        if (ConnectionTask.isOnline(this)) {
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                String lesson_title = extras.getString("lesson_title");
+                String lesson_body = extras.getString("lesson_body");
+                int lesson_id = extras.getInt("lesson_id");
+                int course_id = extras.getInt("course_id");
+                lesson = new Lesson(lesson_id, lesson_title, course_id, lesson_body);
+                Log.e("Lesson Body: " + lesson.getBody(), "Lesson Body: " + lesson.getBody());
+                mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_lessonview,
+                        null);
+                String lessonBody = lesson.getBody();
+                ((TextView) mainLayout.findViewById(R.id.title)).setText(lesson.getTitle());
+                TextView contentView = (TextView) mainLayout.findViewById(R.id.lessonViewLayoutText);
+    
+                // Check if there was useful content, if there was display it,
+                // otherwise, display a message that there is no body found.
+                if (lessonBody.equals("")) {
+                    contentView.setText("No body found for this lesson");
+                } else {
+                    contentView.setText(lessonBody);
+                }
+                LessonQuery.getAllLessons(this, course_id, 0);
             }
-            LessonQuery.getAllLessons(this, course_id, 0);
+            setContentView(R.layout.loading_screen);
+        } else {
+            ConnectionTask.startNoConnectivityActivity(this);
         }
-        setContentView(R.layout.loading_screen);
     }
 
     /**

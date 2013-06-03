@@ -16,9 +16,16 @@ import android.widget.TextView;
 import java.util.Iterator;
 import java.util.List;
 
+import com.huskysoft.eduki.data.AuthConnectionTask;
+import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.Quiz;
 import com.huskysoft.eduki.data.QuizQuery;
 import com.huskysoft.eduki.data.ViewPopulator;
+
+/**
+ * @author Rafael Vertido Class QuizzesResultsActivity shows a specific quiz
+ *         result, including the grading and navigation options.
+ */
 
 public class QuizzesResultsActivity extends Activity implements TaskComplete {
 
@@ -36,18 +43,22 @@ public class QuizzesResultsActivity extends Activity implements TaskComplete {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            questionsAnswered = extras.getInt("questionsAnswered");
-            questionsCorrect = extras.getInt("questionsCorrect");
-            quiz_title = extras.getString("quiz_title");
-            quiz_id = extras.getInt("quiz_id");
-            course_id = extras.getInt("course_id");
-            QuizQuery.getAllQuizzes(this, course_id, quiz_id);
+        if (ConnectionTask.isOnline(this)) {
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                questionsAnswered = extras.getInt("questionsAnswered");
+                questionsCorrect = extras.getInt("questionsCorrect");
+                quiz_title = extras.getString("quiz_title");
+                quiz_id = extras.getInt("quiz_id");
+                course_id = extras.getInt("course_id");
+                QuizQuery.getAllQuizzes(this, course_id, quiz_id);
+            }
+            mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_quizzesresult,
+                    null);
+            setContentView(R.layout.loading_screen);
+        } else {
+            ConnectionTask.startNoConnectivityActivity(this);
         }
-        mainLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_quizzesresult,
-                null);
-        setContentView(R.layout.loading_screen);
     }
 
     @Override
@@ -89,6 +100,10 @@ public class QuizzesResultsActivity extends Activity implements TaskComplete {
         displayQuizResults();
     }
 
+    /**
+     * Display the number of questions the user answered correctly and also
+     * displays their percentage rounded to the nearest percent.
+     */
     private void displayQuizResults() {
         // Calculate score and display to the user
         TextView contentView = (TextView) findViewById(R.id.quizResultText);
@@ -103,6 +118,9 @@ public class QuizzesResultsActivity extends Activity implements TaskComplete {
         addResultsEventListeners();
     }
 
+    /** 
+     * Attaches event listeners to the navigation buttons 
+     */
     private void addResultsEventListeners() {
         ImageButton retakeButton = (ImageButton) findViewById(R.id.retakeButton);
         ImageButton coursesButton = (ImageButton) findViewById(R.id.coursesButton);
@@ -112,13 +130,7 @@ public class QuizzesResultsActivity extends Activity implements TaskComplete {
 
             @Override
             public void onClick(View v) {
-                // TODO: ADD POSTING OF RESULTS TO QUIZ_ATTEMPT
-                Intent intent = new Intent(context, QuizzesViewActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("quiz_title", quiz_title);
-                intent.putExtra("quiz_id", quiz_id);
-                intent.putExtra("course_id", course_id);
-                startActivity(intent);
+                retakeQuiz();
             }
         });
 
@@ -132,6 +144,22 @@ public class QuizzesResultsActivity extends Activity implements TaskComplete {
         });
     }
 
+    /** 
+     * Restarts the quiz activity to the beginning
+     */
+    private void retakeQuiz() {
+        // TODO: ADD POSTING OF RESULTS TO QUIZ_ATTEMPT
+        Intent intent = new Intent(context, QuizzesViewActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("quiz_title", quiz_title);
+        intent.putExtra("quiz_id", quiz_id);
+        intent.putExtra("course_id", course_id);
+        startActivity(intent);
+    }
+    
+    /**
+     * Restarts to the course list activity
+     */
     private void restartToCoursesActivity() {
         Intent intent = new Intent(context, CoursesListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
+import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.Course;
 import com.huskysoft.eduki.data.CourseQuery;
 
@@ -37,8 +38,12 @@ public class CoursesListActivity extends Activity implements TaskComplete {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CourseQuery.getAllCourses(this, 0);
-        setContentView(R.layout.loading_screen);
+        if (ConnectionTask.isOnline(this)) {
+            CourseQuery.getAllCourses(this, 0);
+            setContentView(R.layout.loading_screen);
+        } else {
+            ConnectionTask.startNoConnectivityActivity(this);
+        }
     }
 
     @Override
