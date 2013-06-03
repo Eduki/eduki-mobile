@@ -105,7 +105,7 @@
     </target>
     <taskdef resource="checkstyletask.properties" classpath="${basedir}/libs/checkstyle.jar" />
     <target name="checkstyle">
-        <checkstyle config="my_project_styles.xml">
+        <checkstyle config="eduki_styles.xml">
             <fileset dir="src" includes="**/*.java" />
             <formatter type="plain" />
             <formatter type="xml" toFile="checkstyle-result.xml" />
