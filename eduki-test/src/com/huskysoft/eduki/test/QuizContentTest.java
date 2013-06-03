@@ -53,51 +53,51 @@ public class QuizContentTest extends AndroidTestCase {
     
     /** Tests the toString method  */
     public void testToString() {
-        assertEquals(title, qc.toString());
+        assertEquals("Quiz Content tostring incorrect", title, qc.toString());
     }
     
     /** Tests the getId method */
     public void testGetId() {
-        assertEquals(id, qc.getId());
+        assertEquals("Quiz Content id incorrect", id, qc.getId());
     }
     
     /** Tests the getCourseId method */    
     public void testGetCourseId() {
-        assertEquals(course_id, qc.getCourseId());
+        assertEquals("Quiz Content course_id incorrect", course_id, qc.getCourseId());
     }
     
     /** Tests the getTitle method */
     public void testGetTitle() {
-        assertEquals(title, qc.getTitle());
+        assertEquals("Quiz Content title incorrect", title, qc.getTitle());
     }
     
     /** tests the getProblems method */
     public void testGetProblems() {
-        assertEquals(problems.size(), qc.getProblems().size());
+        assertEquals("Quiz Content problems incorrect size", problems.size(), qc.getProblems().size());
     }
     
     /** Tests toString method of the Problem subclass */
     public void testProblemToString() {
-        assertEquals(problem_question, p.toString());
+        assertEquals("Problem tostring incorrect", problem_question, p.toString());
     }
     
     /** Tests getQuestion method of the Problem subclass */
     public void testGetQuestion() {
-        assertEquals(problem_question, p.getQuestion());
+        assertEquals("Problem question incorrect", problem_question, p.getQuestion());
     }
     
     /** Tests getAnswer method of the Problem subclass */
     public void testGetAnswer() {
-        assertEquals(problem_answer, p.getAnswer());
+        assertEquals("Problem anser incorrect", problem_answer, p.getAnswer());
     }
     
     /** Tests getId method of the Problem subclass */
     public void testGetProblemId() {
-        assertEquals(problem_id, p.getId());
+        assertEquals("Problem id incorrect", problem_id, p.getId());
     }
     
     /** Tests getQuizId method of the Problem subclass */
     public void testGetQuizId() {
-        assertEquals(problem_quiz_id, p.getQuizId());
+        assertEquals("Problem quiz_id incorrect", problem_quiz_id, p.getQuizId());
     }
 }

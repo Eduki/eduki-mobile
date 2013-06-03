@@ -37,7 +37,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
     }
     
     /**
-     * Test that the login activity exits the activity upon successful login
+     * Test that the login activity renavigates upon login
      */
     @Test(timeout=TIMEOUT)
     public void testLoginRenavigates() {        

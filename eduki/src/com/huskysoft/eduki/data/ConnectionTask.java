@@ -56,16 +56,16 @@ public class ConnectionTask extends AsyncTask<String, Void, String> {
                 sb.append(line + '\n');
                 line = rd.readLine();
             }
-            if(conn.getResponseCode() == 200) {
+            if (conn.getResponseCode() == 200) {
                 return sb.toString();
             }
             return "Error" + conn.getResponseCode();
-            
+
         } catch (IOException e) {
             try {
                 int respCode = conn.getResponseCode();
                 return "Error" + respCode;
-            } catch(Exception ex) {
+            } catch (Exception ex) {
                 return null;
             }
         } catch (Exception e) {
@@ -78,28 +78,41 @@ public class ConnectionTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String response) {
         callback.taskComplete(response, id);
     }
-    
+
     /**
-     * Check internet connectivity 
+     * Check internet connectivity
      * 
      * @param activity activity that is currently running
      * @return true if there is internet connectivity, false otherwise
      */
     public static boolean isOnline(Context activity) {
-        ConnectivityManager cm = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) activity
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
-    }   
-    
+    }
+
+    /**
+     * Will start the no internet activity from context given
+     * 
+     * @param activity The activity to be used as context
+     */
     public static void startNoConnectivityActivity(Context activity) {
         Intent intent = new Intent(activity, NoConnectivityActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         activity.startActivity(intent);
         ((Activity) activity).finish();
     }
-    
+
+    /**
+     * If data contains an error message, this will start the no connectivity
+     * activity.
+     * 
+     * @param act The context
+     * @param data The response
+     */
     public static void checkErrors(Activity act, String data) {
-        if(data.startsWith("Error")) {
+        if (data.startsWith("Error")) {
             startNoConnectivityActivity(act);
         }
     }

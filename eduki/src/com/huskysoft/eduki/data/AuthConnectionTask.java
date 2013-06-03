@@ -1,6 +1,5 @@
 package com.huskysoft.eduki.data;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -37,6 +36,11 @@ public class AuthConnectionTask extends AsyncTask<String, Void, String> {
         this.id = id;
     }
     
+    /**
+     * Sets authentication for this activity. Must be called before execute
+     * @param user The username
+     * @param pass The password
+     */
     public void setAuth(String user, String pass) {
         this.user = user;
         this.pass = pass;
@@ -96,6 +100,10 @@ public class AuthConnectionTask extends AsyncTask<String, Void, String> {
         return netInfo != null && netInfo.isConnectedOrConnecting();
     } 
     
+    /**
+     * 
+     * @param activity A context to pass to the new intent
+     */
     public static void startNoConnectivityActivity(Context activity) {
         Intent intent = new Intent(activity, NoConnectivityActivity.class);
         activity.startActivity(intent);

@@ -1,3 +1,4 @@
+
 package com.huskysoft.eduki.data;
 
 import java.lang.reflect.Type;
@@ -17,6 +18,7 @@ public class UserQuery {
 
     /**
      * Tries to login with the given username and password.
+     * 
      * @param user The username/email
      * @param pass The password
      * @param callback The callback to be called on completion
@@ -26,12 +28,25 @@ public class UserQuery {
         sct.setAuth(user, pass);
         sct.execute(UrlConstants.URL_AUTH);
     }
-    
+
+    /**
+     * Will fetch all the enrollments of the given user
+     * 
+     * @param callback
+     * @param user_id
+     * @param id
+     */
     public static void getEnrollments(TaskComplete callback, int user_id, int id) {
         String url = UrlConstants.getEnrollmentsURL(user_id);
         new ConnectionTask(callback, id).execute(url);
     }
-    
+
+    /**
+     * Parses the enrollments of data into a list and returns it
+     * 
+     * @param data
+     * @return The parsed Enrollments
+     */
     public static List<Enrollment> parseEnrollments(String data) {
         Gson gson = new Gson();
         Type collectionType = new TypeToken<List<Enrollment>>() {
@@ -39,18 +54,25 @@ public class UserQuery {
         List<Enrollment> enrollments = gson.fromJson(data, collectionType);
         return enrollments;
     }
-    
+
+    /**
+     * Parses the User content
+     * 
+     * @param data
+     * @return Null if an error occurred, else the attached User
+     */
     public static User parseLoginAttempt(String data) {
         Map<String, String> fromJson = null;
-        if(data.startsWith("Error")) {
+        if (data.startsWith("Error")) {
             return null;
         } else {
-            fromJson = new Gson().fromJson(data, new TypeToken<HashMap<String, String>>() {}.getType());
-            if(fromJson.containsKey("success") && fromJson.get("success").equals("false"))
+            fromJson = new Gson().fromJson(data, new TypeToken<HashMap<String, String>>() {
+            }.getType());
+            if (fromJson.containsKey("success") && fromJson.get("success").equals("false"))
                 return null;
         }
         Gson gson = new Gson();
         return gson.fromJson(data, User.class);
-        
+
     }
 }

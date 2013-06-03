@@ -4,6 +4,8 @@ package com.huskysoft.eduki;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,21 +42,23 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
             if (extras != null) {
                 String lesson_title = extras.getString("lesson_title");
                 String lesson_body = extras.getString("lesson_body");
+                String lesson_body_markdown = extras.getString("lesson_body_markdown");
                 int lesson_id = extras.getInt("lesson_id");
                 int course_id = extras.getInt("course_id");
-                lesson = new Lesson(lesson_id, lesson_title, course_id, lesson_body);
-                Log.e("Lesson Body: " + lesson.getBody(), "Lesson Body: " + lesson.getBody());
+                lesson = new Lesson(lesson_id, lesson_title, course_id, lesson_body, lesson_body_markdown);
                 mainLayout = (ScrollView) getLayoutInflater().inflate(R.layout.activity_lessonview,
                         null);
-                String lessonBody = lesson.getBody();
                 ((TextView) mainLayout.findViewById(R.id.title)).setText(lesson.getTitle());
                 TextView contentView = (TextView) mainLayout.findViewById(R.id.lessonViewLayoutText);
     
                 // Check if there was useful content, if there was display it,
                 // otherwise, display a message that there is no body found.
-                if (lessonBody.equals("")) {
+                if (lesson_body.equals("")) {
                     contentView.setText("No body found for this lesson");
+                } else if(lesson_body_markdown == null) {
+                    contentView.setText(lesson_body);
                 } else {
+                    CharSequence lessonBody = Html.fromHtml(lesson.getBodyMarkdown());
                     contentView.setText(lessonBody);
                 }
                 LessonQuery.getAllLessons(this, course_id, 0);
@@ -92,6 +96,7 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
         i.putExtra("lesson_id", chosen.getId());
         i.putExtra("lesson_body", chosen.getBody());
         i.putExtra("course_id", chosen.getCourseId());
+        i.putExtra("lesson_body_markdown", chosen.getBodyMarkdown());
         startActivity(i);
     }
 

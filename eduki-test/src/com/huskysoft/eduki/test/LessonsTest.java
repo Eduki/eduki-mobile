@@ -36,19 +36,11 @@ public class LessonsTest extends AndroidTestCase {
     }
     
     /**
-     * Test the lesson's toString
-     */
-    @Test(timeout=TIMEOUT)
-	public void testToString() {
-		assertEquals(title.toUpperCase(), lesson.toString());
-	}
-	
-    /**
      * Test the getId method
      */
 	@Test(timeout=TIMEOUT)
 	public void testGetId() {
-	    assertEquals(id, lesson.getId());
+	    assertEquals("Lesson id incorrect", id, lesson.getId());
 	}
 	
 	/**
@@ -56,7 +48,7 @@ public class LessonsTest extends AndroidTestCase {
 	 */
 	@Test(timeout=TIMEOUT)
 	public void testGetCourseId() {
-	    assertEquals(c_id, lesson.getCourseId());
+	    assertEquals("Lesson's course_id incorrect", c_id, lesson.getCourseId());
 	}
 	
 	/**
@@ -64,7 +56,7 @@ public class LessonsTest extends AndroidTestCase {
 	 */
 	@Test(timeout=TIMEOUT)
 	public void testGetTitle() {
-	    assertEquals(title.toUpperCase(), lesson.getTitle());
+	    assertEquals("Lessons title incorrect", title.toUpperCase(), lesson.getTitle());
 	}
 	
 	/**
@@ -72,7 +64,7 @@ public class LessonsTest extends AndroidTestCase {
 	 */
 	@Test(timeout=TIMEOUT)
 	public void testGetBody() {
-	    assertEquals(body, lesson.getBody());
+	    assertEquals("Lesson body incorrect", body, lesson.getBody());
 	}
 
 }
