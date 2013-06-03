@@ -107,6 +107,7 @@ public class CoursesListActivity extends Activity implements TaskComplete {
         Intent i = new Intent(context, CourseActivity.class);
         i.putExtra("course_title", chosen.getTitle());
         i.putExtra("course_id", chosen.getId());
+        i.putExtra("course_description", chosen.getDescription());
         startActivity(i);
     }
 }
