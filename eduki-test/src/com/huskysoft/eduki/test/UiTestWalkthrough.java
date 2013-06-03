@@ -139,7 +139,9 @@ public class UiTestWalkthrough extends ActivityInstrumentationTestCase2<LoginAct
             List<RadioButton> list_rb = getRadioButtons(current_rg);
             assertTrue(list_rb.size() != 0);
             solo.clickOnView(list_rb.get(0)); // Answer "A" for everything
+            solo.sleep(500);
         }
+        solo.sleep(1000);
         solo.clickOnButton("SUBMIT");
         solo.waitForActivity(QuizzesResultsActivity.class);
         solo.assertCurrentActivity("Wrong activity", QuizzesResultsActivity.class);
