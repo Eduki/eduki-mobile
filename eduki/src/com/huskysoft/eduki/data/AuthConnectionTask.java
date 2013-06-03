@@ -98,8 +98,6 @@ public class AuthConnectionTask extends AsyncTask<String, Void, String> {
     
     public static void startNoConnectivityActivity(Context activity) {
         Intent intent = new Intent(activity, NoConnectivityActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         activity.startActivity(intent);
-        ((Activity) activity).finish();
     }
 }

@@ -46,7 +46,7 @@ public class LoginActivity extends Activity implements TaskComplete {
             ((TextView) findViewById(R.id.loginError)).setVisibility(View.INVISIBLE);
             UserQuery.attemptLogin(user, pass, this, 0);
         } else {
-            ConnectionTask.startNoConnectivityActivity(this);
+            AuthConnectionTask.startNoConnectivityActivity(this);
         }
     }
 
