@@ -69,6 +69,7 @@ public class QuizzesViewTest extends ActivityInstrumentationTestCase2<QuizzesVie
     public void testQuizTaking() {
         solo.assertCurrentActivity("Wrong activity", QuizzesViewActivity.class);
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.quizScrollView));
+        solo.sleep(2000); // Sleep to wait for the answers to populate
         List<RadioGroup> answersGroupList = ((QuizzesViewActivity) solo.getCurrentActivity()).getAnswerGroup();
         for (int i = 0; i < answersGroupList.size(); i++) {
             RadioGroup current_rg = answersGroupList.get(i);

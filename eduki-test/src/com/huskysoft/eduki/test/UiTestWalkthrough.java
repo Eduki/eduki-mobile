@@ -132,6 +132,7 @@ public class UiTestWalkthrough extends ActivityInstrumentationTestCase2<LoginAct
         solo.clickOnText(quizList.get(0).toString());
 
         solo.waitForView(solo.getView(com.huskysoft.eduki.R.id.quizScrollView));
+        solo.sleep(2000); // Sleep to wait for the answers to populate
         List<RadioGroup> answersGroupList = ((QuizzesViewActivity) solo.getCurrentActivity())
                 .getAnswerGroup();
         for (int i = 0; i < answersGroupList.size(); i++) {
