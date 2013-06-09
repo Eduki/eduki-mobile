@@ -100,7 +100,7 @@ public class CourseActivity extends Activity implements TaskComplete {
             };
             Log.w("Eduki LessonListSiz", "Eduki: Task Complete!");
             ViewPopulator.populateCarousel(lessonList, layout, R.layout.red_carousel_item, v, this,
-                    "NO LESSONS FOR THIS COURSE");
+                    getString(R.string.noLessons));
         } else if (id == QUIZZES_ID) {
             Log.w("Eduki", "Eduki: Parsing quizzes data");
             quizList = QuizQuery.parseQuizzesList(data);
@@ -112,7 +112,7 @@ public class CourseActivity extends Activity implements TaskComplete {
                 }
             };
             ViewPopulator.populateCarousel(quizList, layout, R.layout.yellow_carousel_item, v,
-                    this, "NO QUIZZES FOR THIS COURSE");
+                    this, getString(R.string.noQuizzes));
         }
         synchronized (taskCompleteCount) {
             taskCompleteCount++;

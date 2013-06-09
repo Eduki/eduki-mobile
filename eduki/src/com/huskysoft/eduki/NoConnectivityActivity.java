@@ -28,8 +28,7 @@ public class NoConnectivityActivity extends Activity {
         setContentView(R.layout.activity_no_connectivity);
         ((TextView) findViewById(R.id.title)).setText(R.string.noConnection);
         TextView contentView = (TextView) findViewById(R.id.noConnectivityText);
-        contentView.setText("Could not submit request due to lack of internet connectivity. " +
-                "Please check your connection and try again.");
+        contentView.setText(getString(R.string.couldNotSubmit));
         addResultsEventListeners();
     }
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">eduki</string>
+    <string name="coursesList">Cursos</string>
+    <string name="coursesTitle">CURSOS</string>
+    <string name="lessonsTitle">LECCIONES</string>
+    <string name="login">LOGIN</string>
+    <string name="email">EMAIL</string>
+    <string name="password">CONTRASEÑA</string>
+    <string name="submit">PRESENTAR</string>
+    <string name="quizzesTitle">CONCURSOS</string>
+    <string name="noAnswerChosen">Por favor conteste todas las preguntas!</string>
+    <string name="okay">Bueno</string>
+    <string name="quizResults">RESULTADOS DE CONCURSOS</string>
+    <string name="retakeQuiz">Retomar el concurso</string>
+    <string name="loginText">¿Todavía no tienes una cuenta?\n Empieza a buscar ahora!</string>
+    <string name="loginFailed">Login incorrecto.</string>
+    <string name="enrollment">INSCRIPCIONES</string>
+    <string name="myCourses">MIS CURSOS</string>
+    <string name="dash">CARRERA</string>
+    <string name="home">Casa</string>
+    <string name="noConnection">Sin conexión a Internet</string>
+    <string name="noLessons">NO LECCIONES EN ESTE CURSO</string>
+    <string name="noQuizzes">NO CONCURSOS EN ESTE CURSO</string>
+    <string name="noLessonBody">No texto en la lección</string>
+    <string name="my">MI</string>
+    <string name="dashboard">SALPICADERO</string>
+    <string name="noCoursesCreated">NO HAY CURSOS CREADOS POR USTED</string>
+    <string name="noCoursesEnrolled">NO HAY CURSOS MATRICULADOS POR USTED</string>
+    <string name="couldNotSubmit">No se pudo enviar petición por falta de conectividad a Internet. Por favor, compruebe la conexión y vuelva a intentarlo.</string>
+    <string name="quizFinished">Concurso finalizado!\n Usted puntuación</string>
+    <string name="questionsCorrect"> preguntas correctas.\n Su puntuación es </string>
+    <string name="noQuestions">No hay preguntas en este concurso.</string>
+</resources>

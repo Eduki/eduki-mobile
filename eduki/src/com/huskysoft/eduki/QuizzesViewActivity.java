@@ -1,7 +1,6 @@
 
 package com.huskysoft.eduki;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -23,6 +22,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.Quiz;
@@ -35,7 +35,6 @@ import com.huskysoft.eduki.data.QuizQuery;
  *         multiple choice quizzes
  */
 
-@SuppressLint("DefaultLocale")
 public class QuizzesViewActivity extends Activity implements TaskComplete {
 
     /**
@@ -108,7 +107,7 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
         if (problemList.size() == 0) {
             setContentView(R.layout.activity_no_list_found);
             TextView contentView = (TextView) findViewById(R.id.noListText);
-            contentView.setText("No questions found for this quiz.");
+            contentView.setText(getString(R.string.noQuestions));
         } else {
             // We are ready to display quiz content, initialize required fields
             initializeLists();
@@ -271,7 +270,7 @@ public class QuizzesViewActivity extends Activity implements TaskComplete {
                     }
 
                     // Get the answer from database data
-                    char correctAnswer = answers.get(questionsAnswered).toLowerCase().charAt(0);
+                    char correctAnswer = answers.get(questionsAnswered).toLowerCase(Locale.getDefault()).charAt(0);
                     int correctAnswerIndex = ((int) correctAnswer) - ASCII_NUM;
 
                     // Check if the user got it correct

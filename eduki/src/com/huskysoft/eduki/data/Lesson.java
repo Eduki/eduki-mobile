@@ -1,6 +1,8 @@
 
 package com.huskysoft.eduki.data;
 
+import java.util.Locale;
+
 /**
  * @author Rafael Vertido Lesson represents a lesson with an id, title, and
  *         body, and also its corresponding course's id
@@ -61,7 +63,7 @@ public class Lesson {
 
     /** @return the title of the lesson */
     public String getTitle() {
-        return title.toUpperCase();
+        return title.toUpperCase(Locale.getDefault());
     }
 
     /** @return the content of the lesson */
