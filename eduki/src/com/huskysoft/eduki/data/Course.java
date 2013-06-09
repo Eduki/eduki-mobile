@@ -1,6 +1,8 @@
 
 package com.huskysoft.eduki.data;
 
+import java.util.Locale;
+
 /**
  * @author Cody Thomas Course represents a course with an id and a title
  */
@@ -37,7 +39,7 @@ public class Course {
 
     /** @return The title of the course */
     public String getTitle() {
-        return title.toUpperCase();
+        return title.toUpperCase(Locale.getDefault());
     }
     
     public String getDescription() {

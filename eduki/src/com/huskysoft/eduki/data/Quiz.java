@@ -1,5 +1,7 @@
 package com.huskysoft.eduki.data;
 
+import java.util.Locale;
+
 /**
  * @author Rafael Vertido Quiz represents a quiz with an id, title, and
  *         course_id of the course it is associated with
@@ -44,6 +46,6 @@ public class Quiz {
     
     /** @return title of the quiz */
     public String getTitle() {
-        return title.toUpperCase();
+        return title.toUpperCase(Locale.getDefault());
     }
 }

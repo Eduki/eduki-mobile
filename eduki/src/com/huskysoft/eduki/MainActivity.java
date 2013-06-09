@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import com.huskysoft.eduki.data.AuthConnectionTask;
 import com.huskysoft.eduki.data.ConnectionTask;
@@ -59,15 +60,15 @@ public class MainActivity extends Activity implements TaskComplete {
                 int userId = prefs.getInt("user_id", 2);
                 String dashboardName;
                 if (name == null) {
-                    dashboardName = "MY";
+                    dashboardName = getString(R.string.my);
                 } else {
-                    if (name.toLowerCase().charAt(name.length() - 1) == 's') {
-                        dashboardName = name.toUpperCase() + "'";
+                    if (name.toLowerCase(Locale.getDefault()).charAt(name.length() - 1) == 's') {
+                        dashboardName = name.toUpperCase(Locale.getDefault()) + "'";
                     } else {
-                        dashboardName = name.toUpperCase() + "'S";
+                        dashboardName = name.toUpperCase(Locale.getDefault()) + "'S";
                     }
                 }
-                dashboardName = dashboardName + " DASHBOARD";
+                dashboardName = dashboardName + " " + getString(R.string.dashboard);
                 ((TextView) mainLayout.findViewById(R.id.title)).setText(dashboardName);
                 CourseQuery.getAllUserCourses(this, COURSES, userId);
                 UserQuery.getEnrollments(this, userId, ENROLLMENTS);
@@ -114,7 +115,7 @@ public class MainActivity extends Activity implements TaskComplete {
                 complete = true;
                 LinearLayout layout = (LinearLayout) mainLayout
                         .findViewById(R.id.enrollment_rowview);
-                ViewPopulator.populateCarouselEmpty(layout, this, "NO COURSES ENROLLED BY YOU");
+                ViewPopulator.populateCarouselEmpty(layout, this, getString(R.string.noCoursesEnrolled));
             }
             for (Enrollment e : enrollments) {
                 int course_id = e.getCourseId();
@@ -131,7 +132,7 @@ public class MainActivity extends Activity implements TaskComplete {
                 }
             };
             ViewPopulator.populateCarousel(myCourses, layout, R.layout.red_carousel_item, v, this,
-                    "NO COURSES CREATED BY YOU");
+                    getString(R.string.noCoursesCreated));
 
         } else if (id == ENROLLED_COURSE) {
             Course c = CourseQuery.parseCourse(data);
@@ -150,7 +151,7 @@ public class MainActivity extends Activity implements TaskComplete {
                         }
                     };
                     ViewPopulator.populateCarousel(enrolledCourses, layout,
-                            R.layout.blue_carousel_item, v, this, "NO COURSES ENROLLED BY YOU");
+                            R.layout.blue_carousel_item, v, this, getString(R.string.noCoursesEnrolled));
                 }
             }
 

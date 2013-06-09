@@ -16,7 +16,6 @@ import android.widget.TextView;
 import java.util.Iterator;
 import java.util.List;
 
-import com.huskysoft.eduki.data.AuthConnectionTask;
 import com.huskysoft.eduki.data.ConnectionTask;
 import com.huskysoft.eduki.data.Quiz;
 import com.huskysoft.eduki.data.QuizQuery;
@@ -110,9 +109,9 @@ public class QuizzesResultsActivity extends Activity implements TaskComplete {
         double percentage = ((1.0 * questionsCorrect) / questionsAnswered) * 100; // Get
                                                                                   // %
                                                                                   // score
-        contentView.setText("Quiz Finished!\n" + "You got "
-                + questionsCorrect + "/" + questionsAnswered + " questions correct.\n"
-                + "Your score is " + (int) percentage + "%!");
+        contentView.setText(getString(R.string.quizFinished)
+                + questionsCorrect + "/" + questionsAnswered + getString(R.string.questionsCorrect)
+                + (int) percentage + "%!");
 
         // Add event listeners to the buttons in this view
         addResultsEventListeners();

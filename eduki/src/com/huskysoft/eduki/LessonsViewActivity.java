@@ -54,7 +54,7 @@ public class LessonsViewActivity extends Activity implements TaskComplete {
                 // Check if there was useful content, if there was display it,
                 // otherwise, display a message that there is no body found.
                 if (lesson_body.equals("")) {
-                    contentView.setText("No body found for this lesson");
+                    contentView.setText(getString(R.string.noLessonBody));
                 } else if(lesson_body_markdown == null) {
                     contentView.setText(lesson_body);
                 } else {

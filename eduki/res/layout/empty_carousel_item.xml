@@ -5,7 +5,7 @@
     android:id="@+id/emptyCarousel"
     android:textColor="@color/white"
     android:background="@color/headers"
-    android:textSize="11dp"
+    android:textSize="11sp"
     android:padding="8dp" 
 
     android:clickable="false"

@@ -87,7 +87,7 @@ public class CoursesListActivity extends Activity implements TaskComplete {
         ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(this,
                 R.layout.list_item_layout, courseList);
         setContentView(R.layout.activity_courseslist);
-        ((TextView) findViewById(R.id.title)).setText("COURSES");
+        ((TextView) findViewById(R.id.title)).setText(getString(R.string.coursesTitle));
         ListView listView = (ListView) findViewById(R.id.courseListView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new OnItemClickListener() {

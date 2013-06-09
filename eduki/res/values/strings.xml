@@ -2,16 +2,12 @@
 <resources>
 
     <string name="app_name">eduki</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="coursesList">Courses</string>
     <string name="coursesTitle">COURSES</string>
-    <string name="lessonsList">Lessons List</string>
     <string name="lessonsTitle">LESSONS</string>
     <string name="login">LOGIN</string>
     <string name="email">EMAIL</string>
     <string name="password">PASSWORD</string>
-    <string name="courseSelectDialog">What would you like to display?</string>
     <string name="submit">SUBMIT</string>
     <string name="quizzesTitle">QUIZZES</string>
     <string name="noAnswerChosen">Please fill out all questions!</string>
@@ -25,5 +21,15 @@
     <string name="dash">DASH</string>
     <string name="home">Home</string>
     <string name="noConnection">No Internet Connectivity</string>
-
+    <string name="noLessons">NO LESSONS FOR THIS COURSE</string>
+    <string name="noQuizzes">NO QUIZZES FOR THIS COURSE</string>
+    <string name="noLessonBody">No body found for this lesson</string>
+    <string name="my">MY</string>
+    <string name="dashboard">DASHBOARD</string>
+    <string name="noCoursesCreated">NO COURSES CREATED BY YOU</string>
+    <string name="noCoursesEnrolled">NO COURSES ENROLLED BY YOU</string>
+    <string name="couldNotSubmit">Could not submit request due to lack of internet connectivity. Please check your connection and try again.</string>
+    <string name="quizFinished">Quiz Finished!\n You got</string>
+    <string name="questionsCorrect"> questions correct.\nYour score is </string>
+    <string name="noQuestions">No questions found for this quiz.</string>
 </resources>
